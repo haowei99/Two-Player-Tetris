@@ -29,7 +29,7 @@ public:
     void setDropSpeed(int speed);
     int getPoints();
     bool onBoard();
-    void addCell(Cell *);
+    void addCell(Cell* cell);
 };
 
 #endif // __BLOCK_H__

@@ -9,22 +9,22 @@ Block::Block(int x, int y, int level, Board* board)
 } // constructor
 
 
-int getDropSpeed() {
+int Block::getDropSpeed() {
     return dropSpeed;
 } // getDropSpeed
 
 
-void setDropSpeed(int speed) {
+void Block::setDropSpeed(int speed) {
     dropSpeed = speed;
 } // setDropSpeed
 
 
-int getPoints() {
+int Block::getPoints() {
     return (level + 1) * (level + 1);
 } // getPoints
 
 
-bool onBoard() {
+bool Block::onBoard() {
     for (int i = 0; i < len;i++) {
         if (cells[i]->getBlock == this) {
             return true;
@@ -35,7 +35,7 @@ bool onBoard() {
 } // onBoard
 
 
-void addCell(Cell* cell) {
+void Block::addCell(Cell* cell) {
     cells[len] = cell;
     len += 1;
 } // addCell
