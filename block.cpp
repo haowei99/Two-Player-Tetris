@@ -1,4 +1,5 @@
 #include "block.h"
+#include "cell.h"
 
 Block::Block(int x, int y, int level, Board *board)
     : x{x}, y{y}, level{level}, board{board}, dropSpeed{0}, len{0} {
