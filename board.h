@@ -4,7 +4,8 @@
 #include "cell.h"
 #include "block.h"
 
-class board {
+
+class Board {
     std::vector<std::vector<Cell>> grid;
     int x;
     int y;

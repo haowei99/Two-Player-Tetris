@@ -3,4 +3,4 @@ project(Final_Project)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Final_Project main.cpp Block.h Block.cpp Cell.h)
+add_executable(Final_Project main.cpp Block.h Block.cpp Cell.h oBlock.h)
