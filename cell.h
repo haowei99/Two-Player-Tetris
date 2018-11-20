@@ -4,23 +4,28 @@
 
 
 class Cell{
-    bool isFilled = false;
+    bool isFilled;
     char fillType;
-    int x;
-    int y;
-    int width;
-    int height;
-    //Block * block;
-    //XWindow * window;
+    int x, y, width, height;
+    Block* block;
+    Cell* neighbourBottom = nullptr;
+    Cell* neighbourRight = nullptr;
+    Cell* neighbourLeft = nullptr;
+    // Colour colour;
+    // XWindow* window;
 
-    public:
-    Cell(bool isFilled, char fillType, int x, int y, int width, int height);
-    //void setFill(char block, Colour c)
-    //setCoords(int x, int y, int width, int height);
+public:
+    void setFill(char fill /*, Colour c */);
+    // setCoords(int x, int y, int width, int height, XWindow* window);
     // void draw();
-    void addBlock(Block * block);
     bool cellFilled();
+    bool bottomFilled();
+    bool rightFilled();
+    bool leftFilled();
+    Block* getBlock();
+    void addBlock(Block* block);
 
+    // add operator<< later cause im lazy
 };
 
-#endif //CELL_H
+#endif // __CELL_H__
