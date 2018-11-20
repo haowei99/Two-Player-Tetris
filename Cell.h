@@ -21,7 +21,6 @@ class Cell{
     void addBlock(Block * block);
     bool cellFilled();
 
-
 };
 
 #endif //CELL_H
