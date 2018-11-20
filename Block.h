@@ -1,10 +1,13 @@
 #ifndef BLOCK_H
 #define BLOCK_H
 #include <string>
+#include "cell.h"
+#include "board.h"
 
 
 class Block{
     public:
+    Block(int x, int y, int dropSpeed, int level, int len, Board *b, Cell **c);
     virtual void rotateClockwise() = 0;
     virtual void rotateCounterClockwise() = 0;
     virtual void right() = 0;
@@ -25,8 +28,8 @@ class Block{
     int level;
     int len;
     Board * board;
-    Window * window;
-    Cell *[] cells;
+    //XWindow * window;
+    Cell *cells[];
 };
 
 #endif //BLOCK_H
