@@ -1,5 +1,5 @@
-#ifndef CELL_H
-#define CELL_H
+#ifndef __CELL_H__
+#define __CELL_H__
 
 class Cell{
     bool isFilled = false;
