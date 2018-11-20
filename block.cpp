@@ -2,7 +2,7 @@
 #include "board.h"
 #include "cell.h"
 
-Block::Block(int x, int y, int level, Board* board)
+Block::Block(int x, int y, int level, Board *board)
     : x{x}, y{y}, level{level}, board{board}, dropSpeed{0}, len{0} {
     if (level >= 3) {
         dropSpeed = 1;
