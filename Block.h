@@ -4,10 +4,20 @@
 #include "cell.h"
 #include "board.h"
 
+const int max = 4;
 
-class Block{
-    public:
-    Block(int x, int y, int dropSpeed, int level, int len, Board *b, Cell **c);
+class Block {
+protected:
+    int x, y; // coords of top left corner of block
+    int level;
+    Board* board;
+    int dropSpeed;
+    Cell* cells[max];
+    int len;
+    // XWindow* window;
+    
+public:
+    Block(int x, int y, int level, Board* board);
     virtual void rotateClockwise() = 0;
     virtual void rotateCounterClockwise() = 0;
     virtual void right() = 0;
@@ -16,20 +26,10 @@ class Block{
     virtual void drop() = 0;
     virtual bool canMoveDown() = 0;
     int getDropSpeed();
-    void setDropSpeed(int x);
+    void setDropSpeed(int speed);
     int getPoints();
     bool onBoard();
     void addCell(Cell *);
-
-    protected:
-    int x; // x-cord
-    int y; // y-cord
-    int dropSpeed;
-    int level;
-    int len;
-    Board * board;
-    //XWindow * window;
-    Cell *cells[];
 };
 
-#endif //BLOCK_H
+#endif // __BLOCK_H__
