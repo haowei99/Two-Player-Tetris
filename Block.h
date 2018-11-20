@@ -1,5 +1,5 @@
-#ifndef BLOCK_H
-#define BLOCK_H
+#ifndef __BLOCK_H__
+#define __BLOCK_H__
 #include <string>
 #include "cell.h"
 #include "board.h"
