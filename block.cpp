@@ -8,6 +8,9 @@ Block::Block(int x, int y, int level, Board *board)
 } // constructor
 
 
+Block::~Block() {} // destructor
+
+
 int Block::getDropSpeed() {
     return dropSpeed;
 } // getDropSpeed

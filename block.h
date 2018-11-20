@@ -18,6 +18,7 @@ protected:
     
 public:
     Block(int x, int y, int level, Board* board);
+    ~Block();
     virtual void rotateClockwise() = 0;
     virtual void rotateCounterClockwise() = 0;
     virtual void right() = 0;
