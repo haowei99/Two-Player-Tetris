@@ -24,46 +24,16 @@ bool Cell::cellFilled() {
     return isFilled;
 } // cellFilled
 
-
-bool Cell::bottomFilled() {
-    if (neighbourBottom != nullptr) {
-        return neighbourBottom->cellFilled();
-    } // if
-
-    return false;
+void Cell::setCell(){
+    isFilled = true;
 }
 
-
-bool Cell::rightFilled() {
-    if (neighbourRight != nullptr) {
-        return neighbourRight->cellFilled();
-    } // if
-
-    return false;
-} // rightFilled
-
-
-bool Cell::leftFilled() {
-    if (neighbourLeft != nullptr) {
-        return neighbourLeft->cellFilled();
-    } // if
-
-    return false;
-} // leftFilled
-
-
-Block* Cell::getBlock() {
-    return block;
-} // getBlock
-
-
-void Cell::addBlock(Block* block) {
-    this->block = block;
-} // addBlock
-
+void Cell::unsetCell(){
+    isFilled = false;
+}
 
 std::ostream& operator<<(std::ostream& out, Cell& cell) {
-    out << fillType;
+    out << cell.fillType;
     
     return out;
 } // operator<<

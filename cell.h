@@ -3,16 +3,10 @@
 #include <iostream>
 
 
-class Block;
-
 class Cell {
     bool isFilled;
     char fillType;
     int x, y, width, height;
-    Block* block = nullptr;
-    Cell* neighbourBottom = nullptr;
-    Cell* neighbourRight = nullptr;
-    Cell* neighbourLeft = nullptr;
     // Colour colour;
     // XWindow* window;
 
@@ -23,11 +17,11 @@ public:
     // setCoords(int x, int y, int width, int height, XWindow* window);
     // void draw();
     bool cellFilled();
-    bool bottomFilled();
-    bool rightFilled();
-    bool leftFilled();
-    Block* getBlock();
     void addBlock(Block* block);
+
+    void setCell();
+    void unsetCell();
+
 
     friend std::ostream& operator<<(std::ostream& os, Cell& cell);
 };

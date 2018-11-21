@@ -8,17 +8,19 @@ class Board {
     std::vector<std::vector<Cell>> grid;
     int x;
     int y;
-    Block* currblock;
+    Block* currBlock;
+    Block *nextBlock;
     //Xwindow window;
 
     public:
     Board(int x, int y);
     void init();
-    void tick();
     void reset();
-    bool isRowFilled(int row);
     void clearRow(int row);
     Cell *cellAt(int x, int y);
+    void set(int x, int y);
+    void unset(int x, int y);
+    void setCurrBlock(Block *currBlock);
 
 };
 
