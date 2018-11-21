@@ -3,6 +3,7 @@
 #include "block.h"
 
 
+
 Cell::Cell() 
     : isFilled{false}, fillType{'-'}, x{0}, y{0}, width{0}, height{0} {} // constructor
 

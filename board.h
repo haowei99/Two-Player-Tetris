@@ -12,6 +12,7 @@ class Board {
     //Xwindow window;
 
     public:
+    Board(int x, int y);
     void init();
     void tick();
     void reset();

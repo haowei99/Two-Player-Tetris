@@ -49,17 +49,14 @@ void lBlock::rotateCounterClockwise() {
 }
 
 void lBlock::right() {
-    //board->cellAt(x + 1, y);
     x = x + 1;
 }
 
 
 void lBlock::left() {
-    //board->cellAt(x - 1, y);
     x = x - 1;
 }
 
 void lBlock::down() {
-    //board->cellAt(x, y + 1);
     y = y + 1;
 }

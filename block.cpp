@@ -29,7 +29,7 @@ int Block::getPoints() {
 
 bool Block::onBoard() {
     for (int i = 0; i < len;i++) {
-        if (cells[i]->getBlock == this) {
+        if (cells[i]->getBlock() == this) {
             return true;
         } // if
     } // for

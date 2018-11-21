@@ -8,18 +8,15 @@ iBlock::iBlock(int x, int y, int level, Board *board): Block{x, y, level, board}
 }
 
 void iBlock::rotateClockwise() {
-    bool rotations[2][4][4] = {
-        {{0,0,0,0},
-         {0,0,0,0},
-         {0,0,0,0},
-         {1,1,1,1}},
+    bool rotations= {
+        {{1,1,1,1}},
          
         {{1,0,0,0},
          {1,0,0,0},
          {1,0,0,0},
          {1,0,0,0}}
-
     };
+    cout << rotations[0][0][1] << endl;
 }
 
 void iBlock::rotateCounterClockwise() {

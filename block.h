@@ -2,7 +2,9 @@
 #define __BLOCK_H__
 #include <string>
 #include "cell.h"
-#include "board.h"
+//#include "board.h"
+
+class Board;
 
 const int max = 4;
 
