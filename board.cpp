@@ -1,5 +1,6 @@
 #include "board.h"
 #include <vector>
+#include "oBlock.h"
 
 using namespace::std;
 
@@ -30,6 +31,25 @@ void Board::unset(int x, int y){
     cellAt(x, y)->unsetCell();
 }
 
+Block* Board::getBlock() {
+    return currBlock;
+}
+
+Block* Board::changeBlock() {
+    Block * block = new oBlock(0,0,0, this);
+    Cell c = Cell();
+    currBlock = block;
+    currBlock->addCell(&grid[0][0]);
+    currBlock->addCell(&grid[0][1]);
+    currBlock->addCell(&grid[1][0]);
+    currBlock->addCell(&grid[1][1]);
+    this->set(0, 0);
+    this->set(1, 0);
+    this->set(0, 1);
+    this->set(1, 1);
+    return block;
+   // currBlock = new oBlock(0,0,0,this);
+}
 
 
 std::ostream& operator<<(std::ostream& out, Board& board){
@@ -37,6 +57,7 @@ std::ostream& operator<<(std::ostream& out, Board& board){
         for (int j = 0; j < 11; j++){
             out << board.grid[i][j];
         }
+        out << endl;
     }
     return out;
 }

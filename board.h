@@ -20,6 +20,9 @@ class Board {
     Cell *cellAt(int x, int y);
     void set(int x, int y);
     void unset(int x, int y);
+    Block * getBlock();
+    Block * changeBlock();
+
    // void setCurrBlock(Block *currBlock);
     friend std::ostream& operator<<(std::ostream& os, Board& board);
 

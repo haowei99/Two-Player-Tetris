@@ -7,6 +7,7 @@ oBlock::oBlock(int x, int y, int level, Board *board): Block{x, y, level, board}
     currShape[1][0] = true;
     currShape[1][1] = true;
     numCells = 4;
+    blockType = 'o';
 }
 
 void oBlock::rotateClockwise() {}
@@ -42,4 +43,9 @@ void oBlock::down() {
         board->unset(x, y);
         board->set(x, y + 1);
     }
+}
+
+void oBlock::drop() {} //need to implement
+bool oBlock::canMoveDown() {
+    return true; // need implement
 }

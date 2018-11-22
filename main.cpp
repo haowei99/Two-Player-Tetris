@@ -2,23 +2,42 @@
 #include "board.h"
 #include "oBlock.h"
 #include <iostream>
+#include <string>
 using namespace std;
 
 
 int main() {
     Board b(0, 0);
+    b.init();
     cout << "Board:" << endl;
-    char c;
-    oBlock ob(0, 0, 0 b);
+    cout << b << endl;
+    string c;
+    Board * bp = &b;
+    bp->changeBlock();
+    Block *oblo = bp->getBlock();
+    //Block * oblo =  new oBlock(0,0,0,bp);
+    cout << "Board next:" << endl;
+    cout << b << endl;
     while (cin >> c){
-        if (c == 'r'){ // right
+        if (c == "r"){ // right
+            oblo->right();
         }
-        else if (c == 'l'){ //left
-            
+        else if (c == "l"){ //left
+            oblo->left();
         }
-        else if (c == 'd'){ //down 
-            
+        else if (c == "d"){ //down
+            oblo->down();
         }
+        else if (c == "rC"){
+            oblo->rotateClockwise();
+        }
+        else if (c == "rCC"){
+            oblo->rotateCounterClockwise();
+        }
+        else if (c == "p"){
+            cout << b;
+        }
+        cout << b << endl;
     }
 /*
     vector<vector<int>> new_grid(15, vector<Cell>(11));
