@@ -1,4 +1,5 @@
 #include "iBlock.h"
+#include "board.h"
 
 iBlock::iBlock(int x, int y, int level, Board *board): Block{x, y, level, board} {
     currShape[0][0] = true;
@@ -8,54 +9,56 @@ iBlock::iBlock(int x, int y, int level, Board *board): Block{x, y, level, board}
     numCells = 4;
 }
 
+
 void iBlock::rotate(int state) {
+    int x, y;
     if (state == 2) { //initial state is flat
         //block 1
-        int x = cells[0]->get_X();
-        int y = cells[0]->get_Y(); //pos of block
+        x = cells[0]->get_X();
+        y = cells[0]->get_Y(); //pos of block
 
         board->unset(x, y);
-        board->set(x + 3, y + 3, 'I');
+        board->set(x + 3, y + 3);
 
 
         //block 2
-        int x = cells[1]->get_X();
-        int y = cells[1]->get_Y(); //pos of block
+        x = cells[1]->get_X();
+        y = cells[1]->get_Y(); //pos of block
 
         board->unset(x, y);
-        board->set(x + 2, y + 2, 'I');
+        board->set(x + 2, y + 2);
 
         //block 3
-        int x = cells[2]->get_X();
-        int y = cells[2]->get_Y(); //pos of block
+        x = cells[2]->get_X();
+        y = cells[2]->get_Y(); //pos of block
 
         board->unset(x, y);
-        board->set(x + 1, y + 1, 'I');
+        board->set(x + 1, y + 1);
 
         //block 4 pivot point, does not change
     }
     else{
         //block 1
-        int x = cells[0]->get_X();
-        int y = cells[0]->get_Y(); //pos of block
+        x = cells[0]->get_X();
+        y = cells[0]->get_Y(); //pos of block
 
         board->unset(x, y);
-        board->set(x - 3, y - 3, 'I');
+        board->set(x - 3, y - 3);
 
 
         //block 2
-        int x = cells[1]->get_X();
-        int y = cells[1]->get_Y(); //pos of block
+        x = cells[1]->get_X();
+        y = cells[1]->get_Y(); //pos of block
 
         board->unset(x, y);
-        board->set(x - 2, y - 2, 'I');
+        board->set(x - 2, y - 2);
 
         //block 3
-        int x = cells[2]->get_X();
-        int y = cells[2]->get_Y(); //pos of block
+        x = cells[2]->get_X();
+        y = cells[2]->get_Y(); //pos of block
 
         board->unset(x, y);
-        board->set(x - 1, y - 1, 'I');
+        board->set(x - 1, y - 1);
 
         //block 4 pivot point, does not change
     }
