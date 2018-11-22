@@ -78,7 +78,7 @@ void iBlock::right() {
         int y = cells[i]->get_Y(); //pos of block
 
         board->unset(x, y);
-        board->set(x + 1, y, 'I');
+        board->set(x + 1, y);
     }
 }
 
@@ -89,7 +89,7 @@ void iBlock::left() {
         int y = cells[i]->get_Y(); //pos of block
 
         board->unset(x, y);
-        board->set(x - 1, y, 'I');
+        board->set(x - 1, y);
     }
 }
 
@@ -99,6 +99,6 @@ void iBlock::down() {
         int y = cells[i]->get_Y(); //pos of block
 
         board->unset(x, y);
-        board->set(x, y + 1, 'I');
+        board->set(x, y + 1);
     }
 }

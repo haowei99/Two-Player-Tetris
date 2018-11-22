@@ -16,11 +16,11 @@ class Board {
     Board(int x, int y);
     void init();
     void reset();
-    void clearRow(int row);
+    //void clearRow(int row);
     Cell *cellAt(int x, int y);
     void set(int x, int y);
     void unset(int x, int y);
-    void setCurrBlock(Block *currBlock);
+   // void setCurrBlock(Block *currBlock);
     friend std::ostream& operator<<(std::ostream& os, Board& board);
 
 
