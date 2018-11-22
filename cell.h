@@ -21,6 +21,8 @@ public:
 
     void setCell(char blockType);
     void unsetCell();
+    int get_X();
+    int get_Y();
 
 
     friend std::ostream& operator<<(std::ostream& os, Cell& cell);

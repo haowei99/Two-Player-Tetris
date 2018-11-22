@@ -8,15 +8,22 @@ iBlock::iBlock(int x, int y, int level, Board *board): Block{x, y, level, board}
 }
 
 void iBlock::rotateClockwise() {
-    bool rotations= {
-        {{1,1,1,1}},
-         
-        {{1,0,0,0},
-         {1,0,0,0},
-         {1,0,0,0},
-         {1,0,0,0}}
-    };
-    cout << rotations[0][0][1] << endl;
+    if (rotateState == 1){
+        for (int i = 0; i <numCells; i++){
+            int x = cells[i]->get_X();
+            int y = cells[i]->get_Y(); //pos of block
+
+            board->unset(x,y);
+            board->set(x, -y, 'I');
+
+        }
+    }
+
+
+
+    //Change state at the end
+    if (rotateState == 2) rotateState = 1;
+    else rotateState++;
 }
 
 void iBlock::rotateCounterClockwise() {

@@ -34,8 +34,16 @@ void Cell::unsetCell(){
     // fillType = '_';
 }
 
+int Cell::get_X() {
+    return x;
+}
+
+int Cell::get_Y() {
+    return y;
+}
+
 std::ostream& operator<<(std::ostream& out, Cell& cell) {
-    if (isFilled) out << cell.fillType;
+    if (cell.isFilled) out << cell.fillType;
     else out << "_"; //debugging reasons
     return out;
 } // operator<<
