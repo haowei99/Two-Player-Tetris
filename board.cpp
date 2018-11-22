@@ -37,17 +37,17 @@ Block* Board::getBlock() {
 
 Block* Board::changeBlock() {
     Block * block = new oBlock(0,0,0, this);
-    Cell c = Cell();
     currBlock = block;
-    currBlock->addCell(&grid[0][0]);
-    currBlock->addCell(&grid[0][1]);
-    currBlock->addCell(&grid[1][0]);
-    currBlock->addCell(&grid[1][1]);
-    this->set(0, 0);
+    //this->set(0, 0);
     this->set(1, 0);
     this->set(0, 1);
     this->set(1, 1);
-    return block;
+    block->addCell(&grid[0][0]);
+    block->addCell(&grid[0][1]);
+    block->addCell(&grid[1][0]);
+    block->addCell(&grid[1][1]);
+    currBlock = block;
+    return currBlock;
    // currBlock = new oBlock(0,0,0,this);
 }
 

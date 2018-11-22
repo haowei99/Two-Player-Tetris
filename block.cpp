@@ -42,7 +42,8 @@ int Block::getPoints() {
 
 void Block::addCell(Cell* cell) {
     cells[len] = cell;
-    len += 1;
+    len = len + 1;
+    std::cout << "Cell at: " << len << *cell << std::endl;
 } // addCell
 
 char Block::getBlockType() {
