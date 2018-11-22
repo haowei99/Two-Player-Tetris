@@ -63,6 +63,7 @@ void iBlock::rotate(int state) {
         //block 4 pivot point, does not change
     }
 }
+
 void iBlock::rotateClockwise() {
     rotate(rotateState);
     if (rotateState == 2) rotateState = 1;

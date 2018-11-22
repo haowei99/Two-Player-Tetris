@@ -15,7 +15,7 @@ protected:
     Board* board;
     int dropSpeed;
     Cell* cells[max];
-    int len;
+    int len = 0;
     char blockType;
     // XWindow* window;
     
@@ -29,7 +29,7 @@ public:
     virtual void down() = 0;
     virtual void drop() = 0;
     virtual bool canMoveDown() = 0;
-    virtual void rotate(int state) =0; //for state changes
+   // virtual void rotate(int state) =0; //for state changes
     char getBlockType();
     int getDropSpeed();
     void setDropSpeed(int speed);
