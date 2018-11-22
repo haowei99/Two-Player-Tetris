@@ -11,21 +11,8 @@ Cell::Cell()
 Cell::~Cell() {} // destructor
 
 
-<<<<<<< HEAD
-void Cell::toggleBlind() {
-    isBlind = true;
-}
-
-void Cell::untoggleBlind(){
-    isBlind = false;
-}
-
-
-void Cell::setFill(char fill /*, Colour c */) {
-=======
 /*
 void Cell::setFill(char fill , Colour c ) {
->>>>>>> 3cefc50fb7715329a75217feb331853253023e8e
     fillType = fill;
 } // setFill
 */
@@ -58,16 +45,7 @@ int Cell::get_Y() {
 }
 
 std::ostream& operator<<(std::ostream& out, Cell& cell) {
-<<<<<<< HEAD
-    if (isBlind) {
-        out << '?'
-    } else {
-        out << fillType;
-    } // if
-    
-=======
     if (cell.isFilled) out << cell.fillType;
     else out << "_"; //debugging reasons
->>>>>>> 3cefc50fb7715329a75217feb331853253023e8e
     return out;
 } // operator<<

@@ -13,13 +13,7 @@ class Cell {
 public:
     Cell();
     ~Cell();
-<<<<<<< HEAD
-    void setFill(char fill /*, Colour c */);
-    void toggleBlind();
-    void untoggleBlind();
-=======
     //void setFill(char fill /*, Colour c */);
->>>>>>> 3cefc50fb7715329a75217feb331853253023e8e
     // setCoords(int x, int y, int width, int height, XWindow* window);
     // void draw();
     bool cellFilled();

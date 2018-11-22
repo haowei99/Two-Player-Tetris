@@ -3,10 +3,6 @@
 #include "oBlock.h"
 #include <iostream>
 #include <string>
-<<<<<<< HEAD
-#include "game.h"
-=======
->>>>>>> c9effef1287d9bb4168707d2426ddd8aba61338c
 using namespace std;
 
 
