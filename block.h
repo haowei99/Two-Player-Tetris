@@ -20,6 +20,7 @@ protected:
     int rotateState; //new state 1 - 4
     int numCells;
     // XWindow* window;
+    void rotate(int state);
     
 public:
     Block(int x, int y, int level, Board* board);
