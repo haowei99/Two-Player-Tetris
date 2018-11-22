@@ -5,7 +5,7 @@
 #include "block.h"
 
 class Board {
-    std::vector<std::vector<Cell*>> grid; //NEED TO FIX, ARRAY OF CELL POINTERS NOW
+    std::vector<std::vector<Cell>> grid; //NEED TO FIX, ARRAY OF CELL POINTERS NOW
     int x;
     int y;
     Block* currBlock;

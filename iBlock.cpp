@@ -5,10 +5,11 @@ iBlock::iBlock(int x, int y, int level, Board *board): Block{x, y, level, board}
     currShape[0][1] = true;
     currShape[0][2] = true;
     currShape[0][3] = true;
+    numCells = 4;
 }
 
 void iBlock::rotate(int state) {
-    if (rotateState == 1) {
+    if (state == 2) { //initial state is flat
         //block 1
         int x = cells[0]->get_X();
         int y = cells[0]->get_Y(); //pos of block
@@ -60,26 +61,19 @@ void iBlock::rotate(int state) {
     }
 }
 void iBlock::rotateClockwise() {
-     rotate(rotateState);
-     //still need top left to check and move the locaiton???
-
-    //Change state at the end
+    rotate(rotateState);
     if (rotateState == 2) rotateState = 1;
-    else rotateState++;
+    else rotateState = 2;
 }
 
 void iBlock::rotateCounterClockwise() {
-    int s;
-    if (rotateState == 2) s = 1;
-    else s++; //opposite rotations
-
-    rotate(s);
+    rotate(rotateState);
     if (rotateState == 1) rotateState = 2;
     else rotateState--;
 }
 
 void iBlock::right() {
-    for (int i =0; i < 4; i++){
+    for (int i =0; i < numCells; i++){
         int x = cells[i]->get_X();
         int y = cells[i]->get_Y(); //pos of block
 
@@ -90,7 +84,7 @@ void iBlock::right() {
 
 
 void iBlock::left() {
-    for (int i =0; i < 4; i++){
+    for (int i =0; i < numCells; i++){
         int x = cells[i]->get_X();
         int y = cells[i]->get_Y(); //pos of block
 
@@ -100,7 +94,7 @@ void iBlock::left() {
 }
 
 void iBlock::down() {
-    for (int i =0; i < 4; i++){
+    for (int i =0; i < numCells; i++){
         int x = cells[i]->get_X();
         int y = cells[i]->get_Y(); //pos of block
 

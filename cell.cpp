@@ -11,9 +11,11 @@ Cell::Cell()
 Cell::~Cell() {} // destructor
 
 
-void Cell::setFill(char fill /*, Colour c */) {
+/*
+void Cell::setFill(char fill , Colour c ) {
     fillType = fill;
 } // setFill
+*/
 
 
 // setCoords(int x, int y, int width, int height, XWindow* window);

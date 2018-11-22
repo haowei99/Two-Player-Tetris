@@ -4,6 +4,7 @@
 
 class oBlock: public Block{
     bool currShape[2][2];
+    int numCells;
 public:
     oBlock(int x, int y, int level, Board *board);
     void rotateClockwise() override;

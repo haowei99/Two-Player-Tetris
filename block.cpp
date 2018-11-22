@@ -27,7 +27,9 @@ int Block::getPoints() {
 } // getPoints
 
 
-bool Block::onBoard() {
+
+//implement later
+/*bool Block::onBoard() {
     for (int i = 0; i < len;i++) {
         if (cells[i]->getBlock() == this) {
             return true;
@@ -36,7 +38,7 @@ bool Block::onBoard() {
 
     return false;
 } // onBoard
-
+*/
 
 void Block::addCell(Cell* cell) {
     cells[len] = cell;

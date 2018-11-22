@@ -10,17 +10,14 @@ const int max = 4;
 
 class Block {
 protected:
-    // int x, y; // coords of top left corner of block NO LONGER NEEDED NO KEEPING TRACK OF top left
+    int x, y; // coords of top left corner of block NO LONGER NEEDED NO KEEPING TRACK OF top left
     int level;
     Board* board;
     int dropSpeed;
     Cell* cells[max];
     int len;
     char blockType;
-    int rotateState; //new state 1 - 4
-    int numCells;
     // XWindow* window;
-    void rotate(int state);
     
 public:
     Block(int x, int y, int level, Board* board);
@@ -32,6 +29,7 @@ public:
     virtual void down() = 0;
     virtual void drop() = 0;
     virtual bool canMoveDown() = 0;
+    virtual void rotate(int state) =0; //for state changes
     char getBlockType();
     int getDropSpeed();
     void setDropSpeed(int speed);
