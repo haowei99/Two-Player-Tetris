@@ -13,8 +13,8 @@ public:
     void right() override;
     void left() override;
     void down() override;
-    void drop() override;
-    bool canMoveDown() override;
+    //void drop() override;
+    //bool canMoveDown() override;
     void rotate(int state) override;
     ~iBlock() = default;
 };
