@@ -21,8 +21,13 @@ class Board {
     void set(int x, int y);
     void unset(int x, int y);
     void setCurrBlock(Block *currBlock);
+    friend std::ostream& operator<<(std::ostream& os, Board& board);
+
+
 
 };
+
+std::ostream& operator<<(std::ostream& os, Board& board);
 
 
 #endif

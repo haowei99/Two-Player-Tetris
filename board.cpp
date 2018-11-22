@@ -12,7 +12,7 @@ void Board::init() {
 }
 
 void Board::reset(){
-    for (auto it = grid.begin(); it != grid.end(); ++it){
+    for(auto it = grid.begin(); it != grid.end(); ++it){
         it->erase(it->begin(), it->end());
     }
     grid.erase(grid.begin(), grid.end());
@@ -23,9 +23,20 @@ Cell *Board::cellAt(int x, int y){
 }
 
 void Board::set(int x, int y){
-    cellAt(x, y)->setCell();
+    cellAt(x, y)->setCell(currBlock->getBlockType());
 }
 
 void Board::unset(int x, int y){
     cellAt(x, y)->unsetCell();
+}
+
+
+
+std::ostream& operator<<(std::ostream& out, Board& board){
+    for (int i = 0; i < 18; i++){
+        for (int j = 0; j < 11; j++){
+            out << board.grid[i][j];
+        }
+    }
+    return out;
 }

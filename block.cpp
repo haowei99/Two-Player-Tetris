@@ -42,3 +42,7 @@ void Block::addCell(Cell* cell) {
     cells[len] = cell;
     len += 1;
 } // addCell
+
+char Block::getBlockType() {
+    return blockType;
+}
