@@ -5,7 +5,7 @@
 
 
 class Cell {
-    bool isFilled;
+    bool isFilled, isBlind;
     char fillType;
     int x, y, width, height;
     Block* block = nullptr;
@@ -19,6 +19,8 @@ public:
     Cell();
     ~Cell();
     void setFill(char fill /*, Colour c */);
+    void toggleBlind();
+    void untoggleBlind();
     // setCoords(int x, int y, int width, int height, XWindow* window);
     // void draw();
     bool cellFilled();

@@ -4,10 +4,19 @@
 
 
 Cell::Cell() 
-    : isFilled{false}, fillType{'-'}, x{0}, y{0}, width{0}, height{0} {} // constructor
+    : isFilled{false}, isBlind{false}, fillType{'-'}, x{0}, y{0}, width{0}, height{0} {} // constructor
 
 
 Cell::~Cell() {} // destructor
+
+
+void Cell::toggleBlind() {
+    isBlind = true;
+}
+
+void Cell::untoggleBlind(){
+    isBlind = false;
+}
 
 
 void Cell::setFill(char fill /*, Colour c */) {
@@ -62,7 +71,11 @@ void Cell::addBlock(Block* block) {
 
 
 std::ostream& operator<<(std::ostream& out, Cell& cell) {
-    out << fillType;
+    if (isBlind) {
+        out << '?'
+    } else {
+        out << fillType;
+    } // if
     
     return out;
 } // operator<<
