@@ -13,13 +13,13 @@ class Cell {
 public:
     Cell();
     ~Cell();
-    void setFill(char fill /*, Colour c */);
+    //void setFill(char fill /*, Colour c */);
     // setCoords(int x, int y, int width, int height, XWindow* window);
     // void draw();
     bool cellFilled();
-    void addBlock(Block* block);
+//    void addBlock(Block* block); should be deleted
 
-    void setCell();
+    void setCell(char blockType);
     void unsetCell();
 
 

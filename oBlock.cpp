@@ -12,18 +12,15 @@ void oBlock::rotateClockwise() {}
 void oBlock::rotateCounterClockwise() {}
 
 void oBlock::right() {
-    board->cellAt(x + 1, y);
     x = x + 1;
 }
 
 
 void oBlock::left() {
-    board->cellAt(x - 1, y);
     x = x - 1;
 }
 
 void oBlock::down() {
-    board->cellAt(x, y + 1);
     y = y + 1;
 }
 

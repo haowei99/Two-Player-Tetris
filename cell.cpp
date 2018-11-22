@@ -24,16 +24,18 @@ bool Cell::cellFilled() {
     return isFilled;
 } // cellFilled
 
-void Cell::setCell(){
+void Cell::setCell(char blockType){
     isFilled = true;
+    fillType = blockType;
 }
 
 void Cell::unsetCell(){
     isFilled = false;
+    // fillType = '_';
 }
 
 std::ostream& operator<<(std::ostream& out, Cell& cell) {
-    out << cell.fillType;
-    
+    if (isFilled) out << cell.fillType;
+    else out << "_"; //debugging reasons
     return out;
 } // operator<<
