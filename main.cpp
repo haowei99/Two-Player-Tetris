@@ -1,11 +1,25 @@
 #include "block.h"
 #include "board.h"
-#include "iBlock.h"
+#include "oBlock.h"
 #include <iostream>
 using namespace std;
 
 
 int main() {
+    Board b(0, 0);
+    cout << "Board:" << endl;
+    char c;
+    oBlock ob(0, 0, 0 b);
+    while (cin >> c){
+        if (c == 'r'){ // right
+        }
+        else if (c == 'l'){ //left
+            
+        }
+        else if (c == 'd'){ //down 
+            
+        }
+    }
 /*
     vector<vector<int>> new_grid(15, vector<Cell>(11));
     Board * board = nullptr;
