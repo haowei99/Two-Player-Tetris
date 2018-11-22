@@ -1,12 +1,13 @@
-#ifndef __OBLOCK_H__
-#define __OBLOCK_H__
+#ifndef __iBLOCK_H__
+#define __iBLOCK_H__
 #include "block.h"
 
-class oBlock: public Block{
-    bool currShape[2][2];
+class iBlock: public Block{
+    bool currShape[4][4];
+    int rotateState = 1; //new state 1 - 4
     int numCells;
 public:
-    oBlock(int x, int y, int level, Board *board);
+    iBlock(int x, int y, int level, Board *board);
     void rotateClockwise() override;
     void rotateCounterClockwise() override;
     void right() override;
@@ -14,8 +15,9 @@ public:
     void down() override;
     //void drop() override;
     //bool canMoveDown() override;
-    ~oBlock() = default;
+    void rotate(int state) override;
+    ~iBlock() = default;
 };
 
 
-#endif //__OBLOCK_H__
+#endif //__iBLOCK_H__

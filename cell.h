@@ -1,34 +1,35 @@
 #ifndef __CELL_H__
 #define __CELL_H__
 #include <iostream>
-#include "block.h"
 
 
 class Cell {
     bool isFilled, isBlind;
     char fillType;
     int x, y, width, height;
-    Block* block = nullptr;
-    Cell* neighbourBottom = nullptr;
-    Cell* neighbourRight = nullptr;
-    Cell* neighbourLeft = nullptr;
     // Colour colour;
     // XWindow* window;
 
 public:
     Cell();
     ~Cell();
+<<<<<<< HEAD
     void setFill(char fill /*, Colour c */);
     void toggleBlind();
     void untoggleBlind();
+=======
+    //void setFill(char fill /*, Colour c */);
+>>>>>>> 3cefc50fb7715329a75217feb331853253023e8e
     // setCoords(int x, int y, int width, int height, XWindow* window);
     // void draw();
     bool cellFilled();
-    bool bottomFilled();
-    bool rightFilled();
-    bool leftFilled();
-    Block* getBlock();
-    void addBlock(Block* block);
+//    void addBlock(Block* block); should be deleted
+
+    void setCell(char blockType);
+    void unsetCell();
+    int get_X();
+    int get_Y();
+
 
     friend std::ostream& operator<<(std::ostream& os, Cell& cell);
 };

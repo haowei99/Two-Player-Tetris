@@ -5,21 +5,29 @@
 #include "block.h"
 
 class Board {
-    std::vector<std::vector<Cell>> grid;
+    std::vector<std::vector<Cell>> grid; //NEED TO FIX, ARRAY OF CELL POINTERS NOW
     int x;
     int y;
-    Block* currblock;
+    Block* currBlock;
+    Block *nextBlock;
     //Xwindow window;
 
     public:
+    Board(int x, int y);
     void init();
-    void tick();
     void reset();
-    bool isRowFilled(int row);
-    void clearRow(int row);
+    //void clearRow(int row);
     Cell *cellAt(int x, int y);
+    void set(int x, int y);
+    void unset(int x, int y);
+   // void setCurrBlock(Block *currBlock);
+    friend std::ostream& operator<<(std::ostream& os, Board& board);
+
+
 
 };
+
+std::ostream& operator<<(std::ostream& os, Board& board);
 
 
 #endif

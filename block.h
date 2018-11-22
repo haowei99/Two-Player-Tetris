@@ -2,18 +2,21 @@
 #define __BLOCK_H__
 #include <string>
 #include "cell.h"
-#include "board.h"
+//#include "board.h"
+
+class Board;
 
 const int max = 4;
 
 class Block {
 protected:
-    int x, y; // coords of top left corner of block
+    int x, y; // coords of top left corner of block NO LONGER NEEDED NO KEEPING TRACK OF top left
     int level;
     Board* board;
     int dropSpeed;
     Cell* cells[max];
     int len;
+    char blockType;
     // XWindow* window;
     
 public:
@@ -26,6 +29,8 @@ public:
     virtual void down() = 0;
     virtual void drop() = 0;
     virtual bool canMoveDown() = 0;
+    virtual void rotate(int state) =0; //for state changes
+    char getBlockType();
     int getDropSpeed();
     void setDropSpeed(int speed);
     int getPoints();

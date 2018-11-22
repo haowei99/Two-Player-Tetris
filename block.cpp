@@ -27,18 +27,24 @@ int Block::getPoints() {
 } // getPoints
 
 
-bool Block::onBoard() {
+
+//implement later
+/*bool Block::onBoard() {
     for (int i = 0; i < len;i++) {
-        if (cells[i]->getBlock == this) {
+        if (cells[i]->getBlock() == this) {
             return true;
         } // if
     } // for
 
     return false;
 } // onBoard
-
+*/
 
 void Block::addCell(Cell* cell) {
     cells[len] = cell;
     len += 1;
 } // addCell
+
+char Block::getBlockType() {
+    return blockType;
+}
