@@ -23,6 +23,8 @@ public:
     void unsetCell();
     int get_X();
     int get_Y();
+    void set_X(int xCoor);
+    void set_Y(int yCoor);
 
 
     friend std::ostream& operator<<(std::ostream& os, Cell& cell);

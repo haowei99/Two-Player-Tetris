@@ -44,6 +44,13 @@ int Cell::get_Y() {
     return y;
 }
 
+void Cell::set_X(int xCoor){
+    x = xCoor;
+}
+void Cell::set_Y(int yCoor){
+    y = yCoor;
+}
+
 std::ostream& operator<<(std::ostream& out, Cell& cell) {
     if (cell.isFilled) out << cell.fillType;
     else out << "_"; //debugging reasons

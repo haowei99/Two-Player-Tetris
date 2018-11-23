@@ -42,6 +42,8 @@ int Block::getPoints() {
 
 void Block::addCell(Cell* cell) {
     cells[len] = cell;
+    cell->set_X(cell->get_X()); //wont get coordinates!
+    cell->set_Y(cell->get_Y());
     len = len + 1;
     std::cout << "Cell at: " << len << *cell << std::endl;
 } // addCell
