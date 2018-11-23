@@ -203,7 +203,6 @@ void jBlock::down() {
 }
 
 void jBlock::drop(){
-
 }
 
 bool jBlock::canMoveDown(){

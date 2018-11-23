@@ -3,7 +3,8 @@
 #include "block.h"
 
 class tBlock: public Block{
-    bool currShape[3][3];
+    int numCells;
+    void rotate(int state);
 public:
     tBlock(int x, int y, int level, Board *board);
     void rotateClockwise() override;
