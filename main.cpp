@@ -7,6 +7,7 @@ using namespace std;
 
 
 int main() {
+    int a = 5; 
     Board b(0, 0);
     b.init();
     cout << "Board:" << endl;
