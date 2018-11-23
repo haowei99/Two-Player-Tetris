@@ -63,8 +63,7 @@ void lBlock::rotate(int state) {
 
         board->unset(x, y);
         cells[1]->set_X(x + 1);
-        cells[1]->set_Y(y + 1);
-        board->set(x + 1, y + 1);
+        board->set(x + 1, y);
 
         //block 3
         x = cells[2]->get_X();
@@ -89,9 +88,9 @@ void lBlock::rotate(int state) {
         y = cells[0]->get_Y(); //pos of block
 
         board->unset(x, y);
-        cells[0]->set_X(x + 1);
-        cells[0]->set_Y(y - 1);
-        board->set(x + 1, y - 1);
+        cells[0]->set_X(x - 1);
+        cells[0]->set_Y(y + 1);
+        board->set(x - 1, y + 1);
 
         //block 2 pivot
 
