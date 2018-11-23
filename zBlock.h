@@ -3,7 +3,7 @@
 #include "block.h"
 
 class zBlock: public Block{
-    bool currShape[3][3];
+    int numCells;
 public:
     zBlock(int x, int y, int level, Board *board);
     void rotateClockwise() override;
@@ -17,4 +17,4 @@ public:
 };
 
 
-#endif //__zBLOCK_H__
+#endif //__ZBLOCK_H__

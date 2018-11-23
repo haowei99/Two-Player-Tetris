@@ -4,12 +4,8 @@
 using namespace::std;
 
 oBlock::oBlock(int x, int y, int level, Board *board): Block{x, y, level, board} {
-    currShape[0][0] = true;
-    currShape[0][1] = true;
-    currShape[1][0] = true;
-    currShape[1][1] = true;
     numCells = 4;
-    blockType = 'o';
+    blockType = 'O';
 }
 
 void oBlock::rotateClockwise() {}

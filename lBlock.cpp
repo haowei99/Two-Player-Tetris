@@ -1,62 +1,50 @@
 #include "lBlock.h"
+#include "board.h"
+
+using namespace::std;
 
 lBlock::lBlock(int x, int y, int level, Board *board): Block{x, y, level, board} {
-    currShape[1][2] = true;
-    currShape[2][0] = true;
-    currShape[2][1] = true;
-    currShape[2][2] = true;
+    numCells = 4;
+    blockType = 'L';
 }
 
-void lBlock::rotateClockwise() {
-    bool rotations[4][3][3] = {
-        {{0,0,0},
-         {0,0,1},
-         {1,1,1}},
+void lBlock::rotateClockwise() {}
 
-        {{1,0,0},
-         {1,0,0},
-         {1,1,0}},
+void lBlock::rotateCounterClockwise() {}
 
-        {{0,0,0},
-         {1,1,1},
-         {1,0,0}},
-
-        {{1,1,0},
-         {0,1,0},
-         {0,1,0}}
-    };
-}
-
-void lBlock::rotateCounterClockwise() {
-    bool rotations[4][3][3] = {
-        {{0,0,0},
-         {0,0,1},
-         {1,1,1}},
-        
-        {{1,1,0},
-         {0,1,0},
-         {0,1,0}},
-
-        {{0,0,0},
-         {1,1,1},
-         {1,0,0}},
-
-        {{1,0,0},
-         {1,0,0},
-         {1,1,0}}
-        
-    };
-}
 
 void lBlock::right() {
-    x = x + 1;
+    for (int i = numCells - 1; i >= 0 ; i--){
+        int x = cells[i]->get_X();
+        int y = cells[i]->get_Y(); //pos of block
+        cells[i]->set_X(x+1);
+        board->unset(x, y);
+        board->set(x + 1, y);
+    }
 }
 
 
 void lBlock::left() {
-    x = x - 1;
+    for (int i = 0; i < numCells; i++){
+        int x = cells[i]->get_X();
+        int y = cells[i]->get_Y(); //pos of block
+        cells[i]->set_X(x - 1);
+        board->unset(x, y);
+        board->set(x - 1, y);
+    }
 }
 
 void lBlock::down() {
-    y = y + 1;
+    for (int i = numCells - 1; i >= 0 ; i--){
+        int x = cells[i]->get_X();
+        int y = cells[i]->get_Y(); //pos of block
+        board->unset(x, y);
+        cells[i]->set_Y(y + 1);
+        board->set(x, y + 1);
+    }
+}
+
+void lBlock::drop() {} //need to implement
+bool lBlock::canMoveDown() {
+    return true; // need implement
 }

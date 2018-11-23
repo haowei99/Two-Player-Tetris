@@ -3,7 +3,8 @@
 #include "block.h"
 
 class jBlock: public Block{
-    bool currShape[3][3];
+    int numCells;
+
 public:
     jBlock(int x, int y, int level, Board *board);
     void rotateClockwise() override;
