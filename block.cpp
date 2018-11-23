@@ -51,3 +51,4 @@ void Block::addCell(Cell* cell) {
 char Block::getBlockType() {
     return blockType;
 }
+

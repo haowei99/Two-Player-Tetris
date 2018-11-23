@@ -3,9 +3,9 @@
 #include "block.h"
 
 class iBlock: public Block{
-    bool currShape[4][4];
     int rotateState = 1; //new state 1 - 4
     int numCells;
+    void rotate(int state);
 public:
     iBlock(int x, int y, int level, Board *board);
     void rotateClockwise() override;
@@ -13,9 +13,8 @@ public:
     void right() override;
     void left() override;
     void down() override;
-    //void drop() override;
-    //bool canMoveDown() override;
-    void rotate(int state) override;
+    void drop() override;
+    bool canMoveDown() override;
     ~iBlock() = default;
 };
 

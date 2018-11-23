@@ -2,10 +2,7 @@
 #include "board.h"
 
 iBlock::iBlock(int x, int y, int level, Board *board): Block{x, y, level, board} {
-    currShape[0][0] = true;
-    currShape[0][1] = true;
-    currShape[0][2] = true;
-    currShape[0][3] = true;
+    blockType ='I';
     numCells = 4;
 }
 
@@ -18,6 +15,8 @@ void iBlock::rotate(int state) {
         y = cells[0]->get_Y(); //pos of block
 
         board->unset(x, y);
+        cells[0]->set_X(x + 3);
+        cells[0]->set_Y(y + 3);
         board->set(x + 3, y + 3);
 
 
@@ -26,6 +25,8 @@ void iBlock::rotate(int state) {
         y = cells[1]->get_Y(); //pos of block
 
         board->unset(x, y);
+        cells[0]->set_X(x + 2);
+        cells[0]->set_Y(y + 2);
         board->set(x + 2, y + 2);
 
         //block 3
@@ -64,6 +65,7 @@ void iBlock::rotate(int state) {
     }
 }
 
+
 void iBlock::rotateClockwise() {
     rotate(rotateState);
     if (rotateState == 2) rotateState = 1;
@@ -77,10 +79,10 @@ void iBlock::rotateCounterClockwise() {
 }
 
 void iBlock::right() {
-    for (int i =0; i < numCells; i++){
+    for (int i = numCells - 1; i >= 0 ; i--){
         int x = cells[i]->get_X();
         int y = cells[i]->get_Y(); //pos of block
-
+        cells[i]->set_X(x+1);
         board->unset(x, y);
         board->set(x + 1, y);
     }
@@ -88,21 +90,29 @@ void iBlock::right() {
 
 
 void iBlock::left() {
-    for (int i =0; i < numCells; i++){
+    for (int i = 0; i < numCells; i++){
         int x = cells[i]->get_X();
         int y = cells[i]->get_Y(); //pos of block
-
+        cells[i]->set_X(x - 1);
         board->unset(x, y);
         board->set(x - 1, y);
     }
 }
 
 void iBlock::down() {
-    for (int i =0; i < numCells; i++){
+    for (int i = numCells - 1; i >= 0 ; i--){
         int x = cells[i]->get_X();
         int y = cells[i]->get_Y(); //pos of block
-
         board->unset(x, y);
+        cells[i]->set_Y(y + 1);
         board->set(x, y + 1);
     }
+}
+
+bool iBlock::canMoveDown() {
+    return true;//need to implement
+}
+
+void iBlock::drop() {
+
 }
