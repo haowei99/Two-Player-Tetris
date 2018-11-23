@@ -115,18 +115,33 @@ void jBlock::rotate(int state) {
         y = cells[0]->get_Y(); //pos of block
 
         board->unset(x, y);
-        cells[0]->set_Y(y + 2);
-        board->set(x, y + 2);
+        cells[0]->set_Y(y - 1);
+        board->set(x , y - 1);
 
-        //block 2/3 are pivot points
+        //block 2
+        x = cells[1]->get_X();
+        y = cells[1]->get_Y(); //pos of block
+
+        board->unset(x, y);
+        cells[1]->set_X(x - 1);
+        board->set(x - 1, y);
+
+        //block 3
+        x = cells[2]->get_X();
+        y = cells[2]->get_Y(); //pos of block
+
+        board->unset(x, y);
+        cells[2]->set_Y(y + 1);
+        board->set(x, y + 1);
 
         //block 4
         x = cells[3]->get_X();
         y = cells[3]->get_Y(); //pos of block
 
         board->unset(x, y);
-        cells[3]->set_X(x + 2);
-        board->set(x + 2, y);
+        cells[3]->set_Y(y + 2);
+        cells[3]->set_X(x + 1);
+        board->set(x + 1, y + 2);
     }
 }
 
@@ -144,8 +159,6 @@ void jBlock::rotateCounterClockwise() {
         else rotateState++;
         cycle--;
     }
-    if (rotateState == 1) rotateState = 4;
-    else rotateState--;
 }
 
 
