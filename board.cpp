@@ -46,13 +46,13 @@ Block* Board::changeBlock() {
     Block * block = new iBlock(0,0,0, this);
     currBlock = block;
     this->set(0, 0);
-    this->set(0, 1);
-    this->set(0, 2);
-    this->set(0, 3);
+    this->set(1, 0);
+    this->set(2, 0);
+    this->set(3, 0);
     block->addCell(&grid[0][0]);
-    block->addCell(&grid[0][1]);
-    block->addCell(&grid[0][2]);
-    block->addCell(&grid[0][3]);
+    block->addCell(&grid[1][0]);
+    block->addCell(&grid[2][0]);
+    block->addCell(&grid[3][0]);
 
     currBlock = block;
     return currBlock;
