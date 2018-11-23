@@ -10,7 +10,7 @@ zBlock::zBlock(int x, int y, int level, Board *board): Block{x, y, level, board}
 
 void zBlock::rotate(int state) {
     int x, y;
-    if (state == 2) { //initial state is flat
+    if (state == 1) { //initial state is flat
         //block 3
         x = cells[2]->get_X();
         y = cells[2]->get_Y(); //pos of block
@@ -27,8 +27,6 @@ void zBlock::rotate(int state) {
         cells[3]->set_X(x - 1);
         cells[3]->set_Y(y - 2);
         board->set(x - 1, y - 2);
-
-        //block 1 pivot point, does not change
     }
     else{
         //block 3
@@ -65,13 +63,44 @@ void zBlock::rotateCounterClockwise() {
     else rotateState--;
 }
 
-void zBlock::down() {
-    for (int i = numCells - 1; i >= 0 ; i--){
+
+void zBlock::right() {
+    for (int i = 0; i < numCells; i++){
         int x = cells[i]->get_X();
         int y = cells[i]->get_Y(); //pos of block
+        cells[i]->set_X(x + 1);
         board->unset(x, y);
+        //board->set(x + 1, y);
+    }
+    for (int i = 0; i < numCells; i++){
+        board->set(cells[i]->get_X(), cells[i]->get_Y());
+    }
+}
+
+
+void zBlock::left() {
+    for (int i = 0; i < numCells; i++){
+        int x = cells[i]->get_X();
+        int y = cells[i]->get_Y(); //pos of block
+        cells[i]->set_X(x - 1);
+        board->unset(x, y);
+        //board->set(x - 1, y);
+    }
+    for (int i = 0; i < numCells; i++){
+        board->set(cells[i]->get_X(), cells[i]->get_Y());
+    }
+}
+
+void zBlock::down() {
+    for (int i = 0; i < numCells; i++){
+        int x = cells[i]->get_X();
+        int y = cells[i]->get_Y(); //pos of block
+        if(board->cellAt(x,y)->cellFilled()) board->unset(x, y);
         cells[i]->set_Y(y + 1);
-        board->set(x, y + 1);
+        //board->set(x, y + 1);
+    }
+    for (int i = 0; i < numCells; i++){
+        board->set(cells[i]->get_X(), cells[i]->get_Y());
     }
 }
 

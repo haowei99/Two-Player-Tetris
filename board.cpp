@@ -2,6 +2,8 @@
 #include <vector>
 #include "oBlock.h"
 #include "iBlock.h"
+#include "sBlock.h"
+#include "zBlock.h"
 
 using namespace::std;
 
@@ -43,6 +45,21 @@ Block* Board::getBlock() {
 }
 
 Block* Board::changeBlock() {
+
+    Block * block = new zBlock(0,0,0, this);
+    currBlock = block;
+    this->set(0, 1);
+    this->set(1, 1);
+    this->set(1, 2);
+    this->set(2 , 2);
+    block->addCell(&grid[0][1]);
+    block->addCell(&grid[1][1]);
+    block->addCell(&grid[1][2]);
+    block->addCell(&grid[2][2]);
+
+    currBlock = block;
+    return currBlock;
+    /* iBlock
     Block * block = new iBlock(0,0,0, this);
     currBlock = block;
     this->set(0, 0);
@@ -56,6 +73,7 @@ Block* Board::changeBlock() {
 
     currBlock = block;
     return currBlock;
+    */
 
     // Block
     /*
