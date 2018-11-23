@@ -17,6 +17,8 @@ protected:
     Cell* cells[max];
     int len = 0;
     char blockType;
+    //initial roatate state =1
+    int rotateState = 1;
     // XWindow* window;
     
 public:
