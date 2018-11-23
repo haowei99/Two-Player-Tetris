@@ -4,6 +4,7 @@
 
 class lBlock: public Block{
     int numCells;
+    void rotate(int state);
 public:
     lBlock(int x, int y, int level, Board *board);
     void rotateClockwise() override;

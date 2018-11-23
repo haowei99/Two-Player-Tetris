@@ -4,6 +4,7 @@
 #include "iBlock.h"
 #include "sBlock.h"
 #include "zBlock.h"
+#include "lBlock.h"
 
 using namespace::std;
 
@@ -46,16 +47,16 @@ Block* Board::getBlock() {
 
 Block* Board::changeBlock() {
 
-    Block * block = new zBlock(0,0,0, this);
+    Block * block = new lBlock(0,0,0, this);
     currBlock = block;
-    this->set(0, 1);
-    this->set(1, 1);
+    this->set(0, 2);
     this->set(1, 2);
-    this->set(2 , 2);
-    block->addCell(&grid[0][1]);
-    block->addCell(&grid[1][1]);
+    this->set(2, 2);
+    this->set(2 ,1);
+    block->addCell(&grid[0][2]);
     block->addCell(&grid[1][2]);
     block->addCell(&grid[2][2]);
+    block->addCell(&grid[2][1]);
 
     currBlock = block;
     return currBlock;
