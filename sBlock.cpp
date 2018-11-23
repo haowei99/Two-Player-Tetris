@@ -15,36 +15,51 @@ void sBlock::rotate(int state) {
         y = cells[0]->get_Y(); //pos of block
 
         board->unset(x, y);
-        cells[0]->set_X(x - 2);
-        board->set(x - 2, y);
+        cells[0]->set_Y(y - 2);
+        board->set(x, y - 2);
 
         //block 2/3 are pivot points
-
-        //block 4
-        x = cells[2]->get_X();
-        y = cells[2]->get_Y(); //pos of block
-
-        board->unset(x, y);
-        cells[2]->set_X(x + 2);
-        cells[2]->set_Y(y + 2);
-        board->set(x + 2, y + 2);
 
         //block 4
         x = cells[3]->get_X();
         y = cells[3]->get_Y(); //pos of block
 
         board->unset(x, y);
-        cells[3]->set_X(x + 3);
-        cells[3]->set_Y(y + 3);
-        board->set(x + 3, y + 3);
-
-        //block 1 pivot point, does not change
+        cells[3]->set_X(x - 2);
+        board->set(x - 2, y);
     }
-    else{}
+    else{
+        //block 1
+        x = cells[0]->get_X();
+        y = cells[0]->get_Y(); //pos of block
+
+        board->unset(x, y);
+        cells[0]->set_Y(y + 2);
+        board->set(x, y + 2);
+
+        //block 2/3 are pivot points
+
+        //block 4
+        x = cells[3]->get_X();
+        y = cells[3]->get_Y(); //pos of block
+
+        board->unset(x, y);
+        cells[3]->set_X(x + 2);
+        board->set(x + 2, y);
+    }
 }
-void sBlock::rotateClockwise() {}
+
+
+void sBlock::rotateClockwise() {
+    rotate(rotateState);
+    if (rotateState == 2) rotateState = 1;
+    else rotateState = 2;
+}
 
 void sBlock::rotateCounterClockwise() {
+    rotate(rotateState);
+    if (rotateState == 1) rotateState = 2;
+    else rotateState--;
 }
 
 
