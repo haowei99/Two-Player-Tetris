@@ -38,6 +38,7 @@ public:
     int getPoints();
     bool onBoard();
     void addCell(Cell* cell);
+    bool in_grid(int x, int y); // check if block is within board
 };
 
 #endif // __BLOCK_H__

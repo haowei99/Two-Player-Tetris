@@ -83,7 +83,6 @@ void tBlock::rotate(int state) {
         //block 2
         x = cells[1]->get_X();
         y = cells[1]->get_Y(); //pos of block
-
         board->unset(x, y);
         cells[1]->set_X(x - 1);
         cells[1]->set_Y(y - 1);
@@ -92,7 +91,6 @@ void tBlock::rotate(int state) {
         // Block 3
         x = cells[2]->get_X();
         y = cells[2]->get_Y(); //pos of block
-
         board->unset(x, y);
         cells[2]->set_Y(y - 2);
         board->set(x , y - 2);
@@ -141,9 +139,6 @@ void tBlock::rotate(int state) {
         board->unset(x, y);
         cells[0]->set_Y(y - 1);
         board->set(x , y - 1);
-
-
-
     }
 }
 
@@ -164,6 +159,14 @@ void tBlock::rotateCounterClockwise() {
 }
 
 void tBlock::right() {
+    // check constraints
+    for (int i = 0; i < numCells; i++){
+        int x = cells[i]->get_X();
+        int y = cells[i]->get_Y();
+        if(!in_grid(x + 1, y)){
+            return;
+        }; //if false return
+    }
     for (int i = 0; i < numCells; i++){
         int x = cells[i]->get_X();
         int y = cells[i]->get_Y(); //pos of block
@@ -178,6 +181,14 @@ void tBlock::right() {
 
 
 void tBlock::left() {
+    // check constraints
+    for (int i = 0; i < numCells; i++){
+        int x = cells[i]->get_X();
+        int y = cells[i]->get_Y();
+        if(!in_grid(x - 1, y)){
+            return;
+        }; //if false return
+    }
     for (int i = 0; i < numCells; i++){
         int x = cells[i]->get_X();
         int y = cells[i]->get_Y(); //pos of block
@@ -191,6 +202,14 @@ void tBlock::left() {
 }
 
 void tBlock::down() {
+    // check constraints
+    for (int i = 0; i < numCells; i++){
+        int x = cells[i]->get_X();
+        int y = cells[i]->get_Y();
+        if(!in_grid(x, y + 1)){
+            return;
+        }; //if false return
+    }
     for (int i = 0; i < numCells; i++){
         int x = cells[i]->get_X();
         int y = cells[i]->get_Y(); //pos of block

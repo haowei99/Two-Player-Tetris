@@ -52,3 +52,7 @@ char Block::getBlockType() {
     return blockType;
 }
 
+bool Block::in_grid(int x, int y) {
+    if ((x >= 0 && x < 11) && (y >= 0 && y < 18)) return true;
+    else return  false;
+}
