@@ -62,8 +62,15 @@ void sBlock::rotateCounterClockwise() {
     else rotateState--;
 }
 
-
 void sBlock::right() {
+    // check constraints
+    for (int i = 0; i < numCells; i++){
+        int x = cells[i]->get_X();
+        int y = cells[i]->get_Y();
+        if(!in_grid(x + 1, y)){
+            return;
+        }; //if false return
+    }
     for (int i = 0; i < numCells; i++){
         int x = cells[i]->get_X();
         int y = cells[i]->get_Y(); //pos of block
@@ -78,6 +85,14 @@ void sBlock::right() {
 
 
 void sBlock::left() {
+    // check constraints
+    for (int i = 0; i < numCells; i++){
+        int x = cells[i]->get_X();
+        int y = cells[i]->get_Y();
+        if(!in_grid(x - 1, y)){
+            return;
+        }; //if false return
+    }
     for (int i = 0; i < numCells; i++){
         int x = cells[i]->get_X();
         int y = cells[i]->get_Y(); //pos of block
@@ -91,6 +106,14 @@ void sBlock::left() {
 }
 
 void sBlock::down() {
+    // check constraints
+    for (int i = 0; i < numCells; i++){
+        int x = cells[i]->get_X();
+        int y = cells[i]->get_Y();
+        if(!in_grid(x, y + 1)){
+            return;
+        }; //if false return
+    }
     for (int i = 0; i < numCells; i++){
         int x = cells[i]->get_X();
         int y = cells[i]->get_Y(); //pos of block
@@ -102,6 +125,7 @@ void sBlock::down() {
         board->set(cells[i]->get_X(), cells[i]->get_Y());
     }
 }
+
 
 void sBlock::drop() {} //need to implement
 bool sBlock::canMoveDown() {

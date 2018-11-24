@@ -166,6 +166,14 @@ void lBlock::rotateCounterClockwise() {
 
 
 void lBlock::right() {
+    // check constraints
+    for (int i = 0; i < numCells; i++){
+        int x = cells[i]->get_X();
+        int y = cells[i]->get_Y();
+        if(!in_grid(x + 1, y)){
+            return;
+        }; //if false return
+    }
     for (int i = 0; i < numCells; i++){
         int x = cells[i]->get_X();
         int y = cells[i]->get_Y(); //pos of block
@@ -180,6 +188,14 @@ void lBlock::right() {
 
 
 void lBlock::left() {
+    // check constraints
+    for (int i = 0; i < numCells; i++){
+        int x = cells[i]->get_X();
+        int y = cells[i]->get_Y();
+        if(!in_grid(x - 1, y)){
+            return;
+        }; //if false return
+    }
     for (int i = 0; i < numCells; i++){
         int x = cells[i]->get_X();
         int y = cells[i]->get_Y(); //pos of block
@@ -193,6 +209,14 @@ void lBlock::left() {
 }
 
 void lBlock::down() {
+    // check constraints
+    for (int i = 0; i < numCells; i++){
+        int x = cells[i]->get_X();
+        int y = cells[i]->get_Y();
+        if(!in_grid(x, y + 1)){
+            return;
+        }; //if false return
+    }
     for (int i = 0; i < numCells; i++){
         int x = cells[i]->get_X();
         int y = cells[i]->get_Y(); //pos of block
