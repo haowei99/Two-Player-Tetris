@@ -108,24 +108,7 @@ void tBlock::rotate(int state) {
 
         //block 4 constant
     }
-    else{
-        //block 2
-        x = cells[1]->get_X();
-        y = cells[1]->get_Y(); //pos of block
-
-        board->unset(x, y);
-        cells[1]->set_X(x + 1);
-        board->set(x + 1, y);
-
-        //block 1
-        x = cells[0]->get_X();
-        y = cells[0]->get_Y(); //pos of block
-
-        board->unset(x, y);
-        cells[0]->set_Y(y - 1);
-        board->set(x, y - 1);
-
-
+    else if (state == 4){
         // Block 3
         x = cells[2]->get_X();
         y = cells[2]->get_Y(); //pos of block
@@ -140,24 +123,45 @@ void tBlock::rotate(int state) {
         y = cells[3]->get_Y(); //pos of block
 
         board->unset(x, y);
-        cells[3]->set_X(x - 1);
         cells[3]->set_Y(y + 1);
-        board->set(x - 1, y + 1);
+        board->set(x, y + 1);
+
+        //block 2
+        x = cells[1]->get_X();
+        y = cells[1]->get_Y(); //pos of block
+
+        board->unset(x, y);
+        cells[1]->set_X(x + 1);
+        board->set(x + 1, y);
+
+        //block 1
+        x = cells[0]->get_X();
+        y = cells[0]->get_Y(); //pos of block
+
+        board->unset(x, y);
+        cells[0]->set_Y(y - 1);
+        board->set(x , y - 1);
+
+
+
     }
 }
 
 void tBlock::rotateClockwise() {
     rotate(rotateState);
-    if (rotateState == 2) rotateState = 1;
-    else rotateState = 2;
+    if (rotateState == 4) rotateState = 1;
+    else rotateState++;
 }
 
 void tBlock::rotateCounterClockwise() {
-    rotate(rotateState);
-    if (rotateState == 1) rotateState = 2;
-    else rotateState--;
+    int cycle = 3;
+    while(cycle){
+        rotate(rotateState);
+        if (rotateState == 4) rotateState = 1;
+        else rotateState++;
+        cycle--;
+    }
 }
-
 
 void tBlock::right() {
     for (int i = 0; i < numCells; i++){
