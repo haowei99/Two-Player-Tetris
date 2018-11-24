@@ -61,9 +61,10 @@ Block* Board::changeBlock() {
     block->addCell(&grid[1][2]);
 
     currBlock = block;
-    return currBlock; */
+    return currBlock;
+    */
 
-    // iBlock
+    //iBlock
     Block * block = new iBlock(0,0,0, this);
     currBlock = block;
     this->set(0, 0);

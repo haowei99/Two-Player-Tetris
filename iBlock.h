@@ -5,7 +5,7 @@
 class iBlock: public Block{
     int rotateState = 1; //new state 1 - 4
     int numCells;
-    void rotate(int state);
+    bool rotate(int state);
 public:
     iBlock(int x, int y, int level, Board *board);
     void rotateClockwise() override;

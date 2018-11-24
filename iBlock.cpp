@@ -7,9 +7,13 @@ iBlock::iBlock(int x, int y, int level, Board *board): Block{x, y, level, board}
 }
 
 
-void iBlock::rotate(int state) {
+bool iBlock::rotate(int state) {
     int x, y;
     if (state == 2) { //initial state is flat
+        // check if 4th block is out of bounds when rotate
+        x = cells[3]->get_X() + 3;
+        y = cells[3]->get_Y() + 3; //pos of block
+        if (!in_grid(x, y )) return false;
         //block 2
         x = cells[1]->get_X();
         y = cells[1]->get_Y(); //pos of block
@@ -71,19 +75,22 @@ void iBlock::rotate(int state) {
 
         //block 1 pivot point, does not change
     }
+    return true;
 }
 
 
 void iBlock::rotateClockwise() {
-    rotate(rotateState);
-    if (rotateState == 2) rotateState = 1;
-    else rotateState = 2;
+    if(rotate(rotateState)) {
+        if (rotateState == 2) rotateState = 1;
+        else rotateState = 2;
+    }
 }
 
 void iBlock::rotateCounterClockwise() {
-    rotate(rotateState);
-    if (rotateState == 1) rotateState = 2;
-    else rotateState--;
+    if (rotate(rotateState)) {
+        if (rotateState == 1) rotateState = 2;
+        else rotateState--;
+    }
 }
 
 void iBlock::right() {
