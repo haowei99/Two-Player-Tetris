@@ -25,8 +25,8 @@ int main() {
         else if (c == "l"){ //left
             oblo->left();
         }
-        else if (c == "d"){ //down
-            oblo->down();
+        else if (c == "drop"){ //down
+            oblo->drop();
         }
         else if (c == "rC"){
             oblo->rotateClockwise();
@@ -34,6 +34,7 @@ int main() {
         else if (c == "rCC"){
             oblo->rotateCounterClockwise();
         }
+        else if(c == "d") oblo->drop();
         else if (c == "p"){
             cout << b;
         }
