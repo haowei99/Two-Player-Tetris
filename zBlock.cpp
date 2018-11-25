@@ -63,7 +63,7 @@ void zBlock::rotateCounterClockwise() {
     else rotateState--;
 }
 
-
+/*
 void zBlock::right() {
     // check constraints
     for (int i = 0; i < numCells; i++){
@@ -132,3 +132,4 @@ void zBlock::drop() {} //need to implement
 bool zBlock::canMoveDown() {
     return true; // need implement
 }
+*/

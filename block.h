@@ -20,17 +20,20 @@ protected:
     //initial roatate state =1
     int rotateState = 1;
     // XWindow* window;
+    int numCells = 4;
     
 public:
     Block(int x, int y, int level, Board* board);
     ~Block();
     virtual void rotateClockwise() = 0;
     virtual void rotateCounterClockwise() = 0;
-    virtual void right() = 0;
-    virtual void left() = 0;
-    virtual void down() = 0;
-    virtual void drop() = 0;
-    virtual bool canMoveDown() = 0;
+    void right();
+    void left();
+    void down();
+    void drop();
+    bool canMoveDown();
+    bool canMoveRight();
+    bool canMoveLeft();
    // virtual void rotate(int state) =0; //for state changes
     char getBlockType();
     int getDropSpeed();

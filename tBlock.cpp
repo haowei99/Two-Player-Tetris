@@ -166,6 +166,7 @@ void tBlock::rotateCounterClockwise() {
     }
 }
 
+/*
 void tBlock::right() {
     // check constraints
     for (int i = 0; i < numCells; i++){
@@ -233,4 +234,4 @@ void tBlock::down() {
 void tBlock::drop() {} //need to implement
 bool tBlock::canMoveDown() {
     return true; // need implement
-}
+}*/

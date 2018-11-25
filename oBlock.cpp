@@ -12,7 +12,7 @@ void oBlock::rotateClockwise() {}
 
 void oBlock::rotateCounterClockwise() {}
 
-
+/*
 void oBlock::right() {
     // check constraints
     for (int i = 0; i < numCells; i++){
@@ -81,4 +81,4 @@ void oBlock::down() {
 void oBlock::drop() {} //need to implement
 bool oBlock::canMoveDown() {
     return true; // need implement
-}
+}*/

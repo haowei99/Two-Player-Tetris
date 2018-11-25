@@ -165,6 +165,7 @@ void jBlock::rotateCounterClockwise() {
     }
 }
 
+/*
 void jBlock::right() {
     // check constraints
     for (int i = 0; i < numCells; i++){
@@ -236,3 +237,4 @@ void jBlock::drop(){
 bool jBlock::canMoveDown(){
     return true; //implement later
 }
+*/
