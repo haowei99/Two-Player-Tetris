@@ -1,7 +1,7 @@
 #ifndef __DISPLAY_H__
 #define __DISPLAY_H__
 #include <string>
-#include <iostrea>
+#include <iostream>
 #include "cell.h"
 
 class Display {
