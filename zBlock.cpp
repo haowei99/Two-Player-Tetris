@@ -65,6 +65,14 @@ void zBlock::rotateCounterClockwise() {
 
 /*
 void zBlock::right() {
+    // check constraints
+    for (int i = 0; i < numCells; i++){
+        int x = cells[i]->get_X();
+        int y = cells[i]->get_Y();
+        if(!in_grid(x + 1, y)){
+            return;
+        }; //if false return
+    }
     for (int i = 0; i < numCells; i++){
         int x = cells[i]->get_X();
         int y = cells[i]->get_Y(); //pos of block
@@ -79,6 +87,14 @@ void zBlock::right() {
 
 
 void zBlock::left() {
+    // check constraints
+    for (int i = 0; i < numCells; i++){
+        int x = cells[i]->get_X();
+        int y = cells[i]->get_Y();
+        if(!in_grid(x - 1, y)){
+            return;
+        }; //if false return
+    }
     for (int i = 0; i < numCells; i++){
         int x = cells[i]->get_X();
         int y = cells[i]->get_Y(); //pos of block
@@ -92,6 +108,14 @@ void zBlock::left() {
 }
 
 void zBlock::down() {
+    // check constraints
+    for (int i = 0; i < numCells; i++){
+        int x = cells[i]->get_X();
+        int y = cells[i]->get_Y();
+        if(!in_grid(x, y + 1)){
+            return;
+        }; //if false return
+    }
     for (int i = 0; i < numCells; i++){
         int x = cells[i]->get_X();
         int y = cells[i]->get_Y(); //pos of block
