@@ -93,7 +93,7 @@ void iBlock::rotateCounterClockwise() {
     }
 }
 
-/*
+
 void iBlock::right() {
     if(!canMoveRight()) return;
     // check constraints
@@ -185,7 +185,7 @@ bool iBlock::canMoveLeft() {
     for (int i = 0; i < numCells; i++){
         int x = cells[i]->get_X();
         int y = cells[i]->get_Y();
-        if(!in_grid(x + 1, y)){
+        if(!in_grid(x - 1, y)){
             return false;
         }; //if false return
     }
@@ -250,4 +250,4 @@ void iBlock::drop() {
         if(!canMoveDown()) return;
         down();
     }
-}*/
+}
