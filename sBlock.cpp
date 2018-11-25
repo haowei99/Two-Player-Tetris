@@ -62,7 +62,7 @@ void sBlock::rotateCounterClockwise() {
     else rotateState--;
 }
 
-void sBlock::right() {
+/*void sBlock::right() {
     // check constraints
     for (int i = 0; i < numCells; i++){
         int x = cells[i]->get_X();
@@ -130,4 +130,4 @@ void sBlock::down() {
 void sBlock::drop() {} //need to implement
 bool sBlock::canMoveDown() {
     return true; // need implement
-}
+}*/

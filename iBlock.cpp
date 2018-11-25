@@ -93,6 +93,7 @@ void iBlock::rotateCounterClockwise() {
     }
 }
 
+/*
 void iBlock::right() {
     // check constraints
     for (int i = 0; i < numCells; i++){
@@ -164,3 +165,4 @@ bool iBlock::canMoveDown() {
 void iBlock::drop() {
 
 }
+*/

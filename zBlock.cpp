@@ -63,7 +63,7 @@ void zBlock::rotateCounterClockwise() {
     else rotateState--;
 }
 
-
+/*
 void zBlock::right() {
     for (int i = 0; i < numCells; i++){
         int x = cells[i]->get_X();
@@ -108,3 +108,4 @@ void zBlock::drop() {} //need to implement
 bool zBlock::canMoveDown() {
     return true; // need implement
 }
+*/

@@ -168,7 +168,7 @@ void lBlock::rotateCounterClockwise() {
     }
 }
 
-
+/*
 void lBlock::right() {
     // check constraints
     for (int i = 0; i < numCells; i++){
@@ -236,4 +236,4 @@ void lBlock::down() {
 void lBlock::drop() {} //need to implement
 bool lBlock::canMoveDown() {
     return true; // need implement
-}
+}*/
