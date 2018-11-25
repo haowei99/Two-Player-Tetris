@@ -186,6 +186,7 @@ bool Block::canMoveRight(){
     }
     return canMove;
 }
+
 bool Block::canMoveLeft(){
     // check constraints
     for (int i = 0; i < numCells; i++){

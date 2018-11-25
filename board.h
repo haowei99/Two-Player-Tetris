@@ -10,6 +10,7 @@ class Board {
     int y;
     Block* currBlock;
     Block *nextBlock;
+    std::vector<Block *> loBlock;
     //Xwindow window;
 
     public:
@@ -21,7 +22,9 @@ class Board {
     void set(int x, int y);
     void unset(int x, int y);
     Block * getBlock();
-    Block * changeBlock();
+    Block * changeBlock(char type);
+    void addBlock(Block *b);
+    bool loBEmpty();
 
    // void setCurrBlock(Block *currBlock);
     friend std::ostream& operator<<(std::ostream& os, Board& board);

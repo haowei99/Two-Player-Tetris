@@ -1,6 +1,5 @@
 #include "block.h"
 #include "board.h"
-#include "oBlock.h"
 #include <iostream>
 #include <string>
 using namespace std;
@@ -13,13 +12,14 @@ int main() {
     cout << b << endl;
     string c;
     Board * bp = &b;
-    bp->changeBlock();
-    Block *oblo = bp->getBlock();
+    bp->changeBlock('i');
+    Block *oblo = bp->getBlock(); //curr block
     //Block * oblo =  new oBlock(0,0,0,bp);
     cout << "Board next:" << endl;
     cout << b << endl;
     while (cin >> c){
         if (c == "r"){ // right
+            //cout << bp->getBlock() << endl;
             oblo->right();
         }
         else if (c == "l"){ //left
@@ -27,6 +27,11 @@ int main() {
         }
         else if (c == "drop"){ //down
             oblo->drop();
+            Block *tmp = oblo;
+            bp->addBlock(tmp);
+            bp->changeBlock('j');
+            oblo = nullptr;
+            oblo = bp->getBlock(); 
         }
         else if (c == "rC"){
             oblo->rotateClockwise();
@@ -34,9 +39,15 @@ int main() {
         else if (c == "rCC"){
             oblo->rotateCounterClockwise();
         }
-        else if(c == "d") oblo->drop();
-        else if (c == "p"){
-            cout << b;
+        else if(c == "d") {
+            oblo->down();
+            if (!oblo->canMoveDown()){
+                Block *tmp = oblo;
+                bp->addBlock(tmp);
+                oblo = nullptr;
+                oblo = bp->changeBlock('j');
+                //oblo = bp->getBlock(); 
+            }
         }
         cout << b << endl;
     }

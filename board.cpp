@@ -1,12 +1,13 @@
 #include "board.h"
 #include <vector>
-#include "oBlock.h"
 #include "iBlock.h"
+#include "jBlock.h"
+/*
+#include "oBlock.h"
 #include "sBlock.h"
 #include "zBlock.h"
 #include "lBlock.h"
-#include "jBlock.h"
-#include "tBlock.h"
+#include "tBlock.h"*/
 
 using namespace::std;
 
@@ -47,7 +48,7 @@ Block* Board::getBlock() {
     return currBlock;
 }
 
-Block* Board::changeBlock() {
+Block* Board::changeBlock(char type) {
     /* t block
     Block * block = new tBlock(0,0,0, this);
     currBlock = block;
@@ -65,19 +66,38 @@ Block* Board::changeBlock() {
     */
 
     //iBlock
-    Block * block = new iBlock(0,0,0, this);
-    currBlock = block;
-    this->set(0, 0);
-    this->set(1, 0);
-    this->set(2, 0);
-    this->set(3, 0);
-    block->addCell(&grid[0][0]);
-    block->addCell(&grid[1][0]);
-    block->addCell(&grid[2][0]);
-    block->addCell(&grid[3][0]);
+    if (type == 'i'){
+        Block * block = new iBlock(0,0,0, this);
+        //cout << "addr block" << block << endl;
+        currBlock = block;
+        this->set(0, 0);
+        this->set(1, 0);
+        this->set(2, 0);
+        this->set(3, 0);
+        block->addCell(&grid[0][0]);
+        block->addCell(&grid[1][0]);
+        block->addCell(&grid[2][0]);
+        block->addCell(&grid[3][0]);
 
-    currBlock = block;
-    return currBlock;
+        currBlock = block;
+        return currBlock;
+    }
+    else if (type == 'j'){
+        Block * block = new jBlock(0,0,0, this);
+        //cout << "addr block" << block << endl;
+        currBlock = block;
+        this->set(0, 3);
+        this->set(0, 4);
+        this->set(1, 4);
+        this->set(2, 4);
+        block->addCell(&grid[0][3]);
+        block->addCell(&grid[0][4]);
+        block->addCell(&grid[1][4]);
+        block->addCell(&grid[2][4]);
+
+        currBlock = block;
+        return currBlock;
+    }
 
 
     // Block
@@ -101,6 +121,9 @@ Block* Board::changeBlock() {
    // currBlock = new oBlock(0,0,0,this); */
 }
 
+void Board::addBlock(Block *b){
+    loBlock.emplace_back(b);
+}
 
 std::ostream& operator<<(std::ostream& out, Board& board){
     for (int i = 0; i < 18; i++){
@@ -110,4 +133,9 @@ std::ostream& operator<<(std::ostream& out, Board& board){
         out << endl;
     }
     return out;
+}
+
+//test if block is properly added
+bool Board::loBEmpty(){
+    return loBlock.empty();
 }
