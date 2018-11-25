@@ -93,7 +93,7 @@ void iBlock::rotateCounterClockwise() {
     }
 }
 
-
+/*
 void iBlock::right() {
     if(!canMoveRight()) return;
     // check constraints
@@ -250,4 +250,4 @@ void iBlock::drop() {
         if(!canMoveDown()) return;
         down();
     }
-}
+}*/

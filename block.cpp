@@ -59,6 +59,7 @@ bool Block::in_grid(int x, int y) {
 }
 
 void Block::right(){
+    if(!canMoveRight()) return;
     // check constraints
     for (int i = 0; i < numCells; i++){
         int x = cells[i]->get_X();
@@ -79,6 +80,7 @@ void Block::right(){
     }
 }
 void Block::left(){
+    if(!canMoveLeft()) return;
     // check constraints
     for (int i = 0; i < numCells; i++){
         int x = cells[i]->get_X();
@@ -154,8 +156,64 @@ bool Block::canMoveDown(){
     return canMove;
 }
 bool Block::canMoveRight(){
-    return true;
+    // check constraints
+    for (int i = 0; i < numCells; i++){
+        int x = cells[i]->get_X();
+        int y = cells[i]->get_Y();
+        if(!in_grid(x + 1, y)){
+            return false;
+        }; //if false return
+    }
+
+    //check collision
+    for (int i = 0; i < numCells; i++){
+        int x = cells[i]->get_X();
+        int y = cells[i]->get_Y(); //pos of block
+        board->unset(x, y); // unset first to avoid collision
+    }
+    bool canMove = true;
+    for (int i = 0; i < numCells; i++){
+        int x = cells[i]->get_X() + 1;
+        int y = cells[i]->get_Y(); //pos of block when move down 1
+        if(board->cellAt(x,y)->cellFilled()){//if everything is filled
+            canMove = false;
+        }
+    }
+    for (int i = 0; i < numCells; i++){
+        int x = cells[i]->get_X();
+        int y = cells[i]->get_Y(); //pos of block
+        board->set(x, y); // unset first to avoid collision
+    }
+    return canMove;
 }
 bool Block::canMoveLeft(){
-    return true;
+    // check constraints
+    for (int i = 0; i < numCells; i++){
+        int x = cells[i]->get_X();
+        int y = cells[i]->get_Y();
+        if(!in_grid(x - 1, y)){
+            return false;
+        }; //if false return
+    }
+
+    //check collision
+    for (int i = 0; i < numCells; i++){
+        int x = cells[i]->get_X();
+        int y = cells[i]->get_Y(); //pos of block
+        board->unset(x, y); // unset first to avoid collision
+    }
+    bool canMove = true;
+    for (int i = 0; i < numCells; i++){
+        int x = cells[i]->get_X() - 1;
+        int y = cells[i]->get_Y(); //pos of block when move down 1
+        if(board->cellAt(x,y)->cellFilled()){//if everything is filled
+            canMove = false;
+        }
+    }
+    for (int i = 0; i < numCells; i++){
+        int x = cells[i]->get_X();
+        int y = cells[i]->get_Y(); //pos of block
+        board->set(x, y); // unset first to avoid collision
+    }
+    return canMove;
 }
