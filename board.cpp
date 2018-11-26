@@ -77,9 +77,9 @@ Block* Board::changeBlock(char type) {
         this->set(2, 0);
         this->set(3, 0);
         block->addCell(&grid[0][0]);
-        block->addCell(&grid[1][0]);
-        block->addCell(&grid[2][0]);
-        block->addCell(&grid[3][0]);
+        block->addCell(&grid[0][1]);
+        block->addCell(&grid[0][2]);
+        block->addCell(&grid[0][3]);
 
         currBlock = block;
         return currBlock;
@@ -92,10 +92,10 @@ Block* Board::changeBlock(char type) {
         this->set(0, 4);
         this->set(1, 4);
         this->set(2, 4);
-        block->addCell(&grid[0][3]);
-        block->addCell(&grid[0][4]);
-        block->addCell(&grid[1][4]);
-        block->addCell(&grid[2][4]);
+        block->addCell(&grid[3][0]);
+        block->addCell(&grid[4][0]);
+        block->addCell(&grid[4][1]);
+        block->addCell(&grid[4][2]);
 
         currBlock = block;
         return currBlock;
