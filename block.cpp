@@ -62,6 +62,19 @@ void Block::right(){
     if(!canMoveRight()) return;
     // check constraints
     for (int i = 0; i < numCells; i++){
+        x = cells[i]->get_X();
+        y = cells[i]->get_Y(); //pos of block (new opsitition)
+        if(board->cellAt(x, y)->cellFilled()) board->unset(x, y);
+        cells[i]->set_X(x + 1);
+    }
+    for (int i = 0; i < numCells; i++){
+        x = cells[i]->get_X();
+        y = cells[i]->get_Y();
+        board->set(x, y);
+        cells[i]->set_X(x - 1);
+        cells[i] = board->cellAt(x, y);
+    }
+    /*for (int i = 0; i < numCells; i++){
         int x = cells[i]->get_X();
         int y = cells[i]->get_Y();
         if(!in_grid(x + 1, y)){
@@ -77,12 +90,25 @@ void Block::right(){
     }
     for (int i = 0; i < numCells; i++){
         board->set(cells[i]->get_X(), cells[i]->get_Y());
-    }
+    }*/
 }
 void Block::left(){
     if(!canMoveLeft()) return;
     // check constraints
     for (int i = 0; i < numCells; i++){
+        x = cells[i]->get_X();
+        y = cells[i]->get_Y(); //pos of block (new opsitition)
+        if(board->cellAt(x, y)->cellFilled()) board->unset(x, y);
+        cells[i]->set_X(x - 1);
+    }
+    for (int i = 0; i < numCells; i++){
+        x = cells[i]->get_X();
+        y = cells[i]->get_Y();
+        board->set(x, y);
+        cells[i]->set_X(x + 1);
+        cells[i] = board->cellAt(x, y);
+    }
+    /*for (int i = 0; i < numCells; i++){
         int x = cells[i]->get_X();
         int y = cells[i]->get_Y();
         if(!in_grid(x - 1, y)){
@@ -98,7 +124,7 @@ void Block::left(){
     }
     for (int i = 0; i < numCells; i++){
         board->set(cells[i]->get_X(), cells[i]->get_Y());
-    }
+    }*/
 }
 void Block::down(){
     int x;
@@ -108,7 +134,7 @@ void Block::down(){
     for (int i = 0; i < numCells; i++){
         x = cells[i]->get_X();
         y = cells[i]->get_Y(); //pos of block (new opsitition)
-        if(board->cellAt(x,y)->cellFilled()) board->unset(x, y);
+        if(board->cellAt(x, y)->cellFilled()) board->unset(x, y);
         cells[i]->set_Y(y + 1);
     }
     for (int i = 0; i < numCells; i++){
@@ -118,7 +144,7 @@ void Block::down(){
         board->set(x, y);
         //re initialzie (TRYING TO CHANGE FOR NEXT 2 LINES DEBUGGING)
         cells[i]->set_Y(y - 1);
-        cells[i] = board->cellAt(x,y);
+        cells[i] = board->cellAt(x, y);
         //cells[i]->set_Y(change - 1);
         //cells[i] = board->cellAt(cells[i]->get_X(), change);
     }
