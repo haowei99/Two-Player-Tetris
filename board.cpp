@@ -18,8 +18,8 @@ void Board::init() {
     vector<vector<Cell>> new_grid(18, vector<Cell>(11)); // with three reserved rows
     for (int i = 0; i < 18; i++){
         for (int j = 0; j < 11; j++){
-            new_grid[i][j].set_X(i);
-            new_grid[i][j].set_Y(j);
+            new_grid[i][j].set_X(j);
+            new_grid[i][j].set_Y(i);
         }
     }
     grid = new_grid;

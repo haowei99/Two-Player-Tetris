@@ -10,7 +10,7 @@ const int max = 4;
 
 class Block {
 protected:
-    int x, y; // coords of top left corner of block NO LONGER NEEDED NO KEEPING TRACK OF top left
+    int xCoor, yCoor; // coords of top left corner of block NO LONGER NEEDED NO KEEPING TRACK OF top left
     int level;
     Board* board;
     int dropSpeed;
