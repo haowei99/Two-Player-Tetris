@@ -29,9 +29,14 @@ int main() {
             oblo->drop();
             Block *tmp = oblo;
             bp->addBlock(tmp);
-            bp->changeBlock('j');
-            oblo = nullptr;
-            oblo = bp->getBlock(); 
+            oblo = bp->changeBlock('j');
+            //oblo = bp->getBlock();
+        }
+        else if (c == "dropi"){
+            oblo->drop();
+            Block *tmp = oblo;
+            bp->addBlock(tmp);
+            oblo = bp->changeBlock('i');
         }
         else if (c == "rC"){
             oblo->rotateClockwise();

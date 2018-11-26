@@ -25,6 +25,8 @@ void Board::init() {
     grid = new_grid;
 }
 
+
+
 void Board::reset(){
     for(auto it = grid.begin(); it != grid.end(); ++it){
         it->erase(it->begin(), it->end());

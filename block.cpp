@@ -101,16 +101,26 @@ void Block::left(){
     }
 }
 void Block::down(){
+    int x;
+    int y;
    // check constraints
     if(!canMoveDown()) return;
     for (int i = 0; i < numCells; i++){
-        int x = cells[i]->get_X();
-        int y = cells[i]->get_Y(); //pos of block
+        x = cells[i]->get_X();
+        y = cells[i]->get_Y(); //pos of block (new opsitition)
         if(board->cellAt(x,y)->cellFilled()) board->unset(x, y);
         cells[i]->set_Y(y + 1);
     }
     for (int i = 0; i < numCells; i++){
-        board->set(cells[i]->get_X(), cells[i]->get_Y());
+        //int change = cells[i]->get_Y(); // change back to original
+        x = cells[i]->get_X();
+        y = cells[i]->get_Y();
+        board->set(x, y);
+        //re initialzie (TRYING TO CHANGE FOR NEXT 2 LINES DEBUGGING)
+        cells[i]->set_Y(y - 1);
+        cells[i] = board->cellAt(x,y);
+        //cells[i]->set_Y(change - 1);
+        //cells[i] = board->cellAt(cells[i]->get_X(), change);
     }
 }
 
@@ -126,7 +136,7 @@ bool Block::canMoveDown(){
         int x = cells[i]->get_X();
         int y = cells[i]->get_Y();
         if(!in_grid(x, y + 1)){
-            return false;
+            return false; //base case?
         }; //if false return
     } // check constraints
 
