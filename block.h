@@ -39,7 +39,6 @@ public:
     int getDropSpeed();
     void setDropSpeed(int speed);
     int getPoints();
-    bool onBoard();
     void addCell(Cell* cell);
     bool in_grid(int x, int y); // check if block is within board
 };

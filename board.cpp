@@ -214,3 +214,20 @@ std::ostream& operator<<(std::ostream& out, Board& board){
 bool Board::loBEmpty(){
     return loBlock.empty();
 }
+
+void Board::checkRows() {
+    for (int i = 0; i < 11; i++){
+        bool clear = true;
+        for (int j = 0; j < 18; j++){
+            if(!grid[i][j].cellFilled()) clear = false;
+        }
+        if(clear) clearRow(i);
+    }
+}
+void Board::clearRow(int row) {
+    //remove blocks helper
+    grid.erase(grid.begin() + row);
+    grid.insert(grid.begin(), vector<Cell>(18));
+    //re init x,y position
+    init();
+}

@@ -17,7 +17,8 @@ class Board {
     Board(int x, int y);
     void init();
     void reset();
-    //void clearRow(int row);
+    void clearRow(int row);
+    void checkRows();
     Cell *cellAt(int x, int y);
     void set(int x, int y);
     void unset(int x, int y);
