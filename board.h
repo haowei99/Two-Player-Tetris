@@ -26,6 +26,7 @@ class Board {
     Block * changeBlock(char type);
     void addBlock(Block *b);
     bool loBEmpty();
+    void removeCells();
 
    // void setCurrBlock(Block *currBlock);
     friend std::ostream& operator<<(std::ostream& os, Board& board);

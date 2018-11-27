@@ -9,6 +9,7 @@ class Board;
 const int max = 4;
 
 class Block {
+    friend Board;
 protected:
     int xCoor, yCoor; // coords of top left corner of block NO LONGER NEEDED NO KEEPING TRACK OF top left
     int level;
@@ -31,7 +32,7 @@ public:
     void left();
     void down();
     void drop();
-    bool canMoveDown();
+    bool canMoveDown(); 
     bool canMoveRight();
     bool canMoveLeft();
    // virtual void rotate(int state) =0; //for state changes
