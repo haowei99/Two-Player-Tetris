@@ -2,12 +2,11 @@
 #include <vector>
 #include "iBlock.h"
 #include "jBlock.h"
-/*
+#include "lBlock.h"
 #include "oBlock.h"
 #include "sBlock.h"
 #include "zBlock.h"
-#include "lBlock.h"
-#include "tBlock.h"*/
+#include "tBlock.h"
 
 using namespace::std;
 
@@ -72,14 +71,14 @@ Block* Board::changeBlock(char type) {
         Block * block = new iBlock(0,0,0, this);
         //cout << "addr block" << block << endl;
         currBlock = block;
-        this->set(0, 0);
-        this->set(1, 0);
-        this->set(2, 0);
-        this->set(3, 0);
-        block->addCell(&grid[0][0]);
-        block->addCell(&grid[0][1]);
-        block->addCell(&grid[0][2]);
-        block->addCell(&grid[0][3]);
+        this->set(0, 3);
+        this->set(1, 3);
+        this->set(2, 3);
+        this->set(3, 3);
+        block->addCell(&grid[3][0]);
+        block->addCell(&grid[3][1]);
+        block->addCell(&grid[3][2]);
+        block->addCell(&grid[3][3]);
 
         currBlock = block;
         return currBlock;
@@ -100,8 +99,82 @@ Block* Board::changeBlock(char type) {
         currBlock = block;
         return currBlock;
     }
+    else if (type == 'l'){
+        Block * block = new lBlock(0,0,0, this);
+        //cout << "addr block" << block << endl;
+        currBlock = block;
+        this->set(0, 4);
+        this->set(1, 4);
+        this->set(2, 4);
+        this->set(2, 3);
+        block->addCell(&grid[4][0]);
+        block->addCell(&grid[4][1]);
+        block->addCell(&grid[4][2]);
+        block->addCell(&grid[3][2]);
 
+        currBlock = block;
+        return currBlock;
+    }
+    else if (type == 'o'){
+        Block * block = new oBlock(0,0,0, this);
+        currBlock = block;
+        this->set(0, 3);
+        this->set(1, 3);
+        this->set(0, 4);
+        this->set(1, 4);
+        block->addCell(&grid[3][0]);
+        block->addCell(&grid[3][1]);
+        block->addCell(&grid[4][0]);
+        block->addCell(&grid[4][1]);
 
+        currBlock = block;
+        return currBlock;
+    }
+    else if (type == 's'){
+        Block * block = new sBlock(0,0,0, this);
+        currBlock = block;
+        this->set(0, 4);
+        this->set(1, 4);
+        this->set(1, 3);
+        this->set(2, 3);
+        block->addCell(&grid[4][0]);
+        block->addCell(&grid[4][1]);
+        block->addCell(&grid[3][1]);
+        block->addCell(&grid[3][2]);
+
+        currBlock = block;
+        return currBlock;
+    }
+    else if (type == 'z'){
+        Block * block = new zBlock(0,0,0, this);
+        currBlock = block;
+        this->set(0, 3);
+        this->set(1, 3);
+        this->set(1, 4);
+        this->set(2, 4);
+        block->addCell(&grid[3][0]);
+        block->addCell(&grid[3][1]);
+        block->addCell(&grid[4][1]);
+        block->addCell(&grid[4][2]);
+
+        currBlock = block;
+        return currBlock;
+    }
+    else if (type == 't'){
+        Block * block = new tBlock(0,0,0, this);
+        currBlock = block;
+        this->set(0, 3);
+        this->set(1, 3);
+        this->set(2, 3);
+        this->set(1, 4);
+        block->addCell(&grid[3][0]);
+        block->addCell(&grid[3][1]);
+        block->addCell(&grid[3][2]);
+        block->addCell(&grid[4][1]);
+
+        currBlock = block;
+        return currBlock;
+    }
     // Block
     /*
     Block * block = new oBlock(1,1,0, this);

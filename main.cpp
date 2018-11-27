@@ -38,6 +38,36 @@ int main() {
             bp->addBlock(tmp);
             oblo = bp->changeBlock('i');
         }
+        else if (c == "dropl"){
+            oblo->drop();
+            Block *tmp = oblo;
+            bp->addBlock(tmp);
+            oblo = bp->changeBlock('l');
+        }
+        else if (c == "dropo"){
+            oblo->drop();
+            Block *tmp = oblo;
+            bp->addBlock(tmp);
+            oblo = bp->changeBlock('o');
+        }
+        else if (c == "drops"){
+            oblo->drop();
+            Block *tmp = oblo;
+            bp->addBlock(tmp);
+            oblo = bp->changeBlock('s');
+        }
+        else if (c == "dropz"){
+            oblo->drop();
+            Block *tmp = oblo;
+            bp->addBlock(tmp);
+            oblo = bp->changeBlock('z');
+        }
+        else if (c == "dropt"){
+            oblo->drop();
+            Block *tmp = oblo;
+            bp->addBlock(tmp);
+            oblo = bp->changeBlock('t');
+        }
         else if (c == "rC"){
             oblo->rotateClockwise();
         }
