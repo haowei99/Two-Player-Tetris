@@ -15,7 +15,7 @@ public:
     void down() override;
     void drop() override;
     bool canMoveDown() override;*/
-    ~tBlock() = default;
+    ~starBlock() = default;
 };
 
 #endif //__STARBLOCK_H__

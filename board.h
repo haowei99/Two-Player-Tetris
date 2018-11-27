@@ -10,10 +10,11 @@ class Board {
     int y;
     Block* currBlock;
     Block *nextBlock;
-    std::vector<Block *> loBlock;
+
     //Xwindow window;
 
     public:
+    std::vector<Block *> loBlock;
     Board(int x, int y);
     void init();
     void reset();

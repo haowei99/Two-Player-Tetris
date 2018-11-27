@@ -93,7 +93,19 @@ int main() {
                 //oblo = bp->getBlock(); 
             }
         }
+        else if (c == "reset"){
+            b.reset();
+            b.init();
+            bp = &b;
+        }
         if (drop) bp->checkRows();
+        //check blocks deleted
+        int score = 0;
+        for (int i =0; i < bp->loBlock.size(); i++){
+            int size = bp->loBlock[i]->getCellSize();
+            if (size == 0) score++;
+        }
+        cout << "Score is: " << score << endl;
         cout << b << endl;
     }
 /*
