@@ -84,6 +84,11 @@ int main() {
                 //oblo = bp->getBlock(); 
             }
         }
+        else if (c == "reset"){
+            b.reset();
+            b.init();
+            bp = &b;
+        }
         cout << b << endl;
     }
 /*

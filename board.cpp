@@ -7,6 +7,7 @@
 #include "sBlock.h"
 #include "zBlock.h"
 #include "tBlock.h"
+#include <iostream>
 
 using namespace::std;
 
@@ -198,6 +199,20 @@ Block* Board::changeBlock(char type) {
 
 void Board::addBlock(Block *b){
     loBlock.emplace_back(b);
+}
+
+void Board::removeCells(){
+    int size = loBlock.size();
+    for (int i = 0; i < size; i++){
+        Block *b = loBlock.at(i);
+        for (int j = 0; j < b->numCells; j++){
+            if (b->cells[j]->cellFilled() == false){
+                b->cells[j] = nullptr;
+                --(b->numCells);
+            }
+        }
+    }   
+
 }
 
 std::ostream& operator<<(std::ostream& out, Board& board){
