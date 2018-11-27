@@ -3,7 +3,8 @@
 #include "block.h"
 
 class starBlock: public Block{
-    bool currShape[1][1];
+    int numCells;
+    void rotate(int state);
 public:
     starBlock(int x, int y, int level, Board *board);
     void rotateClockwise() override;
@@ -14,8 +15,7 @@ public:
     void down() override;
     void drop() override;
     bool canMoveDown() override;*/
-    ~starBlock() = default;
+    ~tBlock() = default;
 };
-
 
 #endif //__STARBLOCK_H__

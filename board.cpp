@@ -216,9 +216,9 @@ bool Board::loBEmpty(){
 }
 
 void Board::checkRows() {
-    for (int i = 0; i < 11; i++){
+    for (int i = 0; i < 18; i++){
         bool clear = true;
-        for (int j = 0; j < 18; j++){
+        for (int j = 0; j < 11; j++){
             if(!grid[i][j].cellFilled()) clear = false;
         }
         if(clear) clearRow(i);
@@ -229,5 +229,10 @@ void Board::clearRow(int row) {
     grid.erase(grid.begin() + row);
     grid.insert(grid.begin(), vector<Cell>(18));
     //re init x,y position
-    init();
+    for (int i = 0; i < 18; i++){
+        for (int j = 0; j < 11; j++){
+            grid[i][j].set_X(j);
+            grid[i][j].set_Y(i);
+        }
+    }
 }
