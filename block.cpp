@@ -237,3 +237,7 @@ bool Block::canMoveLeft(){
     }
     return canMove;
 }
+
+int Block::getCellSize() {
+    return numCells;
+}

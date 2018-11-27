@@ -184,7 +184,7 @@ void Board::removeCells(){
     int size = loBlock.size();
     for (int i = 0; i < size; i++){
         Block *b = loBlock.at(i);
-        for (int j = 0; j < b->numCells; j++){
+        for (int j = 0; j < 4; j++){
             if (b->cells[j]->cellFilled() == false){
                 b->cells[j] = nullptr;
                 --(b->numCells);
@@ -207,4 +207,31 @@ std::ostream& operator<<(std::ostream& out, Board& board){
 //test if block is properly added
 bool Board::loBEmpty(){
     return loBlock.empty();
+}
+
+void Board::checkRows() {
+    for (int i = 0; i < 18; i++){
+        bool clear = true;
+        for (int j = 0; j < 11; j++){
+            if(!grid[i][j].cellFilled()) clear = false;
+        }
+        if(clear) clearRow(i);
+    }
+}
+void Board::clearRow(int row) {
+    // Unset first
+    for(int i = 0; i < 11; i++){
+        grid[row][i].unsetCell();
+    }
+    //remove blocks helper
+    removeCells();
+    grid.erase(grid.begin() + row);
+    grid.insert(grid.begin(), vector<Cell>(18));
+    //re init x,y position
+    for (int i = 0; i < 18; i++){
+        for (int j = 0; j < 11; j++){
+            grid[i][j].set_X(j);
+            grid[i][j].set_Y(i);
+        }
+    }
 }
