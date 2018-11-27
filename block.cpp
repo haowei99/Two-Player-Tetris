@@ -18,6 +18,11 @@ int Block::getDropSpeed() {
     return dropSpeed;
 } // getDropSpeed
 
+void Block::applyDropSpeed(){
+    while (dropSpeed > 0){
+        down();
+    }
+}
 
 void Block::setDropSpeed(int speed) {
     dropSpeed = speed;

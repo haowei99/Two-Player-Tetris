@@ -25,8 +25,6 @@ void Board::init() {
     grid = new_grid;
 }
 
-
-
 void Board::reset(){
     for(auto it = grid.begin(); it != grid.end(); ++it){
         it->erase(it->begin(), it->end());
@@ -176,25 +174,6 @@ Block* Board::changeBlock(char type) {
         currBlock = block;
         return currBlock;
     }
-    // Block
-    /*
-    Block * block = new oBlock(1,1,0, this);
-    currBlock = block;
-    this->set(0, 0);
-    this->set(1, 0);
-    this->set(0, 1);
-    this->set(1, 1);
-    cout << grid[0][1].get_X() << " Y:"<< grid[0][1].get_Y() <<endl;
-    Cell a = grid[0][1];
-    cout << a;
-    block->addCell(&grid[0][0]);
-    block->addCell(&grid[0][1]);
-    block->addCell(&grid[1][0]);
-    block->addCell(&grid[1][1]);
-
-    currBlock = block;
-    return currBlock;
-   // currBlock = new oBlock(0,0,0,this); */
 }
 
 void Board::addBlock(Block *b){

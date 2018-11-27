@@ -28,6 +28,7 @@ public:
     ~Block();
     virtual void rotateClockwise() = 0;
     virtual void rotateCounterClockwise() = 0;
+    void applyDropSpeed();
     void right();
     void left();
     void down();
