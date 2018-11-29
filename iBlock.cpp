@@ -13,34 +13,31 @@ bool iBlock::rotate(int state) {
         // check if 4th block is out of bounds when rotate
         x = cells[3]->get_X() + 3;
         y = cells[3]->get_Y() + 3; //pos of block
-        if (!in_grid(x, y )) return false;
+        if (!in_grid(x, y)) return false;
         //block 2
         x = cells[1]->get_X();
         y = cells[1]->get_Y(); //pos of block
 
-        board->unset(x, y);
-        cells[1]->set_X(x + 1);
-        cells[1]->set_Y(y + 1);
+        if(board->cellAt(x, y)->cellFilled()) board->unset(x, y);
         board->set(x + 1, y + 1);
+        cells[1] = board->cellAt(x + 1, y + 1);
 
 
         //block 3
         x = cells[2]->get_X();
         y = cells[2]->get_Y(); //pos of block
 
-        board->unset(x, y);
-        cells[2]->set_X(x + 2);
-        cells[2]->set_Y(y + 2);
+        if(board->cellAt(x, y)->cellFilled()) board->unset(x, y);
         board->set(x + 2, y + 2);
+        cells[2] = board->cellAt(x + 2, y + 2);
 
         //block 4
         x = cells[3]->get_X();
         y = cells[3]->get_Y(); //pos of block
 
-        board->unset(x, y);
-        cells[3]->set_X(x + 3);
-        cells[3]->set_Y(y + 3);
+        if(board->cellAt(x, y)->cellFilled()) board->unset(x, y);
         board->set(x + 3, y + 3);
+        cells[3] = board->cellAt(x + 3, y + 3);
 
         //block 1 pivot point, does not change
     }
@@ -49,29 +46,25 @@ bool iBlock::rotate(int state) {
         x = cells[1]->get_X();
         y = cells[1]->get_Y(); //pos of block
 
-        board->unset(x, y);
-        cells[1]->set_X(x - 1);
-        cells[1]->set_Y(y - 1);
+        if(board->cellAt(x, y)->cellFilled()) board->unset(x, y);
         board->set(x - 1, y - 1);
-
+        cells[1] = board->cellAt(x - 1, y - 1);
 
         //block 3
         x = cells[2]->get_X();
         y = cells[2]->get_Y(); //pos of block
 
-        board->unset(x, y);
-        cells[2]->set_X(x - 2);
-        cells[2]->set_Y(y - 2);
+        if(board->cellAt(x, y)->cellFilled()) board->unset(x, y);
         board->set(x - 2, y - 2);
+        cells[2] = board->cellAt(x - 2, y - 2);
 
         //block 4
         x = cells[3]->get_X();
         y = cells[3]->get_Y(); //pos of block
 
-        board->unset(x, y);
-        cells[3]->set_X(x - 3);
-        cells[3]->set_Y(y - 3);
+        if(board->cellAt(x, y)->cellFilled()) board->unset(x, y);
         board->set(x - 3, y - 3);
+        cells[3] = board->cellAt(x - 3, y - 3);
 
         //block 1 pivot point, does not change
     }
@@ -92,162 +85,3 @@ void iBlock::rotateCounterClockwise() {
         else rotateState--;
     }
 }
-
-/*
-void iBlock::right() {
-    if(!canMoveRight()) return;
-    // check constraints
-    for (int i = 0; i < numCells; i++){
-        int x = cells[i]->get_X();
-        int y = cells[i]->get_Y(); //pos of block
-        cells[i]->set_X(x + 1);
-        board->unset(x, y);
-        //board->set(x + 1, y);
-    }
-    for (int i = 0; i < numCells; i++){
-        board->set(cells[i]->get_X(), cells[i]->get_Y());
-    }
-}
-
-
-void iBlock::left() {
-    if(!canMoveLeft()) return;
-
-    // check constraints
-    for (int i = 0; i < numCells; i++){
-        int x = cells[i]->get_X();
-        int y = cells[i]->get_Y();
-        if(!in_grid(x - 1, y)){
-            return;
-        }; //if false return
-    }
-    for (int i = 0; i < numCells; i++){
-        int x = cells[i]->get_X();
-        int y = cells[i]->get_Y(); //pos of block
-        cells[i]->set_X(x - 1);
-        board->unset(x, y);
-        //board->set(x - 1, y);
-    }
-    for (int i = 0; i < numCells; i++){
-        board->set(cells[i]->get_X(), cells[i]->get_Y());
-    }
-}
-
-void iBlock::down() {
-    // check constraints
-    if(!canMoveDown()) return;
-    for (int i = 0; i < numCells; i++){
-        int x = cells[i]->get_X();
-        int y = cells[i]->get_Y(); //pos of block
-        if(board->cellAt(x,y)->cellFilled()) board->unset(x, y);
-        cells[i]->set_Y(y + 1);
-    }
-    for (int i = 0; i < numCells; i++){
-        board->set(cells[i]->get_X(), cells[i]->get_Y());
-    }
-}
-
-bool iBlock::canMoveRight() {
-    // check constraints
-    for (int i = 0; i < numCells; i++){
-        int x = cells[i]->get_X();
-        int y = cells[i]->get_Y();
-        if(!in_grid(x + 1, y)){
-            return false;
-        }; //if false return
-    }
-
-    //check collision
-    for (int i = 0; i < numCells; i++){
-        int x = cells[i]->get_X();
-        int y = cells[i]->get_Y(); //pos of block
-        board->unset(x, y); // unset first to avoid collision
-    }
-    bool canMove = true;
-    for (int i = 0; i < numCells; i++){
-        int x = cells[i]->get_X() + 1;
-        int y = cells[i]->get_Y(); //pos of block when move down 1
-        if(board->cellAt(x,y)->cellFilled()){//if everything is filled
-            canMove = false;
-        }
-    }
-    for (int i = 0; i < numCells; i++){
-        int x = cells[i]->get_X();
-        int y = cells[i]->get_Y(); //pos of block
-        board->set(x, y); // unset first to avoid collision
-    }
-    return canMove;
-}
-
-
-bool iBlock::canMoveLeft() {
-    // check constraints
-    for (int i = 0; i < numCells; i++){
-        int x = cells[i]->get_X();
-        int y = cells[i]->get_Y();
-        if(!in_grid(x - 1, y)){
-            return false;
-        }; //if false return
-    }
-
-    //check collision
-    for (int i = 0; i < numCells; i++){
-        int x = cells[i]->get_X();
-        int y = cells[i]->get_Y(); //pos of block
-        board->unset(x, y); // unset first to avoid collision
-    }
-    bool canMove = true;
-    for (int i = 0; i < numCells; i++){
-        int x = cells[i]->get_X() - 1;
-        int y = cells[i]->get_Y(); //pos of block when move down 1
-        if(board->cellAt(x,y)->cellFilled()){//if everything is filled
-            canMove = false;
-        }
-    }
-    for (int i = 0; i < numCells; i++){
-        int x = cells[i]->get_X();
-        int y = cells[i]->get_Y(); //pos of block
-        board->set(x, y); // unset first to avoid collision
-    }
-    return canMove;
-}
-
-bool iBlock::canMoveDown() {
-    for (int i = 0; i < numCells; i++){
-        int x = cells[i]->get_X();
-        int y = cells[i]->get_Y();
-        if(!in_grid(x, y + 1)){
-            return false;
-        }; //if false return
-    } // check constraints
-
-    // check collision
-    for (int i = 0; i < numCells; i++){
-        int x = cells[i]->get_X();
-        int y = cells[i]->get_Y(); //pos of block
-        board->unset(x, y); // unset first to avoid collision
-    }
-
-    bool canMove = true;
-
-    for (int i = 0; i < numCells; i++){
-        int x = cells[i]->get_X();
-        int y = cells[i]->get_Y() + 1; //pos of block when move down 1
-        if(board->cellAt(x,y)->cellFilled()){//if everything is filled
-            canMove = false;
-        }
-    }
-    for (int i = 0; i < numCells; i++){
-        int x = cells[i]->get_X();
-        int y = cells[i]->get_Y(); //pos of block
-        board->set(x, y); // unset first to avoid collision
-    }
-    return canMove;//need to implement
-}
-
-void iBlock::drop() {
-    while(true){
-        if(!canMoveDown()) return;
-        down();
-    }
-}*/

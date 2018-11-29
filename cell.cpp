@@ -47,6 +47,7 @@ int Cell::get_Y() {
 void Cell::set_X(int xCoor){
     x = xCoor;
 }
+
 void Cell::set_Y(int yCoor){
     y = yCoor;
 }

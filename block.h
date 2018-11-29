@@ -9,8 +9,9 @@ class Board;
 const int max = 4;
 
 class Block {
+    friend Board;
 protected:
-    int x, y; // coords of top left corner of block NO LONGER NEEDED NO KEEPING TRACK OF top left
+    int xCoor, yCoor; // coords of top left corner of block NO LONGER NEEDED NO KEEPING TRACK OF top left
     int level;
     Board* board;
     int dropSpeed;
@@ -27,11 +28,12 @@ public:
     ~Block();
     virtual void rotateClockwise() = 0;
     virtual void rotateCounterClockwise() = 0;
+    void applyDropSpeed();
     void right();
     void left();
     void down();
     void drop();
-    bool canMoveDown();
+    bool canMoveDown(); 
     bool canMoveRight();
     bool canMoveLeft();
    // virtual void rotate(int state) =0; //for state changes
@@ -39,9 +41,9 @@ public:
     int getDropSpeed();
     void setDropSpeed(int speed);
     int getPoints();
-    bool onBoard();
     void addCell(Cell* cell);
     bool in_grid(int x, int y); // check if block is within board
+    int getCellSize();
 };
 
 #endif // __BLOCK_H__

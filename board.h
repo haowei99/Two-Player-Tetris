@@ -10,14 +10,16 @@ class Board {
     int y;
     Block* currBlock;
     Block *nextBlock;
-    std::vector<Block *> loBlock;
+
     //Xwindow window;
 
     public:
+    std::vector<Block *> loBlock;
     Board(int x, int y);
     void init();
     void reset();
-    //void clearRow(int row);
+    void clearRow(int row);
+    void checkRows();
     Cell *cellAt(int x, int y);
     void set(int x, int y);
     void unset(int x, int y);
@@ -25,6 +27,7 @@ class Board {
     Block * changeBlock(char type);
     void addBlock(Block *b);
     bool loBEmpty();
+    void removeCells();
 
    // void setCurrBlock(Block *currBlock);
     friend std::ostream& operator<<(std::ostream& os, Board& board);
