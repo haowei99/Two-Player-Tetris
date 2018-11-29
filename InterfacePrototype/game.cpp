@@ -3,6 +3,9 @@
 #include <fstream>
 #include <stdexcept>
 #include <vector>
+#include "player.h"
+#include "numbergenerator.h"
+#include "gamedisplay.h"
 #include "game.h"
 
 
@@ -78,12 +81,12 @@ bool Game::readCommands(std::istream& in, bool readingFromFile, std::string file
             for (int i = 0;i < multiplier;i++) {
                 curPlayer->levelDown();
             } // for
-        } else if (command == "norandom") { // ASK: valid for multipliers?
+        } else if (command == "norandom") {
             std::string noRandomFileName;
 
             in >> noRandomFileName;
             curPlayer->noRandom(noRandomFileName);
-        } else if (command == "random") { // ASK: valid for multipliers?
+        } else if (command == "random") { 
             curPlayer->random();
         } else if (command == "sequence") { // ASK: valid for multipliers?
             std::string fileReaderName;
@@ -110,12 +113,9 @@ bool Game::readCommands(std::istream& in, bool readingFromFile, std::string file
                 } // if
             } // for
         } else if (command == "restart") {
-            std::cout << "Restarting the Game\n\n\n";
             throw Game::GameException{false, true};
         } else if (command == "drop") { 
             curPlayer->drop();
-            curPlayer->disableBlind();
-            curPlayer->disableHeavy();
             break;
         } else if (command == "I" || command == "J" || command == "L" || command == "O" ||
                    command == "S" || command == "Z" || command == "T") {
@@ -128,22 +128,55 @@ bool Game::readCommands(std::istream& in, bool readingFromFile, std::string file
         /** update/reprint display here **/
     } // while
 
-    /** update/reprint display here **/
+    /** update/reprint display here <-- this will update screen after drop is called **/
     return true;
 } // readCommands
 
 
-Game::Game(int startLevel, std::string sequenceFileName1, std::string sequenceFileName2)
+void Game::promptSpecialActions() {
+    while(true) {
+        int n;
+
+        std::cout << "Please select a special action: " << std::endl;
+        std::cout << "1: heavy" << std::endl;
+        std::cout << "2: force" << std::endl;
+        std::cout << "3: blind" << std::endl;
+        std::cout << "(enter the corresponding number)" << std::endl;
+
+        if (std::cin >> n) {
+            if (n == 1) {
+                curPlayer->heavyOpponent();
+            } else if (n == 2) {
+                curPlayer->forceOpponent();
+            } else if (n == 3) {
+                curPlayer->blindOpponent();
+            } else {
+                std::cout << "Invalid input, please try again" << std::endl;
+                continue;
+            } // if
+
+            return;
+        } else {
+            return;
+        } // if
+    } // while
+} // promptSpecialActions
+
+
+Game::Game(int startLevel, std::string sequenceFileName1, std::string sequenceFileName2, 
+           bool textOnly, bool willSetSeed, int seed)
     : startLevel{startLevel}, 
       sequenceFileName1{sequenceFileName1}, 
       sequenceFileName2{sequenceFileName2},
-      player1{new Player(startLevel, sequenceFileName1)}, 
-      player2{new Player(startLevel, sequenceFileName2)}, 
+      textOnly{textOnly},
+      willSetSeed{willSetSeed},
+      seed{seed},
+      ng{new NumberGenerator(willSetSeed, seed)},
+      player1{new Player(startLevel, sequenceFileName1, ng)}, 
+      player2{new Player(startLevel, sequenceFileName2, ng)}, 
       curPlayer{nullptr},
-      display{new Display(28, 23, startLevel)}
-{
-
-} // constructor
+      display{new GameDisplay(28, 23, startLevel)}
+{} // constructor
 
 
 Game::~Game() {
@@ -172,20 +205,52 @@ void Game::reset() { // *******????
 
 
 void Game::tick() {
-    if (curPlayer == player1) {
-        std::cout << "Player 1's turn has commenced!" << std::endl;
-    } else {
-        std::cout << "Player 2's turn has commenced!" << std::endl;
-    } // if
-    
-    curPlayer->applyEffects(); // apply special effects
 
+    // apply special effects
+    curPlayer->applyEffects(); 
+    /** update screen **/
+
+    // read in commands until drop or restart
     std::cout << "Now reading commands: " << std::endl;
     readCommands(std::cin, false);
+    
+    // assume player has just called drop
+    int rowsCleared = curPlayer->clearRows(); // store the amount of rows cleared
+    curPlayer->checkRemovedBlocks();          // check if any blocks has been removed
 
-    curPlayer->endTurn();
-    curPlayer->disableForce();
-    /** check for win/lose conditions, update display **/
+    /*** update the board ***/
+
+    bool hasLost = curPlayer->endTurn();      // end the turn, and check if player has lost
+
+    if (hasLost) {
+        char response;
+
+        if (curPlayer == player1) {
+            std::cout << "Sorry player 1, you have lost" << std::endl;
+        } else {
+            std::cout << "Sorry player 2, you have lost" << std::endl;
+        } // if
+
+        std::cout << "Would you like to restart? (Y/N)" << std::endl;
+        std::cin >> response;
+
+        if (response == 'Y' || response == 'y') {
+            throw Game::GameException{false, true};
+        } else {
+            throw Game::GameException{true, false};
+        } // if
+    } else {
+        if (curPlayer->getScore() > highscore) {
+            highscore = curPlayer->getScore();
+            // display->updateHighscore(highscore);
+        } // if
+
+        /*** print updated board ***/
+
+        if (rowsCleared > 2) {
+            promptSpecialActions();
+        } // if
+    } // if
 } // tick
 
 

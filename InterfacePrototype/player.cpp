@@ -1,14 +1,20 @@
 #include <string>
 #include <iostream>
 #include "player.h"
+#include "blockgenerator.h"
+#include "numbergenerator.h"
 
 
-Player::Player(int startLevel, std::string sequenceFileName) 
+Player::Player(int startLevel, std::string sequenceFileName, NumberGenerator* ng) 
     : startLevel{startLevel}, level{startLevel}, 
-      score{0}, sequenceFileName{sequenceFileName} {} // constructor 
+      score{0}, sequenceFileName{sequenceFileName},
+      generator{new BlockGenerator(ng, sequenceFileName)} {} // constructor 
 
 
-Player::~Player() {} // destructor
+Player::~Player() {
+    delete generator;
+    // delete board, curBlock, nextBlock;
+} // destructor
 
 
 void Player::init(Player* opponent) {
@@ -26,85 +32,104 @@ void Player::reset() {
 
 
 void Player::left() {
-    std::cout << "moved current block left!" << std::endl;
+    // curBlock->left()
 } // left
 
 
 void Player::right() {
-    std::cout << "moved current block right!" << std::endl;
+    // curBlock->right()
 } // right
 
 
 void Player::down() {
-    std::cout << "moved current block down!" << std::endl;
+    // curBlock->down()
 } // down
 
 
 void Player::clockwise() {
-    std::cout << "rotated current block clockwise!" << std::endl;
+    // curBlock->clockwise()
 } // clockwise
 
 
 void Player::counterclockwise() {
-    std::cout << "rotated current block counterclockwise!" << std::endl;
+    // curBlock->counterclockwise()
 } // counterclockwise
 
 
 void Player::levelUp() {
     if (level < maxLevel) {
         level += 1;
-        std::cout << "level up successful! current level: " << level << std::endl;
-        return;
     } // if
-
-    std::cout << "level up failed! current level: " << level << std::endl;
 } // levelUp
 
 
 void Player::levelDown() {
     if (level > minLevel) {
         level -= 1;
-        std::cout << "level down successful! current level: " << level << std::endl;
-        return;
     } // if
-
-    std::cout << "level down failed! current level: " << level << std::endl;
 } // levelDown
 
 
 void Player::random() {
     if (level > 2) {
-        std::cout << "randomness restored!" << std::endl;
-        return;
+        generator->unsetStream();
     } // if
-
-    std::cout << "can't call random on level: " << level << std::endl;
 } // random
 
 
 void Player::noRandom(std::string noRandomFileName) {
     if (level > 2) {
-        std::cout << "no more randomness! Now reading blocks from: " << noRandomFileName << std::endl;
-        return;
+        generator->setStream(noRandomFileName);
     } // if
-
-    std::cout << "can't call noRandom on level: " << level << std::endl;
 } // noRandom
 
 
+void Player::setBlock(std::string blockType) { // needs err checking for block?
+    // check if I can replace current block with the specified blocktype
+    // if so, do so and delete previous curBlock
+} // setBlock
+
+
 void Player::drop() {
-    std::cout << "block has been dropped!" << std::endl;
+    // add the dropped block to board's placedBlocks <-- this should be handled in board/block
+    // curBlock->drop()
+
+    if (hasBlind) {
+        hasBlind = false;
+        // board->unblind();
+    } // if
+    
+    hasHeavy = false;
 } // drop
 
 
-void Player::setBlock(std::string blockType) { // needs err checking for block?
-    std::cout << "current block has been replaced with a(n) " << blockType << "-block!" << std::endl;
-} // setBlock
+int Player::clearRows() {
+    // clear filled rows, use returned val to calculated a score and add that to own score
+    return 0;
+} // clearRows
+
+
+void Player::checkRemovedBlocks() {
+    // check for any removed blocks, add returned score to own score
+    // if no blocks has been cleared, and its been 5 blocks, and hasForce, 
+    //     drop a starblock onto the board if able, board->dropStar()
+    hasForce = false;
+} // checkRemoveBlocks
+
+
+bool Player::endTurn() {
+    // check if nextBlock can be placed on the top of the board
+    //     if not: I lose, return true
+    //     if so: curBlock = nextBlock, update coords of nextBlock, 
+    //            nextBlock = generator->getNextBlock(), return false
+    return false;
+} // endTurn
 
 
 void Player::applyEffects() {
     if (hasHeavy) {
         std::cout << "heavy applied! ";
+        // curBlock->applyHeavy(); function just adds 3 to existing dropspeed
     } // if
 
     if (hasBlind) {
@@ -114,30 +139,6 @@ void Player::applyEffects() {
 
     std::cout << std::endl;
 } // applyEffects
-
-
-void Player::disableHeavy() {
-    hasHeavy = false;
-    // might need more logic depending on how blocks are shifted after they're placed
-} // disableHeavy
-
-
-void Player::disableBlind() {
-    if (hasBlind) {
-        hasBlind = false;
-        // board->unBlind()
-    } // if
-} // disableBlind
-
-
-void Player::disableForce() {
-    hasForce = false;
-} // disableForce
-
-
-void Player::endTurn() {
-    std::cout << "Player's turn has ended!" << std::endl << std::endl;
-} // endTurn
 
 
 void Player::heavyOpponent() {
@@ -153,3 +154,8 @@ void Player::forceOpponent() {
 void Player::blindOpponent() {
     opponent->hasBlind = true;
 } // blindOpponent
+
+
+int Player::getScore() {
+    return score;
+} // getScore

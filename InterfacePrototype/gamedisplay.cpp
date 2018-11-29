@@ -3,17 +3,17 @@
 #include <vector>
 #include <iomanip>
 #include "cell.h"
-#include "display.h"
+#include "gamedisplay.h"
 
 
-Display::Display(int width, int height, int startLevel) 
+GameDisplay::GameDisplay(int width, int height, int startLevel) 
     : width{width}, height{height},
       grid{std::vector<std::vector<Cell>> (height, std::vector<Cell> (width))},
       startLevel{startLevel} {
 } // constructor
 
 
-Display::~Display() {
+GameDisplay::~GameDisplay() {
     for (int i = 0;i < height;i++) {
         grid.at(i).clear();
     } // for
@@ -22,7 +22,7 @@ Display::~Display() {
 } // destructor
 
 
-void Display::init() {
+void GameDisplay::init() {
     player1Level = startLevel;
     player2Level = startLevel;
 
@@ -47,42 +47,49 @@ void Display::init() {
 } // init
 
 
-void Display::reset() {
+void GameDisplay::reset() {
     player1Score = 0;
     player2Score = 0;
     init(); 
 } // reset
 
 
-void Display::drawPlayer1Score(int score) {
-    // draw block to the correct coordinate
+void GameDisplay::updateHighscore(int highscore) {
+    this->highscore = highscore;
+    // draw highscore to correct coordinate
+} // updateHighscore
+
+
+void GameDisplay::updatePlayer1Score(int score) {
+    // draw score to the correct coordinate
     player1Score = score;
-} // drawPlayer1Score
+} // updatePlayer1Score
 
 
-void Display::drawPlayer2Score(int score) {
-    // draw block to the correct coordinate
+void GameDisplay::updatePlayer2Score(int score) {
+    // draw score to the correct coordinate
     player2Score = score;
-} // drawPlayer2Score
+} // updatePlayer2Score
 
 
-//void Display::drawPlayer1Next(Block* block) {
+//void Display::updatePlayer1Next(Block* block) {
     // draw block to the correct coordinate
-//} // drawPlayer1Next
+//} // updatePlayer1Next
 
 
-//void Display::drawPlayer2Next(Block* block) {
+//void Display::updatePlayer2Next(Block* block) {
     // draw block to the correct coordinate
-//} // drawPlayer2Next
+//} // updatePlayer2Next
 
 
-std::ostream& operator<<(std::ostream& out, Display& d) {
+std::ostream& operator<<(std::ostream& out, GameDisplay& d) {
     /***
      * for graphical display, maybe store each indiviual msg
      * in a string using a stringstream, then draw those strings
      * to the Xwindow using drawstring at the correct coordinates
      * As for the text display, just out << msg from stringstream
      * ***/
+    out << "Highscore: " << d.highscore << std::endl;
     out << "Level: ";
     out << std::setfill(' ') << std::setw(4) << d.player1Level;
 
