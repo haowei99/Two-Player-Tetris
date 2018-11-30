@@ -26,11 +26,11 @@ class Board {
     Block * getBlock();
     Block * changeBlock(char type);
     void addBlock(Block *b);
-    bool loBEmpty();
     void removeCells();
     void set_next_block();
     int count_score();
     void set_blocks(Block * currBlock, Block * nextBlock);
+    std::vector<Cell> getline(int i);
 
    // void setCurrBlock(Block *currBlock);
     friend std::ostream& operator<<(std::ostream& os, Board& board);

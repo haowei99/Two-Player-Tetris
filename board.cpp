@@ -222,9 +222,8 @@ std::ostream& operator<<(std::ostream& out, Board& board){
     return out;
 }
 
-//test if block is properly added
-bool Board::loBEmpty(){
-    return loBlock.empty();
+vector<Cell> Board::getline(int i) {
+    return grid[i];
 }
 
 int Board::checkRows() { // note give score
