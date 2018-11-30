@@ -8,6 +8,7 @@
 #include "sBlock.h"
 #include "zBlock.h"
 #include "tBlock.h"
+#include "starBlock.h"
 
 using namespace::std;
 
@@ -349,6 +350,16 @@ void Board::blind() {
             grid[i][j].blind();
         }
     }
+}
+
+void Board::dropStar(int level) {
+    //check if can be dropped
+    if (cellAt(6,3)->cellFilled()) return;
+
+    Block * star = new starBlock(6, 3, level, this);
+    star->addCell(cellAt(6,3));
+    star->drop();
+    addBlock(star);
 }
 
 void Board::unblind() {
