@@ -340,3 +340,8 @@ void Board::set_next_block() {
         grid[21][2].setCell(type);
     }
 }
+
+void Board::set_blocks(Block *curr, Block *next) {
+    currBlock = curr;
+    nextBlock = next;
+}

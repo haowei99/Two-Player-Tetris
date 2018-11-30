@@ -30,6 +30,7 @@ class Board {
     void removeCells();
     void set_next_block();
     int count_score();
+    void set_blocks(Block * currBlock, Block * nextBlock);
 
    // void setCurrBlock(Block *currBlock);
     friend std::ostream& operator<<(std::ostream& os, Board& board);
