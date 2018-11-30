@@ -342,3 +342,19 @@ void Board::set_blocks(Block *curr, Block *next) {
     // set next block
     set_next_block();
 }
+
+void Board::blind() {
+    for (int i = 2; i < 12; i++){
+        for (int j = 2; j < 9; j++){
+            grid[i][j].blind();
+        }
+    }
+}
+
+void Board::unblind() {
+    for (int i = 2; i < 12; i++){
+        for (int j = 2; j < 9; j++){
+            grid[i][j].unblind();
+        }
+    }
+}
