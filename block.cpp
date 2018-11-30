@@ -14,21 +14,18 @@ Block::Block(int x, int y, int level, Board *board)
 Block::~Block() {} // destructor
 
 
-int Block::getDropSpeed() {
-    return dropSpeed;
-} // getDropSpeed
 
 void Block::applyDropSpeed(){
-    int speed = getDropSpeed();
+    int speed = dropSpeed;
     while (speed > 0){
         down();
         speed--;
     }
 }
 
-void Block::setDropSpeed(int speed) {
-    dropSpeed = speed;
-} // setDropSpeed
+void Block::applyHeavy(){
+    dropSpeed += 3;
+}
 
 
 int Block::getPoints() {
