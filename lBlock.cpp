@@ -149,6 +149,7 @@ void lBlock::rotateClockwise() {
     rotate(rotateState);
     if (rotateState == 4) rotateState = 1;
     else rotateState++;
+    applyDropSpeed();
 }
 
 void lBlock::rotateCounterClockwise() {
@@ -159,4 +160,5 @@ void lBlock::rotateCounterClockwise() {
         else rotateState++;
         loop--;
     }
+    applyDropSpeed();
 }

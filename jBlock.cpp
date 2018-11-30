@@ -146,6 +146,7 @@ void jBlock::rotateClockwise() {
     rotate(rotateState);
     if (rotateState == 4) rotateState = 1;
     else rotateState++;
+    applyDropSpeed();
 }
 
 void jBlock::rotateCounterClockwise() {
@@ -156,4 +157,5 @@ void jBlock::rotateCounterClockwise() {
         else rotateState++;
         cycle--;
     }
+    applyDropSpeed();
 }

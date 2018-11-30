@@ -146,6 +146,7 @@ void tBlock::rotateClockwise() {
     rotate(rotateState);
     if (rotateState == 4) rotateState = 1;
     else rotateState++;
+    applyDropSpeed();
 }
 
 void tBlock::rotateCounterClockwise() {
@@ -160,4 +161,5 @@ void tBlock::rotateCounterClockwise() {
         else rotateState++;
         cycle--;
     }
+    applyDropSpeed();
 }
