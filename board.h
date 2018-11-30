@@ -30,6 +30,8 @@ class Board {
     void set_next_block();
     int count_score();
     void set_blocks(Block * currBlock, Block * nextBlock);
+    void blind();
+    void unblind();
     std::vector<Cell> getline(int i);
 
    // void setCurrBlock(Block *currBlock);

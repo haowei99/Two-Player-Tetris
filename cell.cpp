@@ -51,7 +51,6 @@ void Cell::set_X(int xCoor){
 void Cell::set_Y(int yCoor){
     y = yCoor;
 }
-
 void Cell::blind(){
     isBlind = true;
 }
