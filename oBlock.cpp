@@ -8,9 +8,13 @@ oBlock::oBlock(int x, int y, int level, Board *board): Block{x, y, level, board}
     blockType = 'O';
 }
 
-void oBlock::rotateClockwise() {}
+void oBlock::rotateClockwise() {
+    applyDropSpeed();
+}
 
-void oBlock::rotateCounterClockwise() {}
+void oBlock::rotateCounterClockwise() {
+    applyDropSpeed();
+}
 
 /*
 void oBlock::right() {

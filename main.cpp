@@ -101,7 +101,7 @@ int main() {
         if (drop) bp->checkRows();
         //check blocks deleted
         int score = 0;
-        for (int i =0; i < bp->loBlock.size(); i++){
+        for(int i =0; i < bp->loBlock.size(); i++){
             int size = bp->loBlock[i]->getCellSize();
             if (size == 0) score++;
         }

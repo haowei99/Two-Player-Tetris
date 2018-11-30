@@ -77,6 +77,7 @@ void iBlock::rotateClockwise() {
         if (rotateState == 2) rotateState = 1;
         else rotateState = 2;
     }
+    applyDropSpeed();
 }
 
 void iBlock::rotateCounterClockwise() {
@@ -84,4 +85,5 @@ void iBlock::rotateCounterClockwise() {
         if (rotateState == 1) rotateState = 2;
         else rotateState--;
     }
+    applyDropSpeed();
 }

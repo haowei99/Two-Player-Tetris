@@ -19,8 +19,10 @@ int Block::getDropSpeed() {
 } // getDropSpeed
 
 void Block::applyDropSpeed(){
-    while (dropSpeed > 0){
+    int speed = getDropSpeed();
+    while (speed > 0){
         down();
+        speed--;
     }
 }
 
@@ -66,7 +68,10 @@ bool Block::in_grid(int x, int y) {
 
 void Block::right(){
     int x, y;
-    if(!canMoveRight()) return;
+    if(!canMoveRight()){
+        applyDropSpeed();
+        return;
+    }
     // check constraints
     for (int i = 0; i < numCells; i++){
         x = cells[i]->get_X();
@@ -81,10 +86,14 @@ void Block::right(){
         cells[i]->set_X(x - 1);
         cells[i] = board->cellAt(x, y);
     }
+    applyDropSpeed();
 }
 void Block::left(){
     int x, y;
-    if(!canMoveLeft()) return;
+    if(!canMoveLeft()) {
+        applyDropSpeed();
+        return;
+    }
     // check constraints
     for (int i = 0; i < numCells; i++){
         x = cells[i]->get_X();
@@ -99,6 +108,7 @@ void Block::left(){
         cells[i]->set_X(x + 1);
         cells[i] = board->cellAt(x, y);
     }
+    applyDropSpeed();
 }
 void Block::down(){
     int x;
@@ -131,6 +141,7 @@ void Block::down(){
         //cells[i]->set_Y(change - 1);
         //cells[i] = board->cellAt(cells[i]->get_X(), change);
     }
+    applyDropSpeed();
 }
 
 void Block::drop(){

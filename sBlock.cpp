@@ -54,10 +54,12 @@ void sBlock::rotateClockwise() {
     rotate(rotateState);
     if (rotateState == 2) rotateState = 1;
     else rotateState = 2;
+    applyDropSpeed();
 }
 
 void sBlock::rotateCounterClockwise() {
     rotate(rotateState);
     if (rotateState == 1) rotateState = 2;
     else rotateState--;
+    applyDropSpeed();
 }
