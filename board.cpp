@@ -8,6 +8,7 @@
 #include "sBlock.h"
 #include "zBlock.h"
 #include "tBlock.h"
+#include "starBlock.h"
 
 using namespace::std;
 
@@ -64,7 +65,7 @@ void Board::unset(int x, int y){
 Block* Board::getBlock() {
     return currBlock;
 }
-/*
+
 Block* Board::changeBlock(char type) {
     /* t block
     Block * block = new tBlock(0,0,0, this);
@@ -79,7 +80,7 @@ Block* Board::changeBlock(char type) {
     block->addCell(&grid[1][2]);
 
     currBlock = block;
-    return currBlock;
+    return currBlock;*/
 
     nextBlock = currBlock;
 
@@ -212,7 +213,7 @@ void Board::removeCells(){
         }
     }   
 
-}*/
+}
 
 std::ostream& operator<<(std::ostream& out, Board& board){
     for (int i = 0; i < 22; i++){
@@ -336,6 +337,16 @@ void Board::set_next_block() {
     }
 }
 
+void Board::dropStar(int level) {
+    //check if can be dropped
+    if (cellAt(6,3)->cellFilled()) return;
+
+    Block * star = new starBlock(6, 3, level, this);
+    star->addCell(cellAt(6,3));
+    star->drop();
+    addBlock(star);
+}
+
 void Board::set_blocks(Block *curr, Block *next) {
     currBlock = curr;
     nextBlock = next;
@@ -405,7 +416,7 @@ bool Board::canFitNew(char blockType){
         && grid[4][1].cellFilled()
         && grid[4][2].cellFilled();
     }
-
+    return  false;
 
 }
 
@@ -470,30 +481,33 @@ bool Board::canFit(char blockType){
         && grid[maxY][minX + 1].cellFilled();
     }
 
+    return  false;
+
 
 }
 
 bool Board::swapBlock(char blockType){
-    Block *b;
-    int currLvl =currBlock->level;
-
-    char type = blockType;
-
-    int maxY = currBlock->cells[0]->get_Y();
-    int minX = currBlock->cells[0]->get_X();
-    for (int i = 0; i < 4; i++){
-        int tmpY = currBlock->cells[i]->get_Y();
-        if ( tmpY >= maxY){
-            int tmpX = currBlock->cells[i]->get_X();
-            if (tmpX <= minX){
-                minX = tmpX;
-                maxY = tmpY;
-            }
-        }
-        currBlock->cells[i]->unsetCell();
-    } 
 
     if (canFit(blockType)){
+        Block *b;
+        int currLvl =currBlock->level;
+
+        char type = blockType;
+
+        int maxY = currBlock->cells[0]->get_Y();
+        int minX = currBlock->cells[0]->get_X();
+        for (int i = 0; i < 4; i++){
+            int tmpY = currBlock->cells[i]->get_Y();
+            if ( tmpY >= maxY){
+                int tmpX = currBlock->cells[i]->get_X();
+                if (tmpX <= minX){
+                    minX = tmpX;
+                    maxY = tmpY;
+                }
+            }
+            currBlock->cells[i]->unsetCell();
+        }
+
         if (blockType == 'I'){
             b = new iBlock{0, 0, currLvl, this};
             b->addCell(&grid[maxY][minX]);
@@ -510,20 +524,45 @@ bool Board::swapBlock(char blockType){
         }
         else if (blockType == 'L'){
             b = new lBlock{0, 0, currLvl, this};
+            b->addCell(&grid[maxY][minX]);
+            b->addCell(&grid[maxY][minX + 1]);
+            b->addCell(&grid[maxY][minX + 2]);
+            b->addCell(&grid[maxY - 1][minX + 2]);
         }
         else if (blockType == 'T'){
             b = new tBlock{0, 0, currLvl, this};
+            b->addCell(&grid[maxY][minX]);
+            b->addCell(&grid[maxY - 1][minX]);
+            b->addCell(&grid[maxY - 1][minX - 1]);
+            b->addCell(&grid[maxY - 1][minX + 1]);
         }
         else if (blockType == 'O'){
             b = new oBlock{0, 0, currLvl, this};
+            b->addCell(&grid[maxY][minX]);
+            b->addCell(&grid[maxY][minX + 1]);
+            b->addCell(&grid[maxY - 1][minX]);
+            b->addCell(&grid[maxY - 1][minX + 1]);
         }
         else if (blockType == 'S'){
             b = new sBlock{0, 0, currLvl, this};
+            b->addCell(&grid[maxY][minX]);
+            b->addCell(&grid[maxY][minX + 1]);
+            b->addCell(&grid[maxY - 1][minX + 1]);
+            b->addCell(&grid[maxY - 1][minX + 2]);
         }
-        else if (blockType == 'Z'){
+        else { //(blockType == 'Z')
             b = new zBlock{0, 0, currLvl, this};
+            b->addCell(&grid[maxY][minX]);
+            b->addCell(&grid[maxY - 1][minX]);
+            b->addCell(&grid[maxY - 1][minX - 1]);
+            b->addCell(&grid[maxY][minX + 1]);
+        }
+        for (int i = 0; i < 4; i++){
+            b->cells[i]->setCell(b->getBlockType());
         }
         delete currBlock;
         currBlock = b;
+        return true;
     }
+    return  false;
 }
