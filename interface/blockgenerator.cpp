@@ -12,6 +12,7 @@
 #include "lBlock.h"
 #include "oBlock.h"
 #include "tBlock.h"
+#include "starBlock.h"
 
 
 BlockGenerator::BlockGenerator(Board* board, NumberGenerator* ng, std::string sequenceFileName) 
