@@ -4,6 +4,8 @@
 #include <string>
 #include "numbergenerator.h"
 #include "blockgenerator.h"
+#include "block.h"
+#include "board.h"
 
 const int maxLevel = 4;
 const int minLevel = 0;
@@ -16,6 +18,9 @@ class Player {
     BlockGenerator* generator;
     Player* opponent;
     bool hasHeavy, hasForce, hasBlind = false;
+    Board* board;
+    Block* curBlock;
+    Block* nextBlock;
 public:
     Player(int startLevel, std::string sequenceFileName, NumberGenerator* ng);
     ~Player();
