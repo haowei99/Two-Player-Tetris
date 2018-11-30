@@ -51,9 +51,17 @@ void Cell::set_X(int xCoor){
 void Cell::set_Y(int yCoor){
     y = yCoor;
 }
+void Cell::blind(){
+    isBlind = true;
+}
+
+void Cell::unblind(){
+    isBlind = false;
+}
 
 std::ostream& operator<<(std::ostream& out, Cell& cell) {
-    if (cell.isFilled) out << cell.fillType;
+    if (cell.isFilled && cell.isBlind) out << "?";
+    else if (cell.isFilled) out << cell.fillType;
     else out << "_"; //debugging reasons
     return out;
 } // operator<<
