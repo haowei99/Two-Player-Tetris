@@ -3,11 +3,14 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include "board.h"
-#include "block.h"
+#include "numbergenerator.h"
+
+/** TODOS
+ * figure out how setseed works for random number generator
+ * ***/
 
 class BlockGenerator {
-    Board* board;
+    NumberGenerator* ng;
     std::string sequenceFileName;
     std::ifstream sequenceReader;
     std::string noRandomFileName;
@@ -19,11 +22,10 @@ class BlockGenerator {
     std::string generateLevel2(int random);
     std::string generateLevel34(int random);
     int randNum(int lower, int upper);
-    Block* makeBlock(std::string type, int level);
 public:
-    BlockGenerator(Board* board, std::string sequenceFileName);
+    BlockGenerator(NumberGenerator* ng, std::string sequenceFileName);
     ~BlockGenerator();
-    Block* generateBlock(int level); 
+    std::string generateBlock(int level); // change to return block later
     void setStream(std::string fileName);
     void unsetStream();
     void reset();

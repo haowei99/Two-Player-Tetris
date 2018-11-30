@@ -1,5 +1,6 @@
-#include "board.h"
 #include <vector>
+#include <iostream>
+#include "board.h"
 #include "iBlock.h"
 #include "jBlock.h"
 #include "lBlock.h"
@@ -7,7 +8,6 @@
 #include "sBlock.h"
 #include "zBlock.h"
 #include "tBlock.h"
-#include <iostream>
 
 using namespace::std;
 
