@@ -28,7 +28,6 @@ public:
     void blind();
     void unblind();
 
-
     friend std::ostream& operator<<(std::ostream& os, Cell& cell);
 };
 

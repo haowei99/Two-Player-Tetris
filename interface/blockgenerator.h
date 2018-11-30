@@ -22,10 +22,11 @@ class BlockGenerator {
     std::string generateLevel2(int random);
     std::string generateLevel34(int random);
     int randNum(int lower, int upper);
+    // Block* makeBlocK(std::string type, int level);
 public:
     BlockGenerator(NumberGenerator* ng, std::string sequenceFileName);
     ~BlockGenerator();
-    std::string generateBlock(int level); // change to return block later
+    std::string generateBlock(int level); // replace Block* generateBlock(int level);
     void setStream(std::string fileName);
     void unsetStream();
     void reset();

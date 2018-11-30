@@ -71,6 +71,7 @@ void Game::readCommands() {
         } // if
 
         iss >> command;
+        command = ci->interpret(command);
 
         // if multiplier on command is 0, then we don't need to do anything
         if (multiplier == 0) {
@@ -207,14 +208,35 @@ Game::Game(int startLevel, std::string sequenceFileName1, std::string sequenceFi
       player1{new Player(startLevel, sequenceFileName1, ng)}, 
       player2{new Player(startLevel, sequenceFileName2, ng)}, 
       curPlayer{nullptr},
-      display{new GameDisplay(28, 23, startLevel)}
-{} // constructor
+      display{new GameDisplay(28, 23, startLevel)},
+      ci{new CommandInterpreter()} {
+    ci->addCommand("left");
+    ci->addCommand("right");
+    ci->addCommand("down");
+    ci->addCommand("clockwise");
+    ci->addCommand("counterclockwise");
+    ci->addCommand("drop");
+    ci->addCommand("levelup");
+    ci->addCommand("leveldown");
+    ci->addCommand("random");
+    ci->addCommand("norandom");
+    ci->addCommand("sequence");
+    ci->addCommand("restart");
+    ci->addCommand("I");
+    ci->addCommand("J");
+    ci->addCommand("L");
+    ci->addCommand("O");
+    ci->addCommand("S");
+    ci->addCommand("Z");
+    ci->addCommand("T");
+} // constructor
 
 
 Game::~Game() {
     delete player1;
     delete player2;
     delete display;
+    delete ci;
     // delete the XWindow, 
 } // destructor
 

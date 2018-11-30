@@ -6,6 +6,7 @@
 #include "player.h"
 #include "gamedisplay.h"
 #include "numbergenerator.h"
+#include "commandinterpreter.h"
 
 class Game {
     int startLevel;
@@ -19,6 +20,7 @@ class Game {
     Player* player2;
     Player* curPlayer;
     GameDisplay* display;
+    CommandInterpreter* ci;
     int highscore = 0;
     bool readingFromFile = false;
     std::vector<std::string> fileInputs;

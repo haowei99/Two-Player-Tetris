@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -Wall -MMD
 EXEC = interface
-OBJECTS = main.o game.o player.o display.o cell.o gamedisplay.o numbergenerator.o blockgenerator.o
+OBJECTS = main.o game.o player.o display.o cell.o gamedisplay.o numbergenerator.o blockgenerator.o commandinterpreter.o trie.o trienode.o
 DEPENDS = ${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}
