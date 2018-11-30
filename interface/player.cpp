@@ -110,7 +110,7 @@ void Player::drop() {
 
     if (hasBlind) {
         hasBlind = false;
-        // board->unblind();
+        board->unblind();
     } // if
     
     hasHeavy = false;
@@ -143,13 +143,11 @@ bool Player::endTurn() {
 
 void Player::applyEffects() {
     if (hasHeavy) {
-        std::cout << "heavy applied! ";
         // curBlock->applyHeavy(); function just adds 3 to existing dropspeed
     } // if
 
     if (hasBlind) {
-        std::cout << "blind applied! ";
-        // board->blind()
+        board->blind()
     } // if
 
     std::cout << std::endl;
