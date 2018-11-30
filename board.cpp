@@ -15,13 +15,29 @@ Board::Board(int x, int y): x{x}, y{y}{
 }
 
 void Board::init() {
-    vector<vector<Cell>> new_grid(18, vector<Cell>(11)); // with three reserved rows
-    for (int i = 0; i < 18; i++){
+    vector<vector<Cell>> new_grid(22, vector<Cell>(11)); // with three reserved rows
+    for (int i = 0; i < 22; i++){
         for (int j = 0; j < 11; j++){
             new_grid[i][j].set_X(j);
             new_grid[i][j].set_Y(i);
         }
     }
+
+    for (int j = 0; j < 11; j++){
+            new_grid[18][j].setCell('-');
+    } //setting up  ------
+
+    // Next:
+    new_grid[19][0].setCell('N');
+    new_grid[19][1].setCell('E');
+    new_grid[19][2].setCell('X');
+    new_grid[19][3].setCell('T');
+    new_grid[19][4].setCell(':');
+
+    // set next block
+    set_next_block();
+
+
     grid = new_grid;
 }
 
@@ -246,4 +262,56 @@ void Board::clearRow(int row) {
         }
     }
 
+}
+
+void Board::set_next_block() {
+    for (int i = 20; i < 22; i++){
+        for (int j = 0; j < 11; j++){
+            grid[i][j].unsetCell();
+        }
+    } //clear cells first
+    char type = nextBlock->getBlockType();
+
+    if (type == 'I'){
+        grid[20][0].setCell(type);
+        grid[20][1].setCell(type);
+        grid[20][2].setCell(type);
+        grid[20][3].setCell(type);
+    }
+    else if (type == 'J'){
+        grid[20][0].setCell(type);
+        grid[21][0].setCell(type);
+        grid[21][1].setCell(type);
+        grid[21][2].setCell(type);
+    }
+    else if (type == 'L'){
+        grid[20][2].setCell(type);
+        grid[21][0].setCell(type);
+        grid[21][1].setCell(type);
+        grid[21][2].setCell(type);
+    }
+    else if (type == 'T'){
+        grid[20][0].setCell(type);
+        grid[20][1].setCell(type);
+        grid[20][2].setCell(type);
+        grid[21][1].setCell(type);
+    }
+    else if (type == 'O'){
+        grid[20][0].setCell(type);
+        grid[20][1].setCell(type);
+        grid[21][0].setCell(type);
+        grid[21][1].setCell(type);
+    }
+    else if (type == 'S'){
+        grid[21][0].setCell(type);
+        grid[21][1].setCell(type);
+        grid[20][1].setCell(type);
+        grid[20][2].setCell(type);
+    }
+    else if (type == 'Z'){
+        grid[20][0].setCell(type);
+        grid[20][1].setCell(type);
+        grid[21][1].setCell(type);
+        grid[21][2].setCell(type);
+    }
 }
