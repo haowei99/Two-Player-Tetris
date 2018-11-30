@@ -12,8 +12,10 @@ int main() {
     cout << b << endl;
     string c;
     Board * bp = &b;
+
     bp->changeBlock('i');
     Block *oblo = bp->getBlock(); //curr block
+    bp->set_blocks(oblo, oblo);
     //Block * oblo =  new oBlock(0,0,0,bp);
     cout << "Board next:" << endl;
     cout << b << endl;

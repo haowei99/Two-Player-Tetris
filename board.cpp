@@ -34,12 +34,8 @@ void Board::init() {
     new_grid[19][3].setCell('T');
     new_grid[19][4].setCell(':');
 
-    // set next block
-    set_next_block();
-
-
     grid = new_grid;
-}
+    }
 
 void Board::reset(){
     for(auto it = grid.begin(); it != grid.end(); ++it){
@@ -215,7 +211,7 @@ void Board::removeCells(){
 }
 
 std::ostream& operator<<(std::ostream& out, Board& board){
-    for (int i = 0; i < 18; i++){
+    for (int i = 0; i < 22; i++){
         for (int j = 0; j < 11; j++){
             out << board.grid[i][j];
         }
@@ -344,4 +340,6 @@ void Board::set_next_block() {
 void Board::set_blocks(Block *curr, Block *next) {
     currBlock = curr;
     nextBlock = next;
+    // set next block
+    set_next_block();
 }
