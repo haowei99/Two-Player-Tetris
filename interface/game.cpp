@@ -147,9 +147,10 @@ void Game::readCommands() {
             curPlayer->drop();
             break;
 
-        } else if (command == "I" || command == "J" || command == "L" || command == "O" ||
-                   command == "S" || command == "Z" || command == "T") {
+        } else if (command == "i" || command == "j" || command == "l" || command == "o" ||
+                   command == "s" || command == "z" || command == "t") {
 
+            command[0] = command[0] + -'a' + 'A';        
             curPlayer->setBlock(command);
 
         } else {

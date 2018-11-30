@@ -3,6 +3,7 @@
 #include "player.h"
 #include "blockgenerator.h"
 #include "numbergenerator.h"
+#include "block.h"
 
 
 Player::Player(int startLevel, std::string sequenceFileName, NumberGenerator* ng) 
@@ -13,7 +14,9 @@ Player::Player(int startLevel, std::string sequenceFileName, NumberGenerator* ng
 
 Player::~Player() {
     delete generator;
-    // delete board, curBlock, nextBlock;
+    delete board;
+    delete curBlock;
+    delete nextBlock;
 } // destructor
 
 
@@ -21,43 +24,43 @@ void Player::init(Player* opponent) {
     this->opponent = opponent;
     level = startLevel;
     score = 0;
-    /** construct first curBlock and nextBlock based on level here! **/
+    curBlock = generator->generateBlock(level);
+    nextBlock = generator->generateBlock(level);
 } // init
 
 
 void Player::reset() {
-    /** delete placedBlocks, delete curBlock, nextBlock, reset BlockGenerator, etc here! **/
+    delete curBlock;
+    delete nextBlock;
+    
+    generator->reset();
+    board->reset();
     init(opponent);
 } // reset
 
 
 void Player::left() {
-    // curBlock->left()
-    std::cout << "left" << std::endl;
+    curBlock->left()
 } // left
 
 
 void Player::right() {
-    // curBlock->right()
-    std::cout << "right" << std::endl;
+    curBlock->right()
 } // right
 
 
 void Player::down() {
-    // curBlock->down()
-    std::cout << "down" << std::endl;
+    curBlock->down()
 } // down
 
 
 void Player::clockwise() {
-    // curBlock->clockwise()
-    std::cout << "clockwise" << std::endl;
+    curBlock->clockwise()
 } // clockwise
 
 
 void Player::counterclockwise() {
-    // curBlock->counterclockwise()
-    std::cout << "counterclockwise" << std::endl;
+    curBlock->counterclockwise()
 } // counterclockwise
 
 
@@ -65,8 +68,6 @@ void Player::levelUp() {
     if (level < maxLevel) {
         level += 1;
     } // if
-
-    std::cout << "level up" << std::endl;
 } // levelUp
 
 
@@ -74,8 +75,6 @@ void Player::levelDown() {
     if (level > minLevel) {
         level -= 1;
     } // if
-
-    std::cout << "level down" << std::endl;
 } // levelDown
 
 
@@ -83,8 +82,6 @@ void Player::random() {
     if (level > 2) {
         generator->unsetStream();
     } // if
-
-    std::cout << "random" << std::endl;
 } // random
 
 
@@ -92,15 +89,15 @@ void Player::noRandom(std::string noRandomFileName) {
     if (level > 2) {
         generator->setStream(noRandomFileName);
     } // if
-
-    std::cout << "no random" << std::endl;
 } // noRandom
 
 
-void Player::setBlock(std::string blockType) { // needs err checking for block?
+void Player::setBlock(std::string blockType) { 
     // check if I can replace current block with the specified blocktype
     // if so, do so and delete previous curBlock
-    std::cout << "set block" << std::endl;
+
+    char type = blockType[0];
+    // board->replaceBlock(type);
 } // setBlock
 
 
@@ -114,7 +111,6 @@ void Player::drop() {
     } // if
     
     hasHeavy = false;
-    std::cout << "drop\n\n" << std::endl;
 } // drop
 
 
@@ -143,14 +139,12 @@ bool Player::endTurn() {
 
 void Player::applyEffects() {
     if (hasHeavy) {
-        // curBlock->applyHeavy(); function just adds 3 to existing dropspeed
+        curBlock->applyHeavy();
     } // if
 
     if (hasBlind) {
         board->blind()
     } // if
-
-    std::cout << std::endl;
 } // applyEffects
 
 
