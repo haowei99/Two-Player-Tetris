@@ -3,11 +3,8 @@
 #include "player.h"
 #include "blockgenerator.h"
 #include "numbergenerator.h"
-<<<<<<< HEAD
 #include "board.h"
 #include "block.h"
-=======
->>>>>>> f9b30a59922139a42525da93ee55ff053ede6551
 
 
 Player::Player(int x, int y, int startLevel, std::string sequenceFileName, NumberGenerator* ng) 
