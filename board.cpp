@@ -231,18 +231,43 @@ bool Board::loBEmpty(){
     return loBlock.empty();
 }
 
-void Board::checkRows() {
-    for (int i = 0; i < 18; i++){
+int Board::checkRows() { // note give score
+    int row_cleared = 0;
+    for (int i = 0; i < 18; i++) {
         bool clear = true;
-        for (int j = 0; j < 11; j++){
-            if(!grid[i][j].cellFilled()){
+        for (int j = 0; j < 11; j++) {
+            if (!grid[i][j].cellFilled()) {
                 clear = false;
                 break;
             }
         }
-        if(clear) clearRow(i);
+        if (clear) {
+            clearRow(i);
+            row_cleared++;
+        }
     }
+    if (row_cleared == 0) return 0;
+
+    //else
+    int level = currBlock->level;
+    int row_cleared_score = (level + row_cleared) * (level + row_cleared);
+    int block_score = count_score();
+    return (block_score + row_cleared_score);
 }
+
+int Board::count_score() {
+    int s = 0;
+    int size = loBlock.size();
+    for (int i = 0; i < size; i++){
+        if(!loBlock.at(i)->counted){
+            loBlock.at(i)->counted = true;
+            int point = (loBlock.at(i)->level + 1) * (loBlock.at(i)->level + 1); //level + 1 squared
+            s += point;
+        }
+    }
+    return s;
+}
+
 void Board::clearRow(int row) {
     // Unset first
     for(int i = 0; i < 11; i++){

@@ -22,6 +22,7 @@ protected:
     int rotateState = 1;
     // XWindow* window;
     int numCells = 4;
+    bool counted; //for score counting
     
 public:
     Block(int x, int y, int level, Board* board);

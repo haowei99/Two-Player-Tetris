@@ -19,7 +19,7 @@ class Board {
     void init();
     void reset();
     void clearRow(int row);
-    void checkRows();
+    int checkRows();
     Cell *cellAt(int x, int y);
     void set(int x, int y);
     void unset(int x, int y);
@@ -29,6 +29,7 @@ class Board {
     bool loBEmpty();
     void removeCells();
     void set_next_block();
+    int count_score();
 
    // void setCurrBlock(Block *currBlock);
     friend std::ostream& operator<<(std::ostream& os, Board& board);
