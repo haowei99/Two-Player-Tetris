@@ -45,6 +45,7 @@ public:
     void addCell(Cell* cell);
     bool in_grid(int x, int y); // check if block is within board
     int getCellSize();
+    void applyHeavy();
 };
 
 #endif // __BLOCK_H__
