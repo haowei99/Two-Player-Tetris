@@ -8,6 +8,7 @@
 #include "sBlock.h"
 #include "zBlock.h"
 #include "tBlock.h"
+#include "starBlock.h"
 
 using namespace::std;
 
@@ -40,6 +41,10 @@ void Board::init() {
 void Board::reset(){
     for(auto it = grid.begin(); it != grid.end(); ++it){
         it->erase(it->begin(), it->end());
+    }
+    int size = loBlock.size();
+    for (int i = 0; i < size; i++){
+        delete loBlock.at(i);
     }
     loBlock.clear();
     grid.erase(grid.begin(), grid.end());
@@ -75,8 +80,8 @@ Block* Board::changeBlock(char type) {
     block->addCell(&grid[1][2]);
 
     currBlock = block;
-    return currBlock;
-    */
+    return currBlock;*/
+
     nextBlock = currBlock;
 
     //iBlock
@@ -241,13 +246,9 @@ int Board::checkRows() { // note give score
             row_cleared++;
         }
     }
-    if (row_cleared == 0) return 0;
 
-    //else
-    int level = currBlock->level;
-    int row_cleared_score = (level + row_cleared) * (level + row_cleared);
-    int block_score = count_score();
-    return (block_score + row_cleared_score);
+    return row_cleared;
+    
 }
 
 int Board::count_score() {
@@ -336,6 +337,16 @@ void Board::set_next_block() {
     }
 }
 
+void Board::dropStar(int level) {
+    //check if can be dropped
+    if (cellAt(6,3)->cellFilled()) return;
+
+    Block * star = new starBlock(6, 3, level, this);
+    star->addCell(cellAt(6,3));
+    star->drop();
+    addBlock(star);
+}
+
 void Board::set_blocks(Block *curr, Block *next) {
     currBlock = curr;
     nextBlock = next;
@@ -357,4 +368,201 @@ void Board::unblind() {
             grid[i][j].unblind();
         }
     }
+}
+
+bool Board::canFitNew(char blockType){
+    // check for if new block or replaced block can fit
+    char type = blockType;
+
+    if (type == 'I'){
+        return grid[3][0].cellFilled() 
+        && grid[3][1].cellFilled()
+        && grid[3][2].cellFilled() 
+        && grid[3][3].cellFilled();
+    }
+    else if (type == 'J'){
+        return grid[3][0].cellFilled() 
+        && grid[4][0].cellFilled()
+        && grid[4][1].cellFilled() 
+        && grid[4][2].cellFilled();
+    }
+    else if (type == 'L'){
+        return grid[4][0].cellFilled() 
+        && grid[4][1].cellFilled()
+        && grid[4][2].cellFilled() 
+        && grid[3][2].cellFilled();
+    }
+    else if (type == 'T'){
+        return grid[4][1].cellFilled() 
+        && grid[3][1].cellFilled()
+        && grid[3][2].cellFilled() 
+        && grid[3][0].cellFilled();
+    }
+    else if (type == 'O'){
+        return grid[3][0].cellFilled()
+        && grid[3][1].cellFilled() 
+        && grid[4][0].cellFilled()
+        && grid[4][1].cellFilled();
+    }
+    else if (type == 'S'){
+        return grid[4][0].cellFilled()
+        && grid[4][1].cellFilled()
+        && grid[3][1].cellFilled()
+        && grid[3][2].cellFilled();
+    }
+    else if (type == 'Z'){
+        return grid[3][0].cellFilled()
+        && grid[3][1].cellFilled()
+        && grid[4][1].cellFilled()
+        && grid[4][2].cellFilled();
+    }
+    return  false;
+
+}
+
+bool Board::canFit(char blockType){
+    // check for if new block or replaced block can fit
+    char type = blockType;
+
+    int maxY = currBlock->cells[0]->get_Y();
+    int minX = currBlock->cells[0]->get_X();
+    for (int i = 0; i < 4; i++){
+        int tmpY = currBlock->cells[i]->get_Y();
+        if ( tmpY >= maxY){
+            int tmpX = currBlock->cells[i]->get_X();
+            if (tmpX <= minX){
+                minX = tmpX;
+                maxY = tmpY;
+            }
+        }
+        currBlock->cells[i]->unsetCell();
+    } 
+
+    if (type == 'I'){
+        return grid[maxY][minX].cellFilled() 
+        && grid[maxY][minX + 1].cellFilled()
+        && grid[maxY][minX + 2].cellFilled() 
+        && grid[maxY][minX + 3].cellFilled();
+    }
+    else if (type == 'J'){
+        return grid[maxY - 1][minX].cellFilled() 
+        && grid[maxY][minX].cellFilled()
+        && grid[maxY][minX + 1].cellFilled() 
+        && grid[maxY][minX + 2].cellFilled();
+    }
+    else if (type == 'L'){
+        return grid[maxY][minX].cellFilled() 
+        && grid[maxY][minX + 1].cellFilled()
+        && grid[maxY][minX + 2].cellFilled() 
+        && grid[maxY - 1][minX + 2].cellFilled();
+    }
+    else if (type == 'T'){
+        return grid[maxY][minX].cellFilled() 
+        && grid[maxY - 1][minX].cellFilled()
+        && grid[maxY - 1][minX - 1].cellFilled() 
+        && grid[maxY - 1][minX + 1].cellFilled();
+    }
+    else if (type == 'O'){
+        return grid[maxY][minX].cellFilled()
+        && grid[maxY][minX + 1].cellFilled() 
+        && grid[maxY - 1][minX].cellFilled()
+        && grid[maxY - 1][minX + 1].cellFilled();
+    }
+    else if (type == 'S'){
+        return grid[maxY][minX].cellFilled()
+        && grid[maxY][minX + 1].cellFilled()
+        && grid[maxY - 1][minX + 1].cellFilled()
+        && grid[maxY - 1][minX + 2].cellFilled();
+    }
+    else if (type == 'Z'){
+        return grid[maxY][minX].cellFilled()
+        && grid[maxY - 1][minX].cellFilled()
+        && grid[maxY - 1][minX - 1].cellFilled()
+        && grid[maxY][minX + 1].cellFilled();
+    }
+
+    return  false;
+
+
+}
+
+bool Board::swapBlock(char blockType){
+
+    if (canFit(blockType)){
+        Block *b;
+        int currLvl =currBlock->level;
+
+        char type = blockType;
+
+        int maxY = currBlock->cells[0]->get_Y();
+        int minX = currBlock->cells[0]->get_X();
+        for (int i = 0; i < 4; i++){
+            int tmpY = currBlock->cells[i]->get_Y();
+            if ( tmpY >= maxY){
+                int tmpX = currBlock->cells[i]->get_X();
+                if (tmpX <= minX){
+                    minX = tmpX;
+                    maxY = tmpY;
+                }
+            }
+            currBlock->cells[i]->unsetCell();
+        }
+
+        if (blockType == 'I'){
+            b = new iBlock{0, 0, currLvl, this};
+            b->addCell(&grid[maxY][minX]);
+            b->addCell(&grid[maxY][minX + 1]);
+            b->addCell(&grid[maxY][minX + 2]);
+            b->addCell(&grid[maxY][minX + 3]);
+        }
+        else if (blockType == 'J'){
+            b = new jBlock{0, 0, currLvl, this};
+            b->addCell(&grid[maxY - 1][minX]);
+            b->addCell(&grid[maxY][minX]);
+            b->addCell(&grid[maxY][minX + 1]);
+            b->addCell(&grid[maxY][minX + 2]);
+        }
+        else if (blockType == 'L'){
+            b = new lBlock{0, 0, currLvl, this};
+            b->addCell(&grid[maxY][minX]);
+            b->addCell(&grid[maxY][minX + 1]);
+            b->addCell(&grid[maxY][minX + 2]);
+            b->addCell(&grid[maxY - 1][minX + 2]);
+        }
+        else if (blockType == 'T'){
+            b = new tBlock{0, 0, currLvl, this};
+            b->addCell(&grid[maxY][minX]);
+            b->addCell(&grid[maxY - 1][minX]);
+            b->addCell(&grid[maxY - 1][minX - 1]);
+            b->addCell(&grid[maxY - 1][minX + 1]);
+        }
+        else if (blockType == 'O'){
+            b = new oBlock{0, 0, currLvl, this};
+            b->addCell(&grid[maxY][minX]);
+            b->addCell(&grid[maxY][minX + 1]);
+            b->addCell(&grid[maxY - 1][minX]);
+            b->addCell(&grid[maxY - 1][minX + 1]);
+        }
+        else if (blockType == 'S'){
+            b = new sBlock{0, 0, currLvl, this};
+            b->addCell(&grid[maxY][minX]);
+            b->addCell(&grid[maxY][minX + 1]);
+            b->addCell(&grid[maxY - 1][minX + 1]);
+            b->addCell(&grid[maxY - 1][minX + 2]);
+        }
+        else { //(blockType == 'Z')
+            b = new zBlock{0, 0, currLvl, this};
+            b->addCell(&grid[maxY][minX]);
+            b->addCell(&grid[maxY - 1][minX]);
+            b->addCell(&grid[maxY - 1][minX - 1]);
+            b->addCell(&grid[maxY][minX + 1]);
+        }
+        for (int i = 0; i < 4; i++){
+            b->cells[i]->setCell(b->getBlockType());
+        }
+        delete currBlock;
+        currBlock = b;
+        return true;
+    }
+    return  false;
 }

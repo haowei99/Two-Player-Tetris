@@ -33,6 +33,11 @@ class Board {
     void blind();
     void unblind();
     std::vector<Cell> getline(int i);
+    bool canFit(char blockType);
+    bool canFitNew(char blockType);
+    bool swapBlock(char blockType);
+    void dropStar(int level);
+
 
    // void setCurrBlock(Block *currBlock);
     friend std::ostream& operator<<(std::ostream& os, Board& board);
