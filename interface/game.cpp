@@ -10,6 +10,26 @@
 #include "game.h"
 
 
+void Game::loseGamePrompt() {
+    char response;
+
+    if (curPlayer == player1) {
+        std::cout << "Sorry player 1, you have lost" << std::endl;
+    } else {
+        std::cout << "Sorry player 2, you have lost" << std::endl;
+    } // if
+
+    std::cout << "Would you like to restart? (Y/N)" << std::endl;
+    std::cin >> response;
+
+    if (response == 'Y' || response == 'y') {
+        throw Game::GameException{false, true};
+    } else {
+        throw Game::GameException{true, false};
+    } // if    
+} // loseGamePrompt
+
+
 void Game::addFileInputs(std::string fileName) {
     std::ifstream in(fileName.c_str());
     std::string command;
@@ -160,10 +180,10 @@ void Game::readCommands() {
 
         } // if
 
-        /** update/reprint display here **/
+        std::cout << (*display);
     } // while
 
-    /** update/reprint display here <-- this will update screen after drop is called **/
+    std::cout << (*display);
 } // readCommands
 
 
@@ -181,7 +201,12 @@ void Game::promptSpecialActions() {
             if (n == 1) {
                 curPlayer->heavyOpponent();
             } else if (n == 2) {
-                curPlayer->forceOpponent();
+                char type;
+                
+                std::cout << "Please enter a valid block type: " << std::endl;
+                std::cin >> type;
+
+                curPlayer->forceOpponent(type);
             } else if (n == 3) {
                 curPlayer->blindOpponent();
             } else {
@@ -206,8 +231,8 @@ Game::Game(int startLevel, std::string sequenceFileName1, std::string sequenceFi
       willSetSeed{willSetSeed},
       seed{seed},
       ng{new NumberGenerator(willSetSeed, seed)},
-      player1{new Player(startLevel, sequenceFileName1, ng)}, 
-      player2{new Player(startLevel, sequenceFileName2, ng)}, 
+      player1{new Player(0, 0, startLevel, sequenceFileName1, ng)}, 
+      player2{new Player(0, 0, startLevel, sequenceFileName2, ng)}, 
       curPlayer{nullptr},
       display{new GameDisplay(28, 23, startLevel)},
       ci{new CommandInterpreter()} {
@@ -248,7 +273,7 @@ void Game::init() {
     curPlayer = player1;
 
     display->init();
-    //std::cout << (*display);
+    std::cout << (*display);
 } // init
 
 
@@ -260,10 +285,12 @@ void Game::reset() {
 
 
 void Game::tick() {
+    // apply special effects, if false returned, player has lost
+    if (!(curPlayer->applyEffects())) {
+        loseGamePrompt();
+    } // if
 
-    // apply special effects
-    curPlayer->applyEffects(); 
-    /** update screen **/
+    std::cout << (*display);
 
     // read in commands until drop or restart
     std::cout << "Now reading commands: " << std::endl;
@@ -278,22 +305,7 @@ void Game::tick() {
     bool hasLost = curPlayer->endTurn();      // end the turn, and check if player has lost
 
     if (hasLost) {
-        char response;
-
-        if (curPlayer == player1) {
-            std::cout << "Sorry player 1, you have lost" << std::endl;
-        } else {
-            std::cout << "Sorry player 2, you have lost" << std::endl;
-        } // if
-
-        std::cout << "Would you like to restart? (Y/N)" << std::endl;
-        std::cin >> response;
-
-        if (response == 'Y' || response == 'y') {
-            throw Game::GameException{false, true};
-        } else {
-            throw Game::GameException{true, false};
-        } // if
+        loseGamePrompt();
     } else {
         if (curPlayer->getScore() > highscore) {
             highscore = curPlayer->getScore();

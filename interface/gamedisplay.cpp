@@ -3,6 +3,7 @@
 #include <vector>
 #include <iomanip>
 #include "cell.h"
+#include "board.h"
 #include "gamedisplay.h"
 
 

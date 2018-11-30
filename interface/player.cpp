@@ -3,13 +3,14 @@
 #include "player.h"
 #include "blockgenerator.h"
 #include "numbergenerator.h"
+#include "board.h"
 #include "block.h"
 
 
-Player::Player(int startLevel, std::string sequenceFileName, NumberGenerator* ng) 
-    : startLevel{startLevel}, level{startLevel}, 
+Player::Player(int x, int y, int startLevel, std::string sequenceFileName, NumberGenerator* ng) 
+    : board{new Board(x, y)}, startLevel{startLevel}, level{startLevel}, 
       score{0}, sequenceFileName{sequenceFileName},
-      generator{new BlockGenerator(ng, sequenceFileName)} {} // constructor 
+      generator{new BlockGenerator(board, ng, sequenceFileName)} {} // constructor 
 
 
 Player::~Player() {
@@ -32,6 +33,7 @@ void Player::init(Player* opponent) {
 void Player::reset() {
     delete curBlock;
     delete nextBlock;
+    blocksDropped = 0;
     
     generator->reset();
     board->reset();
@@ -96,14 +98,13 @@ void Player::setBlock(std::string blockType) {
     // check if I can replace current block with the specified blocktype
     // if so, do so and delete previous curBlock
 
-    char type = blockType[0];
-    // board->replaceBlock(type);
+    board->swapBlock(blockType[0]);
 } // setBlock
 
 
 void Player::drop() {
     // add the dropped block to board's placedBlocks <-- this should be handled in board/block
-    // curBlock->drop()
+    curBlock->drop()
 
     if (hasBlind) {
         hasBlind = false;
@@ -111,40 +112,66 @@ void Player::drop() {
     } // if
     
     hasHeavy = false;
+    hasForce = false;
+    blocksDropped += 1;
 } // drop
 
 
 int Player::clearRows() {
     // clear filled rows, use returned val to calculated a score and add that to own score
-    return 0;
+    int rowsCleared = board->clearRow();
+    score += ((level + rowsCleared) * (level + rowsCleared)); 
+
+    if (rowsCleared == 0) {
+        if (blocksDropped % 5 == 0 && level >= 4) {
+            board->dropStar(level);
+        } // if
+    } else {
+        blocksDropped = 0;
+    } // if
+
+    return rowsCleared;
 } // clearRows
 
 
 void Player::checkRemovedBlocks() {
     // check for any removed blocks, add returned score to own score
-    // if no blocks has been cleared, and its been 5 blocks, and hasForce, 
-    //     drop a starblock onto the board if able, board->dropStar()
-    hasForce = false;
+    //    - call count_score()
+    score += board->count_score();
 } // checkRemoveBlocks
 
 
 bool Player::endTurn() {
     // check if nextBlock can be placed on the top of the board
     //     if not: I lose, return true
-    //     if so: curBlock = nextBlock, update coords of nextBlock, 
+    //     if so: curBlock = nextBlock
     //            nextBlock = generator->getNextBlock(), return false
-    return false;
+    if (board->canFitNew()) {
+        curBlock = nextBlock;
+        nextBlock = generator->getNextBlock();
+        return false;
+    } else {
+        return true;
+    } // if
 } // endTurn
 
-
-void Player::applyEffects() {
+// return false if player loses
+bool Player::applyEffects() {
     if (hasHeavy) {
         curBlock->applyHeavy();
     } // if
 
     if (hasBlind) {
-        board->blind()
+        board->blind();
     } // if
+
+    if (hasForce) {
+        if (!(board->swapBlock(forceType))) {
+            return false;
+        } // if
+    } // if
+
+    return true;
 } // applyEffects
 
 
@@ -153,8 +180,9 @@ void Player::heavyOpponent() {
 } // heavyOpponent
 
 
-void Player::forceOpponent() {
+void Player::forceOpponent(char type) {
     opponent->hasForce = true;
+    opponen->forceType = type;
 } // forceOpponent
 
 

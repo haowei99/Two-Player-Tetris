@@ -3,6 +3,8 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include "block.h"
+#include "board.h"
 #include "numbergenerator.h"
 
 /** TODOS
@@ -10,6 +12,7 @@
  * ***/
 
 class BlockGenerator {
+    Board* board;
     NumberGenerator* ng;
     std::string sequenceFileName;
     std::ifstream sequenceReader;
@@ -22,11 +25,11 @@ class BlockGenerator {
     std::string generateLevel2(int random);
     std::string generateLevel34(int random);
     int randNum(int lower, int upper);
-    // Block* makeBlocK(std::string type, int level);
+    Block* makeBlock(std::string type, int level);
 public:
-    BlockGenerator(NumberGenerator* ng, std::string sequenceFileName);
+    BlockGenerator(Board* board, NumberGenerator* ng, std::string sequenceFileName);
     ~BlockGenerator();
-    std::string generateBlock(int level); // replace Block* generateBlock(int level);
+    Block* generateBlock(int level);
     void setStream(std::string fileName);
     void unsetStream();
     void reset();

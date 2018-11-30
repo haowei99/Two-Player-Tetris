@@ -3,10 +3,19 @@
 #include <fstream>
 #include "numbergenerator.h"
 #include "blockgenerator.h"
+#include "block.h"
+#include "board.h"
+#include "sBlock.h"
+#include "zBlock.h"
+#include "iBlock.h"
+#include "jBlock.h"
+#include "lBlock.h"
+#include "oBlock.h"
+#include "tBlock.h"
 
 
-BlockGenerator::BlockGenerator(NumberGenerator* ng, std::string sequenceFileName) 
-    : ng{ng}, sequenceFileName{sequenceFileName} {} // constructor
+BlockGenerator::BlockGenerator(Board* board, NumberGenerator* ng, std::string sequenceFileName) 
+    : board{board}, ng{ng}, sequenceFileName{sequenceFileName} {} // constructor
 
 
 BlockGenerator::~BlockGenerator() {
@@ -143,7 +152,6 @@ int BlockGenerator::randNum(int lower, int upper) {
 } // randNum
 
 
-/*
 Block* BlockGenerator::makeBlock(std::string type, int level) {
     if (type == "S") {
         return new sBlock(0, 0, level, board);
@@ -174,22 +182,6 @@ Block* BlockGenerator::generateBlock(int level) {
         return makeBlock(generateLevel2(randNum(0, 6)), level);
     } else {
         return makeBlock(generateLevel34(randNum(0, 8)), level);
-    } // if
-} // generateBlock
-
-*/
-
-
-// change to return block later
-std::string BlockGenerator::generateBlock(int level) {
-    if (level == 0) {
-        return generateLevel0();
-    } else if (level == 1) {
-        return generateLevel1(randNum(0, 11));
-    } else if (level == 2) {
-        return generateLevel2(randNum(0, 6));
-    } else {
-        return generateLevel34(randNum(0, 8));
     } // if
 } // generateBlock
 

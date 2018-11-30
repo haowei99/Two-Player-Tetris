@@ -26,13 +26,10 @@ class Game {
     std::vector<std::string> fileInputs;
     std::vector<std::string> commandList;
     // XWindow* window;
-    
-    // NumGenerator* ng; player1 and 2 and their blockgenerators will share this generator
-    // ng will be passed to player ctor, but player will NOT store ng
-    // instead player will simply use ng to initialize their blockgenerators
 
     void promptSpecialActions();
     void addFileInputs(std::string fileName);
+    void loseGamePrompt();
     std::string getNextInput();
     void readCommands();
 

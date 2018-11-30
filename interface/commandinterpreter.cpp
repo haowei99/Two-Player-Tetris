@@ -9,7 +9,7 @@ std::string CommandInterpreter::toLowerCase(std::string s) {
         char c = s[i];
         
         if (c >= 'A' && c <= 'Z') {
-            c = c - 'A' + 'a';
+            s[i] = c - 'A' + 'a';
         } // if
     } // for
     

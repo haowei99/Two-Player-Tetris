@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include "cell.h"
+#include "board.h"
 
 class GameDisplay {
     int width, height;

@@ -11,6 +11,7 @@ const int maxLevel = 4;
 const int minLevel = 0;
 
 class Player {
+    Board* board;
     int startLevel;
     int level;
     int score;
@@ -18,11 +19,12 @@ class Player {
     BlockGenerator* generator;
     Player* opponent;
     bool hasHeavy, hasForce, hasBlind = false;
-    Board* board;
     Block* curBlock;
     Block* nextBlock;
+    int blocksDropped = 0;
+    char forceType;
 public:
-    Player(int startLevel, std::string sequenceFileName, NumberGenerator* ng);
+    Player(int x, int y, int startLevel, std::string sequenceFileName, NumberGenerator* ng);
     ~Player();
     void init(Player* opponent);
     void reset();
@@ -40,9 +42,9 @@ public:
     void checkRemovedBlocks();
     bool endTurn();
     void setBlock(std::string blockType);
-    void applyEffects();
+    bool applyEffects();
     void heavyOpponent();
-    void forceOpponent();
+    void forceOpponent(char type);
     void blindOpponent();
     int getScore();
 };
