@@ -196,7 +196,7 @@ void Game::readCommands() {
         std::cout << (*display);
     } // while
 
-    std::cout << (*display);
+    //std::cout << (*display);
 } // readCommands
 
 
@@ -312,8 +312,6 @@ void Game::tick() {
     int rowsCleared = curPlayer->clearRows(); // store the amount of rows cleared
     curPlayer->checkRemovedBlocks();          // check if any blocks has been removed
 
-    /*** update the board ***/
-
     bool hasLost = curPlayer->endTurn();      // end the turn, and check if player has lost
 
     if (hasLost) {
@@ -327,7 +325,7 @@ void Game::tick() {
             display->updatePlayer2Score(curPlayer->getScore());
         } // if
 
-        std::cout << (*display);
+        //std::cout << (*display);
 
         if (rowsCleared > 2) {
             promptSpecialActions();
