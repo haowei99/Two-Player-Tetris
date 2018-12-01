@@ -6,9 +6,127 @@ jBlock::jBlock(int x, int y, int level, Board *board): Block{x, y, level, board}
     numCells = 4; 
 }
 
+bool jBlock::canRotate(int state){
+    int x, y;
+
+     if (state == 1) { //initial state is flat
+        //collision check
+        x = cells[0]->get_X();
+        y = cells[0]->get_Y(); //pos of block
+        bool cell1 = board->cellAt(x + 1, y - 1)->cellFilled();
+        x = cells[1]->get_X();
+        y = cells[1]->get_Y(); //pos of block
+        bool cell2 = board->cellAt(x, y - 2)->cellFilled();
+        
+        //cell 3 and 4 fill in spaces cells 1 and 2 currently occupy
+
+        if(cell1 || cell2) return false;
+    }
+    else if (state == 2){
+        x = cells[0]->get_X();
+        y = cells[0]->get_Y(); //pos of block
+        bool cell1 = board->cellAt(x + 1, y + 2)->cellFilled();
+        x = cells[1]->get_X();
+        y = cells[1]->get_Y(); //pos of block
+        bool cell2 = board->cellAt(x + 2, y + 1)->cellFilled();
+        x = cells[2]->get_X();
+        y = cells[2]->get_Y(); //pos of block
+        bool cell3 = board->cellAt(x + 1, y)->cellFilled();
+
+        //cell 4 doesnt need to recheck
+        
+        if (cell1 || cell2 || cell3) return false;
+    }
+    else if (state == 3){
+        x = cells[0]->get_X();
+        y = cells[0]->get_Y(); //pos of block
+        bool cell1 = board->cellAt(x - 2, y)->cellFilled();
+        x = cells[1]->get_X();
+        y = cells[1]->get_Y(); //pos of block
+        bool cell2 = board->cellAt(x - 1, y + 1)->cellFilled();
+        x = cells[3]->get_X();
+        y = cells[3]->get_Y(); //pos of block
+        bool cell4 = board->cellAt(x + 1, y - 1)->cellFilled();
+
+        //cell 3 stays constant 
+
+        if (cell1 || cell2 || cell4) return false;
+    }
+    else {
+        x = cells[0]->get_X();
+        y = cells[0]->get_Y(); //pos of block
+        bool cell1 = board->cellAt(x, y - 1)->cellFilled();
+        // cells 2 and 3 are taking up spaces that were originally occupied
+        //by the block
+
+        x = cells[3]->get_X();
+        y = cells[3]->get_Y(); //pos of block
+        bool cell4 = board->cellAt(x + 1, y + 2)->cellFilled();
+
+
+        if (cell1|| cell4) return false; 
+    }
+
+
+    return true;
+}
+
+bool jBlock::canRotateCounter(int state){
+    int x, y;
+
+     if (state == 1) { //initial state is flat
+        //collision check
+        x = cells[2]->get_X();
+        y = cells[2]->get_Y(); //pos of block
+        bool cell3 = board->cellAt(x, y - 1)->cellFilled();
+        x = cells[3]->get_X();
+        y = cells[3]->get_Y(); //pos of block
+        bool cell4 = board->cellAt(x - 1, y - 2)->cellFilled();
+
+        //cell 1 and 2 fill in spaces cells 3 and 4 currently occupy
+
+        if(cell3 || cell4) return false;
+    }
+    else if (state == 2){
+        x = cells[2]->get_X();
+        y = cells[2]->get_Y(); //pos of block
+        bool cell3 = board->cellAt(x + 1, y + 1)->cellFilled();
+        x = cells[3]->get_X();
+        y = cells[3]->get_Y(); //pos of block
+        bool cell4 = board->cellAt(x + 2, y)->cellFilled();
+        if ( cell3 || cell4) return false;
+    }
+    else if (state == 3){
+        x = cells[0]->get_X();
+        y = cells[0]->get_Y(); //pos of block
+        bool cell1 = board->cellAt(x - 1, y - 2)->cellFilled();
+        x = cells[1]->get_X();
+        y = cells[1]->get_Y(); //pos of block
+        bool cell2 = board->cellAt(x - 2, y - 1)->cellFilled();
+        x = cells[3]->get_X();
+        y = cells[3]->get_Y(); //pos of block
+        bool cell4 = board->cellAt(x, y + 1)->cellFilled();
+        if (cell1 || cell2 || cell4) return false;
+    }
+    else {
+        x = cells[0]->get_X();
+        y = cells[0]->get_Y(); //pos of block
+        bool cell1 = board->cellAt(x + 2, y)->cellFilled();
+        x = cells[1]->get_X();
+        y = cells[1]->get_Y(); //pos of block
+        bool cell2 = board->cellAt(x + 1, y - 1)->cellFilled();
+        x = cells[3]->get_X();
+        y = cells[3]->get_Y(); //pos of block
+        bool cell4 = board->cellAt(x - 1, y + 1)->cellFilled();
+        if (cell1 || cell2 || cell4) return false; 
+    }
+    return true;
+}
+
 void jBlock::rotate(int state) {
     int x, y;
     if (state == 1) { //initial state is flat
+
         //block 1
         x = cells[0]->get_X();
         y = cells[0]->get_Y(); //pos of block
@@ -143,19 +261,23 @@ void jBlock::rotateClockwise() {
     int x3 = cells[3]->get_X();
     if ( (rotateState == 2) && (x3 > 8)) return;
     if ( (rotateState == 4) && (x0 > 8)) return;
-    rotate(rotateState);
-    if (rotateState == 4) rotateState = 1;
-    else rotateState++;
-    applyDropSpeed();
+    if (canRotate(rotateState)){
+        rotate(rotateState);
+        if (rotateState == 4) rotateState = 1;
+        else rotateState++;
+        applyDropSpeed();
+    }
 }
 
 void jBlock::rotateCounterClockwise() {
     int cycle = 3;
     while(cycle){
-        rotate(rotateState);
-        if (rotateState == 4) rotateState = 1;
-        else rotateState++;
-        cycle--;
+        if (canRotateCounter(rotateState)){
+            rotate(rotateState);
+            if (rotateState == 4) rotateState = 1;
+            else rotateState++;
+            cycle--;
+        }
     }
     applyDropSpeed();
 }
