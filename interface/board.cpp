@@ -437,7 +437,7 @@ bool Board::canFit(char blockType){
     }
     else if (type == 'T'){
         if (minX + 1 >= 11) return false;
-        if (minX - 1 >= 11) return false;
+        if (minX - 1 < 0) return false;
         if (maxY - 1 < 0) return false;
         return !(grid[maxY][minX].cellFilled() 
         || grid[maxY - 1][minX].cellFilled()
@@ -521,10 +521,10 @@ bool Board::swapBlock(char blockType){
         }
         else if (blockType == 'T'){
             b = new tBlock{0, 0, currLvl, this};
-            b->addCell(&grid[maxY][minX]);
             b->addCell(&grid[maxY - 1][minX]);
-            b->addCell(&grid[maxY - 1][minX - 1]);
             b->addCell(&grid[maxY - 1][minX + 1]);
+            b->addCell(&grid[maxY - 1][minX + 2]);
+            b->addCell(&grid[maxY][minX + 1]);
         }
         else if (blockType == 'O'){
             b = new oBlock{0, 0, currLvl, this};

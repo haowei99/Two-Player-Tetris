@@ -8,9 +8,18 @@ zBlock::zBlock(int x, int y, int level, Board *board): Block{x, y, level, board}
     blockType = 'Z';
 }
 
-void zBlock::rotate(int state) {
+bool zBlock::rotate(int state) {
     int x, y;
     if (state == 1) { //initial state is flat
+        x = cells[2]->get_X();
+        y = cells[2]->get_Y(); //pos of block
+        bool cell3 = board->cellAt(x, y + 2)->cellFilled();
+        x = cells[3]->get_X();
+        y = cells[3]->get_Y(); //pos of block
+        bool cell4 = board->cellAt(x + 2, y)->cellFilled();
+
+        if(cell3 || cell4) return false;
+
         //block 3
         x = cells[2]->get_X();
         y = cells[2]->get_Y(); //pos of block
@@ -46,12 +55,14 @@ void zBlock::rotate(int state) {
 
         //block 1 pivot point, does not change
     }
+    return true;
 }
 
 void zBlock::rotateClockwise() {
-    rotate(rotateState);
-    if (rotateState == 2) rotateState = 1;
-    else rotateState = 2;
+    if (rotate(rotateState)) {
+        if (rotateState == 2) rotateState = 1;
+        else rotateState = 2;
+    }
     applyDropSpeed();
 }
 
