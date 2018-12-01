@@ -46,6 +46,7 @@ public:
     bool in_grid(int x, int y); // check if block is within board
     int getCellSize();
     void applyHeavy();
+    void shiftDown(); // shifts the block down by 1
 };
 
 #endif // __BLOCK_H__

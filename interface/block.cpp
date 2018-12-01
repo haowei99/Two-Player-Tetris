@@ -7,6 +7,8 @@ Block::Block(int x, int y, int level, Board *board)
     : xCoor{x}, yCoor{y}, level{level}, board{board}, dropSpeed{0}, len{0} {
     if (level >= 3) {
         dropSpeed = 1;
+    } else {
+        dropSpeed = 0;  
     } // if
 } // constructor
 
@@ -18,7 +20,7 @@ Block::~Block() {} // destructor
 void Block::applyDropSpeed(){
     int speed = dropSpeed;
     while (speed > 0){
-        down();
+        shiftDown();
         speed--;
     }
 }
@@ -107,7 +109,9 @@ void Block::left(){
     }
     applyDropSpeed();
 }
-void Block::down(){
+
+
+void Block::shiftDown() {
     int x;
     int y;
    // check constraints
@@ -138,13 +142,18 @@ void Block::down(){
         //cells[i]->set_Y(change - 1);
         //cells[i] = board->cellAt(cells[i]->get_X(), change);
     }
+} // shiftDown
+
+
+void Block::down(){
+    shiftDown();
     applyDropSpeed();
 }
 
 void Block::drop(){
     while(true){
         if(!canMoveDown()) return;
-        down();
+        shiftDown();
     }
 }
 

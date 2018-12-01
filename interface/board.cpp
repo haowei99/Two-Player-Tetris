@@ -293,10 +293,10 @@ void Board::set_next_block() {
 
 void Board::dropStar(int level) {
     //check if can be dropped
-    if (cellAt(6,3)->cellFilled()) return;
+    if (cellAt(5,3)->cellFilled()) return;
 
-    Block * star = new starBlock(6, 3, level, this);
-    star->addCell(cellAt(6,3));
+    Block * star = new starBlock(5, 3, level, this);
+    star->addCell(cellAt(5,3));
     star->drop();
     addBlock(star);
 }

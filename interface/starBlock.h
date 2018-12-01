@@ -3,7 +3,7 @@
 #include "block.h"
 
 class starBlock: public Block{
-    int numCells;
+    //int numCells;
     void rotate(int state);
 public:
     starBlock(int x, int y, int level, Board *board);
