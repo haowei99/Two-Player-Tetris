@@ -234,7 +234,7 @@ Game::Game(int startLevel, std::string sequenceFileName1, std::string sequenceFi
       player1{new Player(0, 0, startLevel, sequenceFileName1, ng)}, 
       player2{new Player(0, 0, startLevel, sequenceFileName2, ng)}, 
       curPlayer{nullptr},
-      display{new GameDisplay(28, 23, startLevel)},
+      display{new GameDisplay(startLevel)},
       ci{new CommandInterpreter()} {
     ci->addCommand("left");
     ci->addCommand("right");
@@ -273,8 +273,6 @@ void Game::init() {
     display->init(player1->getBoard(), player2->getBoard());
 
     curPlayer = player1;
-    
-    std::cout << (*display);
 } // init
 
 
@@ -308,19 +306,15 @@ void Game::tick() {
     if (hasLost) {
         loseGamePrompt();
     } else {
-        if (curPlayer->getScore() > highscore) {
-            
-
-            if (curPlayer == player1) {
-                display->updatePlayer1Highscore(curPlayer->getHighscore());
-                display->updatePlayer1Score(curPlayer->getScore());
-            } else {
-                display->updatePlayer2Highscore(curPlayer->getHighscore());
-                display->updatePlayer2Score(curPlayer->getScore());
-            } // if
+        if (curPlayer == player1) {
+            display->updatePlayer1Highscore(curPlayer->getHighscore());
+            display->updatePlayer1Score(curPlayer->getScore());
+        } else {
+            display->updatePlayer2Highscore(curPlayer->getHighscore());
+            display->updatePlayer2Score(curPlayer->getScore());
         } // if
 
-        /*** print updated board ***/
+        std::cout << (*display);
 
         if (rowsCleared > 2) {
             promptSpecialActions();

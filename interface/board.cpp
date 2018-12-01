@@ -65,7 +65,7 @@ void Board::unset(int x, int y){
 Block* Board::getBlock() {
     return currBlock;
 }
-
+/*
 Block* Board::changeBlock(char type) {
     /* t block
     Block * block = new tBlock(0,0,0, this);
@@ -80,7 +80,7 @@ Block* Board::changeBlock(char type) {
     block->addCell(&grid[1][2]);
 
     currBlock = block;
-    return currBlock;*/
+    return currBlock;  
 
     nextBlock = currBlock;
 
@@ -193,7 +193,7 @@ Block* Board::changeBlock(char type) {
         currBlock = block;
         return currBlock;
     }
-}
+}*/
 
 void Board::addBlock(Block *b){
     loBlock.emplace_back(b);
@@ -492,7 +492,7 @@ bool Board::swapBlock(char blockType){
         Block *b;
         int currLvl =currBlock->level;
 
-        char type = blockType;
+        //char type = blockType;
 
         int maxY = currBlock->cells[0]->get_Y();
         int minX = currBlock->cells[0]->get_X();

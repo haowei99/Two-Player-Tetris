@@ -59,17 +59,17 @@ void Player::right() {
 
 
 void Player::down() {
-    urBlock->down();
+    curBlock->down();
 } // down
 
 
 void Player::clockwise() {
-    curBlock->clockwise();
+    curBlock->rotateClockwise();
 } // clockwise
 
 
 void Player::counterclockwise() {
-    curBlock->counterclockwise();
+    curBlock->rotateCounterClockwise();
 } // counterclockwise
 
 
@@ -111,7 +111,7 @@ void Player::setBlock(std::string blockType) { // needs err checking for block?
 
 void Player::drop() {
     // add the dropped block to board's placedBlocks <-- this should be handled in board/block
-    curBlock->drop()
+    curBlock->drop();
 
     if (hasBlind) {
         hasBlind = false;
@@ -126,7 +126,7 @@ void Player::drop() {
 
 int Player::clearRows() {
     // clear filled rows, use returned val to calculated a score and add that to own score
-    int rowsCleared = board->clearRow();
+    int rowsCleared = board->checkRows();
     score += ((level + rowsCleared) * (level + rowsCleared)); 
 
     if (score > highscore) {
@@ -161,13 +161,13 @@ bool Player::endTurn() {
     //     if not: I lose, return true
     //     if so: curBlock = nextBlock
     //            nextBlock = generator->getNextBlock(), return false
-    if (board->canFitNew()) {
+    if (board->canFitNew(nextBlock->getBlockType())) {
         curBlock = nextBlock;
-        nextBlock = generator->getNextBlock();
+        nextBlock = generator->generateBlock(level);
         return false;
-    } else {
-        return true;
     } // if
+
+    return false;
 } // endTurn
 
 // return false if player loses
@@ -197,7 +197,7 @@ void Player::heavyOpponent() {
 
 void Player::forceOpponent(char type) {
     opponent->hasForce = true;
-    opponen->forceType = type;
+    opponent->forceType = type;
 } // forceOpponent
 
 

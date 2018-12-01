@@ -49,7 +49,7 @@ public:
     void blindOpponent();
     int getScore();
     int getHighscore();
-    Board* getBoard()
+    Board* getBoard();
 };
 
 #endif /** __PLAYER_H__ **/

@@ -28,12 +28,6 @@ void GameDisplay::reset() {
 } // reset
 
 
-void GameDisplay::updateHighscore(int highscore) {
-    this->highscore = highscore;
-    // draw highscore to correct coordinate
-} // updateHighscore
-
-
 void GameDisplay::updatePlayer1Score(int score) {
     // draw score to the correct coordinate
     player1Score = score;

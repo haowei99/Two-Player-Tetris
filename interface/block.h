@@ -26,7 +26,7 @@ protected:
     
 public:
     Block(int x, int y, int level, Board* board);
-    ~Block();
+    virtual ~Block();
     virtual void rotateClockwise() = 0;
     virtual void rotateCounterClockwise() = 0;
     void applyDropSpeed();
