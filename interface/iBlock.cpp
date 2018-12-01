@@ -14,6 +14,11 @@ bool iBlock::rotate(int state) {
         x = cells[3]->get_X() + 3;
         y = cells[3]->get_Y() + 3; //pos of block
         if (!in_grid(x, y)) return false;
+        if((board->cellAt(x + 1, y + 1)->cellFilled()) ||
+        (board->cellAt(x + 2, y + 2)->cellFilled()) || (board->cellAt(x + 3, y + 3)->cellFilled())){
+            return false;
+        } //collision detection
+
         //block 2
         x = cells[1]->get_X();
         y = cells[1]->get_Y(); //pos of block
@@ -42,6 +47,10 @@ bool iBlock::rotate(int state) {
         //block 1 pivot point, does not change
     }
     else{
+        if((board->cellAt(x - 1, y - 1)->cellFilled()) ||
+           (board->cellAt(x - 2, y - 2)->cellFilled()) || (board->cellAt(x - 3, y - 3)->cellFilled())){
+            return false;
+        } //collision detection
         //block 2
         x = cells[1]->get_X();
         y = cells[1]->get_Y(); //pos of block

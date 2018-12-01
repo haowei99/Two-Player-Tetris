@@ -310,6 +310,9 @@ void Board::dropStar(int level) {
     this->set(x, y);
     cellAt(x, y)->setCell('*');
     star->addCell(&grid[y][x]);
+    star->addCell(nullptr);
+    star->addCell(nullptr);
+    star->addCell(nullptr); //to stay consistent for four cells
     addBlock(star);
 }
 
