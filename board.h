@@ -23,8 +23,8 @@ class Board {
     Cell *cellAt(int x, int y);
     void set(int x, int y);
     void unset(int x, int y);
-    Block * getBlock();
-    Block * changeBlock(char type);
+    Block * getCurrBlock();
+    Block * initBlock();
     void addBlock(Block *b);
     void removeCells();
     void set_next_block();
