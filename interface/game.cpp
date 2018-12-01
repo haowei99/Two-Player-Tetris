@@ -316,7 +316,7 @@ void Game::tick() {
                 display->updatePlayer1Score(curPlayer->getScore());
             } else {
                 display->updatePlayer2Highscore(curPlayer->getHighscore());
-                display->updatePlayer1Score(curPlayer->getScore());
+                display->updatePlayer2Score(curPlayer->getScore());
             } // if
         } // if
 

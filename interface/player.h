@@ -13,8 +13,6 @@ const int minLevel = 0;
 class Player {
     Board* board;
     int startLevel;
-    int level;
-    int score;
     std::string sequenceFileName;
     BlockGenerator* generator;
     Player* opponent;
@@ -23,6 +21,9 @@ class Player {
     Block* nextBlock;
     int blocksDropped = 0;
     char forceType;
+    int level;
+    int score;
+    int highscore;
 public:
     Player(int x, int y, int startLevel, std::string sequenceFileName, NumberGenerator* ng);
     ~Player();
@@ -47,6 +48,7 @@ public:
     void forceOpponent(char type);
     void blindOpponent();
     int getScore();
+    int getHighscore();
     Board* getBoard()
 };
 

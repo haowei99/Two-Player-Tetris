@@ -21,7 +21,6 @@ class Game {
     Player* curPlayer;
     GameDisplay* display;
     CommandInterpreter* ci;
-    int highscore = 0;
     bool readingFromFile = false;
     std::vector<std::string> fileInputs;
     std::vector<std::string> commandList;

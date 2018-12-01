@@ -8,8 +8,9 @@
 
 
 Player::Player(int x, int y, int startLevel, std::string sequenceFileName, NumberGenerator* ng) 
-    : board{new Board(x, y)}, startLevel{startLevel}, level{startLevel}, 
-      score{0}, sequenceFileName{sequenceFileName},
+    : board{new Board(x, y)}, 
+      startLevel{startLevel}, 
+      sequenceFileName{sequenceFileName}, 
       generator{new BlockGenerator(board, ng, sequenceFileName)} {} // constructor 
 
 
@@ -128,6 +129,10 @@ int Player::clearRows() {
     int rowsCleared = board->clearRow();
     score += ((level + rowsCleared) * (level + rowsCleared)); 
 
+    if (score > highscore) {
+        highscore = score;
+    } // if
+
     if (rowsCleared == 0) {
         if (blocksDropped % 5 == 0 && level >= 4) {
             board->dropStar(level);
@@ -144,6 +149,10 @@ void Player::checkRemovedBlocks() {
     // check for any removed blocks, add returned score to own score
     //    - call count_score()
     score += board->count_score();
+
+    if (score > highscore) {
+        highscore = score;
+    } // if
 } // checkRemoveBlocks
 
 
@@ -164,8 +173,7 @@ bool Player::endTurn() {
 // return false if player loses
 bool Player::applyEffects() {
     if (hasHeavy) {
-        std::cout << "heavy applied! ";
-        // curBlock->applyHeavy(); function just adds 3 to existing dropspeed
+        curBlock->applyHeavy(); 
     } // if
 
     if (hasBlind) {
@@ -201,3 +209,8 @@ void Player::blindOpponent() {
 int Player::getScore() {
     return score;
 } // getScore
+
+
+int Player::getHighscore() {
+    return highscore;
+} // getHighscore
