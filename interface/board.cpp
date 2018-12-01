@@ -66,8 +66,8 @@ Block* Board::getCurrBlock() {
     return currBlock;
 }
 
-Block* Board::initBlock() {
-    char type = currBlock->getBlockType();
+Block* Board::initBlock(char type) {
+    //char type = currBlock->getBlockType();
     //iBlock
     if (type == 'I'){
         this->set(0, 3);

@@ -35,9 +35,9 @@ void Player::init(Player* opponent) {
     nextBlock = generator->generateBlock(level);
 
     /*** ATTENTION!!!!! ***/
-    board->set_blocks(curBlock, nextBlock);
-    board->initBlock();
     board->init();
+    board->set_blocks(curBlock, nextBlock);
+    board->initBlock(curBlock->getBlockType());
 } // init
 
 
@@ -170,9 +170,7 @@ bool Player::endTurn() {
         curBlock = nextBlock;
         nextBlock = generator->generateBlock(level);
         board->set_blocks(curBlock, nextBlock);
-        board->initBlock();
-        /*** ATTENTION!!!!! ***/
-        // need to set cur and next for board here
+        board->initBlock(curBlock->getBlockType());
 
         return false;
     } // if
