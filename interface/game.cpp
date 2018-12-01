@@ -276,6 +276,7 @@ Game::~Game() {
     delete player1;
     delete player2;
     delete display;
+    delete window;
     delete ci;
     // delete the XWindow, 
 } // destructor
