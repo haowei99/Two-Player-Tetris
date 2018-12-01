@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
                 sequenceFileName1 = temp;
             } else if (arg == "-scriptfile2") {
                 sequenceFileName2 = temp;
-            } else if (arg == "-startLevel") {
+            } else if (arg == "-startlevel") {
                 istringstream(temp) >> startLevel;
             } else if (arg == "-seed") {
                 istringstream(temp) >> seed;
