@@ -460,10 +460,10 @@ bool Board::canFit(char blockType){
         if (minX + 1 >= 11) return false;
        // if (minX - 1 < 0) return false;
         if (maxY - 1 < 0) return false;
-        return !(grid[maxY][minX].cellFilled()
+        return !(grid[maxY][minX + 1].cellFilled()
+        || grid[maxY - 1][minX + 1].cellFilled()
         || grid[maxY - 1][minX].cellFilled()
-        || grid[maxY - 1][minX - 1].cellFilled()
-        || grid[maxY][minX + 1].cellFilled());
+        || grid[maxY][minX + 2].cellFilled());
     }
 
     return  false;
@@ -534,10 +534,10 @@ bool Board::swapBlock(char blockType){
         }
         else { //(blockType == 'Z')
             b = new zBlock{0, 0, currLvl, this};
-            b->addCell(&grid[maxY][minX]);
             b->addCell(&grid[maxY - 1][minX]);
-            b->addCell(&grid[maxY - 1][minX - 1]);
+            b->addCell(&grid[maxY - 1][minX + 1]);
             b->addCell(&grid[maxY][minX + 1]);
+            b->addCell(&grid[maxY][minX + 2]);
         }
         for (int i = 0; i < 4; i++){
             b->cells[i]->setCell(b->getBlockType());
