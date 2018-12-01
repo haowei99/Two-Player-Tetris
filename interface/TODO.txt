@@ -1,0 +1,7 @@
+- test force special actions
+- test blind special actions
+- fix error where clearing a block does not return a score
+- FIX S T A R B L O C K
+    - the first cell of starblock is still SET to the previous currBlock's cells
+    - although, the fileds for starblock ARE correct
+- implement graphics
