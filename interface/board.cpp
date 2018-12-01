@@ -135,7 +135,7 @@ Block* Board::initBlock() {
         currBlock->addCell(&grid[4][2]);
         return currBlock;
     }
-    else if (type == 'T'){
+    else {
         this->set(0, 3);
         this->set(1, 3);
         this->set(2, 3);
@@ -445,7 +445,7 @@ bool Board::swapBlock(char blockType){
         Block *b;
         int currLvl =currBlock->level;
 
-        char type = blockType;
+        //char type = blockType;
 
         int maxY = currBlock->cells[0]->get_Y();
         int minX = currBlock->cells[0]->get_X();
