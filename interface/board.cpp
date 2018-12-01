@@ -297,7 +297,7 @@ void Board::dropStar(int level) {
 
     Block * star = new starBlock(5, 3, level, this);
     star->addCell(cellAt(5,3));
-    star->drop();
+    star->drop(); 
     addBlock(star);
 }
 
