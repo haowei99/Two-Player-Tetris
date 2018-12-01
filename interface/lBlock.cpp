@@ -8,6 +8,111 @@ lBlock::lBlock(int x, int y, int level, Board *board): Block{x, y, level, board}
     blockType = 'L';
 }
 
+bool lBlock::canRotate(int state){
+    int x, y;
+
+     if (state == 1) { //initial state is flat
+        //collision check
+        x = cells[0]->get_X();
+        y = cells[0]->get_Y(); //pos of block
+        bool cell1 = board->cellAt(x, y - 2)->cellFilled();
+        x = cells[1]->get_X();
+        y = cells[1]->get_Y(); //pos of block
+        bool cell2 = board->cellAt(x - 1, y - 2)->cellFilled();
+
+        //cell 1 and 2 fill in spaces cells 3 and 4 currently occupy
+
+        if(cell1 || cell2) return false;
+    }
+    else if (state == 2){
+        x = cells[0]->get_X();
+        y = cells[0]->get_Y(); //pos of block
+        bool cell1 = board->cellAt(x + 2, y + 1)->cellFilled();
+        x = cells[1]->get_X();
+        y = cells[1]->get_Y(); //pos of block
+        bool cell2 = board->cellAt(x + 1, y)->cellFilled();
+        if ( cell1 || cell2) return false;
+    }
+    else if (state == 3){
+        x = cells[0]->get_X();
+        y = cells[0]->get_Y(); //pos of block
+        bool cell1 = board->cellAt(x, y - 2)->cellFilled();
+        x = cells[1]->get_X();
+        y = cells[1]->get_Y(); //pos of block
+        bool cell2 = board->cellAt(x + 1, y - 1)->cellFilled();
+        x = cells[3]->get_X();
+        y = cells[3]->get_Y(); //pos of block
+        bool cell4 = board->cellAt(x - 1, y + 1)->cellFilled();
+        if (cell1 || cell2 || cell4) return false;
+    }
+    else {
+        x = cells[0]->get_X();
+        y = cells[0]->get_Y(); //pos of block
+        bool cell1 = board->cellAt(x - 1, y)->cellFilled();
+        x = cells[2]->get_X();
+        y = cells[2]->get_Y(); //pos of block
+        bool cell3 = board->cellAt(x + 1, y + 2)->cellFilled();
+        x = cells[3]->get_X();
+        y = cells[3]->get_Y(); //pos of block
+        bool cell4 = board->cellAt(x + 2, y + 1)->cellFilled();
+
+        if (cell1 || cell3 || cell4) return false; 
+    }
+    return true;
+}
+
+bool lBlock::canRotateCounter(int state){
+    int x, y;
+
+     if (state == 1) { //initial state is flat
+        //collision check
+        x = cells[1]->get_X();
+        y = cells[1]->get_Y(); //pos of block
+        bool cell2 = board->cellAt(x, y - 1)->cellFilled();
+        x = cells[2]->get_X();
+        y = cells[2]->get_Y(); //pos of block
+        bool cell3 = board->cellAt(x - 1, y - 2)->cellFilled();
+        x = cells[3]->get_X();
+        y = cells[3]->get_Y(); //pos of block
+        bool cell4 = board->cellAt(x - 2, y - 1)->cellFilled();
+
+        //cell 1 and 2 fill in spaces cells 3 and 4 currently occupy
+
+        if(cell2 || cell3 || cell4) return false;
+    }
+    else if (state == 2){
+        x = cells[2]->get_X();
+        y = cells[2]->get_Y(); //pos of block
+        bool cell3 = board->cellAt(x + 2, y)->cellFilled();
+        x = cells[3]->get_X();
+        y = cells[3]->get_Y(); //pos of block
+        bool cell4 = board->cellAt(x + 1, y - 1)->cellFilled();
+        if ( cell3 || cell4) return false;
+    }
+    else if (state == 3){
+        x = cells[0]->get_X();
+        y = cells[0]->get_Y(); //pos of block
+        bool cell1 = board->cellAt(x - 2, y - 1)->cellFilled();
+        x = cells[3]->get_X();
+        y = cells[3]->get_Y(); //pos of block
+        bool cell4 = board->cellAt(x + 1, y)->cellFilled();
+        if (cell1 || cell4) return false;
+    }
+    else {
+        x = cells[0]->get_X();
+        y = cells[0]->get_Y(); //pos of block
+        bool cell1 = board->cellAt(x + 1, y - 1)->cellFilled();
+        x = cells[2]->get_X();
+        y = cells[2]->get_Y(); //pos of block
+        bool cell3 = board->cellAt(x - 1, y + 1)->cellFilled();
+        x = cells[3]->get_X();
+        y = cells[3]->get_Y(); //pos of block
+        bool cell4 = board->cellAt(x, y + 2)->cellFilled();
+        if (cell1 || cell3 || cell4) return false; 
+    }
+    return true;
+}
+
 void lBlock::rotate(int state) {
     int x, y;
     if (state == 1) { //initial state is flat
