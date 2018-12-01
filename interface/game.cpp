@@ -91,12 +91,21 @@ void Game::readCommands() {
         } // if
 
         iss >> command;
-        command = ci->interpret(command);
 
         // if multiplier on command is 0, then we don't need to do anything
         if (multiplier == 0) {
             continue;
         } // if
+
+        // because L and S conflict with levelup/leveldown and sequence
+        if (command == "I" || command == "J" || command == "L" || command == "O" ||
+            command == "S" || command == "Z" || command == "T") {   
+            curPlayer->setBlock(command);
+            std::cout << (*display);
+            continue;
+        } // if
+
+        command = ci->interpret(command); // interpret the command and apply shortcuts
 
         if (command == "left") {
 
@@ -164,12 +173,6 @@ void Game::readCommands() {
 
             curPlayer->drop();
             break;
-
-        } else if (command == "i" || command == "j" || command == "l" || command == "o" ||
-                   command == "s" || command == "z" || command == "t") {
-
-            command[0] = command[0] + -'a' + 'A';        
-            curPlayer->setBlock(command);
 
         } else {
 
