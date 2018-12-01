@@ -1,7 +1,6 @@
-- test force special actions
-- check if star block CAN be cleared
 - implement graphics
 
 MAIN ISSUES
-- replace block does not work
 - error with rotation bounds/collision detection
+- test force special actions
+- check if star block CAN be cleared
