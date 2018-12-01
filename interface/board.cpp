@@ -405,7 +405,7 @@ bool Board::canFit(char blockType){
                 maxY = tmpY;
             }
         }
-        currBlock->cells[i]->unsetCell();
+        //currBlock->cells[i]->unsetCell();
     } 
 
     if (type == 'I'){
@@ -473,25 +473,26 @@ bool Board::canFit(char blockType){
 
 bool Board::swapBlock(char blockType){
 
+    int maxY = currBlock->cells[0]->get_Y();
+    int minX = currBlock->cells[0]->get_X();
+    for (int i = 0; i < 4; i++){
+        int tmpY = currBlock->cells[i]->get_Y();
+        if ( tmpY >= maxY){
+            int tmpX = currBlock->cells[i]->get_X();
+            if (tmpX <= minX){
+                minX = tmpX;
+                maxY = tmpY;
+            }
+        }
+        currBlock->cells[i]->unsetCell();
+    }
+    //unset before asking unset
+
     if (canFit(blockType)){
         Block *b;
         int currLvl =currBlock->level;
 
         //char type = blockType;
-
-        int maxY = currBlock->cells[0]->get_Y();
-        int minX = currBlock->cells[0]->get_X();
-        for (int i = 0; i < 4; i++){
-            int tmpY = currBlock->cells[i]->get_Y();
-            if ( tmpY >= maxY){
-                int tmpX = currBlock->cells[i]->get_X();
-                if (tmpX <= minX){
-                    minX = tmpX;
-                    maxY = tmpY;
-                }
-            }
-            currBlock->cells[i]->unsetCell();
-        }
 
         if (blockType == 'I'){
             b = new iBlock{0, 0, currLvl, this};
@@ -550,6 +551,20 @@ bool Board::swapBlock(char blockType){
         delete currBlock;
         currBlock = b;
         return true;
+    }
+    else{
+        for (int i = 0; i < 4; i++){
+            int tmpY = currBlock->cells[i]->get_Y();
+            if ( tmpY >= maxY){
+                int tmpX = currBlock->cells[i]->get_X();
+                if (tmpX <= minX){
+                    minX = tmpX;
+                    maxY = tmpY;
+                }
+            }
+            char type = currBlock->getBlockType();
+            currBlock->cells[i]->setCell(type);
+        }
     }
     return  false;
 }
