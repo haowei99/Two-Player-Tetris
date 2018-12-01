@@ -49,6 +49,7 @@ public:
     void blindOpponent();
     int getScore();
     int getHighscore();
+    int getLevel();
     Board* getBoard();
 };
 

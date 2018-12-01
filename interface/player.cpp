@@ -22,11 +22,6 @@ Player::~Player() {
 } // destructor
 
 
-Board* Player::getBoard() {
-    return board;
-} // getBoard
-
-
 void Player::init(Player* opponent) {
     this->opponent = opponent;
     level = startLevel;
@@ -224,3 +219,13 @@ int Player::getScore() {
 int Player::getHighscore() {
     return highscore;
 } // getHighscore
+
+
+int Player::getLevel() {
+    return level;
+} // getLevel
+
+
+Board* Player::getBoard() {
+    return board;
+} // getBoard

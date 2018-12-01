@@ -50,6 +50,16 @@ void GameDisplay::updatePlayer2Highscore(int score) {
 } // updatePlayer2Highscore
 
 
+void GameDisplay::updatePlayer1Level(int level) {
+    player1Level = level;
+} // updatePlayer1Level
+
+
+void GameDisplay::updatePlayer2Level(int level) {
+    player2Level = level;
+} // updatePlayer2Level
+
+
 std::ostream& operator<<(std::ostream& out, GameDisplay& d) {
     /***
      * for graphical display, maybe store each indiviual msg

@@ -288,7 +288,6 @@ void Board::set_next_block() {
         grid[21][1].setCell(type);
         grid[21][2].setCell(type);
     }
-    currBlock = nextBlock;
 }
 
 void Board::dropStar(int level) {

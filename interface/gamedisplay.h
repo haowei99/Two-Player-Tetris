@@ -23,6 +23,8 @@ public:
     void updatePlayer2Score(int score);
     void updatePlayer1Highscore(int score);
     void updatePlayer2Highscore(int score);
+    void updatePlayer1Level(int level);
+    void updatePlayer2Level(int level);
 
     friend std::ostream& operator<<(std::ostream& out, GameDisplay& d);
 };

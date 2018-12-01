@@ -143,11 +143,23 @@ void Game::readCommands() {
                 curPlayer->levelUp();
             } // for
 
+            if (curPlayer == player1) {
+                display->updatePlayer1Level(curPlayer->getLevel());
+            } else {
+                display->updatePlayer2Level(curPlayer->getLevel());
+            } // if
+
         } else if (command == "leveldown") {
 
             for (int i = 0;i < multiplier;i++) {
                 curPlayer->levelDown();
             } // for
+
+            if (curPlayer == player1) {
+                display->updatePlayer1Level(curPlayer->getLevel());
+            } else {
+                display->updatePlayer2Level(curPlayer->getLevel());
+            } // if
 
         } else if (command == "norandom") {
 
