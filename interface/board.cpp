@@ -402,13 +402,9 @@ bool Board::canFit(char blockType){
     int minX = currBlock->cells[0]->get_X();
     for (int i = 0; i < 4; i++){
         int tmpY = currBlock->cells[i]->get_Y();
-        if ( tmpY >= maxY){
-            int tmpX = currBlock->cells[i]->get_X();
-            if (tmpX <= minX){
-                minX = tmpX;
-                maxY = tmpY;
-            }
-        }
+        int tmpX = currBlock->cells[i]->get_X();
+        if (tmpX < minX) minX = tmpX;
+        if (tmpY > maxY) maxY = tmpY;
         //currBlock->cells[i]->unsetCell();
     } 
 
@@ -437,7 +433,7 @@ bool Board::canFit(char blockType){
     }
     else if (type == 'T'){
         if (minX + 1 >= 11) return false;
-        if (minX - 1 < 0) return false;
+        //f (minX < 0) return false;
         if (maxY - 1 < 0) return false;
         return !(grid[maxY][minX].cellFilled() 
         || grid[maxY - 1][minX].cellFilled()
@@ -481,13 +477,9 @@ bool Board::swapBlock(char blockType){
     int minX = currBlock->cells[0]->get_X();
     for (int i = 0; i < 4; i++){
         int tmpY = currBlock->cells[i]->get_Y();
-        if ( tmpY >= maxY){
-            int tmpX = currBlock->cells[i]->get_X();
-            if (tmpX <= minX){
-                minX = tmpX;
-                maxY = tmpY;
-            }
-        }
+        int tmpX = currBlock->cells[i]->get_X();
+        if (tmpX < minX) minX = tmpX;
+        if (tmpY > maxY) maxY = tmpY;
         currBlock->cells[i]->unsetCell();
     }
     //unset before asking unset
