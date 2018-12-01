@@ -405,6 +405,7 @@ bool Board::canFit(char blockType){
                 maxY = tmpY;
             }
         }
+        currBlock->cells[i]->unsetCell();
     } 
 
     if (type == 'I'){
