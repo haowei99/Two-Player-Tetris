@@ -1,7 +1,7 @@
 - implement graphics
-- test force special actions <-- seems to be working
 - check if star block CAN be cleared
 
 MAIN ISSUES
 - star block drop gives seg fault
+- Z Block rotate not working
 - error with rotation bounds/collision detection
