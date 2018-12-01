@@ -209,9 +209,11 @@ int Board::count_score() {
     int size = loBlock.size();
     for (int i = 0; i < size; i++){
         if(!loBlock.at(i)->counted){
-            loBlock.at(i)->counted = true;
-            int point = (loBlock.at(i)->level + 1) * (loBlock.at(i)->level + 1); //level + 1 squared
-            s += point;
+            if (loBlock.at(i)->numCells == 0) {
+                loBlock.at(i)->counted = true;
+                int point = (loBlock.at(i)->level + 1) * (loBlock.at(i)->level + 1); //level + 1 squared
+                s += point;
+            } // if
         }
     }
     return s;
