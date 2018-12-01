@@ -47,6 +47,7 @@ public:
     void forceOpponent(char type);
     void blindOpponent();
     int getScore();
+    Board* getBoard()
 };
 
 #endif /** __PLAYER_H__ **/

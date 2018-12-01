@@ -270,7 +270,7 @@ Game::~Game() {
 void Game::init() {
     player1->init(player2);
     player2->init(player1);
-    display->init();
+    display->init(player1->getBoard(), player2->getBoard());
 
     curPlayer = player1;
     

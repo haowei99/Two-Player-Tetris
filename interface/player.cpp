@@ -21,6 +21,11 @@ Player::~Player() {
 } // destructor
 
 
+Board* Player::getBoard() {
+    return board;
+} // getBoard
+
+
 void Player::init(Player* opponent) {
     board->init();
     
