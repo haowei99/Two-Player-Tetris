@@ -14,6 +14,9 @@ class GameDisplay {
     int player1Score = 0;
     int player2Score = 0;
     int highscore = 0;
+    Board *player1;
+    Board *player2;
+
 public:
     GameDisplay(int width, int height, int startLevel);
     ~GameDisplay();
