@@ -392,42 +392,55 @@ bool Board::canFit(char blockType){
     } 
 
     if (type == 'I'){
+        if (minX + 3 >= 11) return false;
         return !(grid[maxY][minX].cellFilled() 
         || grid[maxY][minX + 1].cellFilled()
         || grid[maxY][minX + 2].cellFilled() 
         || grid[maxY][minX + 3].cellFilled());
     }
     else if (type == 'J'){
+        if (minX + 2 >= 11) return false;
+        if (maxY - 1 < 0) return false;
         return !(grid[maxY - 1][minX].cellFilled() 
         || grid[maxY][minX].cellFilled()
         || grid[maxY][minX + 1].cellFilled() 
         || grid[maxY][minX + 2].cellFilled());
     }
     else if (type == 'L'){
+        if (minX + 2 >= 11) return false;
+        if (maxY - 1 < 0) return false;
         return !(grid[maxY][minX].cellFilled() 
         || grid[maxY][minX + 1].cellFilled()
         || grid[maxY][minX + 2].cellFilled() 
         || grid[maxY - 1][minX + 2].cellFilled());
     }
     else if (type == 'T'){
+        if (minX + 1 >= 11) return false;
+        if (maxY - 1 < 0) return false;
         return !(grid[maxY][minX].cellFilled() 
         || grid[maxY - 1][minX].cellFilled()
         || grid[maxY - 1][minX - 1].cellFilled() 
         || grid[maxY - 1][minX + 1].cellFilled());
     }
     else if (type == 'O'){
+        if (minX + 1 >= 11) return false;
+        if (maxY - 1 < 0) return false;
         return !(grid[maxY][minX].cellFilled()
         || grid[maxY][minX + 1].cellFilled() 
         || grid[maxY - 1][minX].cellFilled()
         || grid[maxY - 1][minX + 1].cellFilled());
     }
     else if (type == 'S'){
+        if (minX + 2 >= 11) return false;
+        if (maxY - 1 < 0) return false;
         return !(grid[maxY][minX].cellFilled()
         || grid[maxY][minX + 1].cellFilled()
         || grid[maxY - 1][minX + 1].cellFilled()
         || grid[maxY - 1][minX + 2].cellFilled());
     }
     else if (type == 'Z'){
+        if (minX + 1 >= 11) return false;
+        if (maxY - 1 < 0) return false;
         return !(grid[maxY][minX].cellFilled()
         || grid[maxY - 1][minX].cellFilled()
         || grid[maxY - 1][minX - 1].cellFilled()
@@ -462,7 +475,6 @@ bool Board::swapBlock(char blockType){
         }
 
         if (blockType == 'I'){
-            if (minX + 3 >= 11) return false;
             b = new iBlock{0, 0, currLvl, this};
             b->addCell(&grid[maxY][minX]);
             b->addCell(&grid[maxY][minX + 1]);
@@ -470,8 +482,6 @@ bool Board::swapBlock(char blockType){
             b->addCell(&grid[maxY][minX + 3]);
         }
         else if (blockType == 'J'){
-            if (minX + 2 >= 11) return false;
-            if (maxY - 1 < 0) return false;
             b = new jBlock{0, 0, currLvl, this};
             b->addCell(&grid[maxY - 1][minX]);
             b->addCell(&grid[maxY][minX]);
@@ -479,8 +489,6 @@ bool Board::swapBlock(char blockType){
             b->addCell(&grid[maxY][minX + 2]);
         }
         else if (blockType == 'L'){
-            if (minX + 2 >= 11) return false;
-            if (maxY - 1 < 0) return false;
             b = new lBlock{0, 0, currLvl, this};
             b->addCell(&grid[maxY][minX]);
             b->addCell(&grid[maxY][minX + 1]);
@@ -488,8 +496,6 @@ bool Board::swapBlock(char blockType){
             b->addCell(&grid[maxY - 1][minX + 2]);
         }
         else if (blockType == 'T'){
-            if (minX + 1 >= 11) return false;
-            if (maxY - 1 < 0) return false;
             b = new tBlock{0, 0, currLvl, this};
             b->addCell(&grid[maxY][minX]);
             b->addCell(&grid[maxY - 1][minX]);
@@ -497,8 +503,6 @@ bool Board::swapBlock(char blockType){
             b->addCell(&grid[maxY - 1][minX + 1]);
         }
         else if (blockType == 'O'){
-            if (minX + 1 >= 11) return false;
-            if (maxY - 1 < 0) return false;
             b = new oBlock{0, 0, currLvl, this};
             b->addCell(&grid[maxY][minX]);
             b->addCell(&grid[maxY][minX + 1]);
@@ -506,8 +510,6 @@ bool Board::swapBlock(char blockType){
             b->addCell(&grid[maxY - 1][minX + 1]);
         }
         else if (blockType == 'S'){
-            if (minX + 2 >= 11) return false;
-            if (maxY - 1 < 0) return false;
             b = new sBlock{0, 0, currLvl, this};
             b->addCell(&grid[maxY][minX]);
             b->addCell(&grid[maxY][minX + 1]);
@@ -515,8 +517,6 @@ bool Board::swapBlock(char blockType){
             b->addCell(&grid[maxY - 1][minX + 2]);
         }
         else { //(blockType == 'Z')
-            if (minX + 1 >= 11) return false;
-            if (maxY - 1 < 0) return false;
             b = new zBlock{0, 0, currLvl, this};
             b->addCell(&grid[maxY][minX]);
             b->addCell(&grid[maxY - 1][minX]);
