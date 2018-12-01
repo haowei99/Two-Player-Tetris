@@ -1,5 +1,5 @@
 - test force special actions
-- fix error where clearing a block does not return a score
+- check if star block CAN be cleared
 - implement graphics
 
 MAIN ISSUES
