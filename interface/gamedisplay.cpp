@@ -119,7 +119,7 @@ std::ostream& operator<<(std::ostream& out, GameDisplay& d) {
             out << d.player1->getline(i)[j];
         }
 
-        for (int i = 0;i < 6;i++) {
+        for (int i = 0; i < 6 ; i++) {
             out << " ";
         } // for
 
