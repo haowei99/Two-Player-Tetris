@@ -174,6 +174,7 @@ bool Player::endTurn() {
         return false;
     } // if
 
+    curBlock = nullptr; // this is so player and board do not try deleting the same object
     return true;
 } // endTurn
 
