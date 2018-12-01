@@ -293,11 +293,23 @@ void Board::set_next_block() {
 
 void Board::dropStar(int level) {
     //check if can be dropped
-    if (cellAt(5,3)->cellFilled()) return;
+    if (cellAt(5, 3)->cellFilled()) return;
 
-    Block * star = new starBlock(5, 3, level, this);
-    star->addCell(cellAt(5,3));
-    star->drop(); 
+    int x = 5;
+    int y = 3;
+
+    while (true){
+        if(!cellAt(x, y + 1)->cellFilled()){
+            y++;
+        }
+        else{
+            break;
+        }
+    }
+    Block * star = new starBlock(x, y, level, this);
+    this->set(x, y);
+    cellAt(x, y)->setCell('*');
+    star->addCell(&grid[y][x]);
     addBlock(star);
 }
 
@@ -309,7 +321,7 @@ void Board::set_blocks(Block *curr, Block *next) {
 }
 
 void Board::blind() {
-    for (int i = 2; i < 12; i++){
+    for (int i = 5; i < 15; i++){
         for (int j = 2; j < 9; j++){
             grid[i][j].blind();
         }
@@ -317,7 +329,7 @@ void Board::blind() {
 }
 
 void Board::unblind() {
-    for (int i = 2; i < 12; i++){
+    for (int i = 5; i < 15; i++){
         for (int j = 2; j < 9; j++){
             grid[i][j].unblind();
         }
