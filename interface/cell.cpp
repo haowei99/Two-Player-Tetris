@@ -62,6 +62,6 @@ void Cell::unblind(){
 std::ostream& operator<<(std::ostream& out, Cell& cell) {
     if (cell.isBlind) out << "?";
     else if (cell.isFilled) out << cell.fillType;
-    else out << "_"; //debugging reasons
+    else out << " "; //debugging reasons
     return out;
 } // operator<<
