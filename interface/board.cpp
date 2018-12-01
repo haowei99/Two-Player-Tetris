@@ -458,7 +458,7 @@ bool Board::canFit(char blockType){
     }
     else if (type == 'Z'){
         if (minX + 1 >= 11) return false;
-        if (minX - 1 < 0) return false;
+       // if (minX - 1 < 0) return false;
         if (maxY - 1 < 0) return false;
         return !(grid[maxY][minX].cellFilled()
         || grid[maxY - 1][minX].cellFilled()
