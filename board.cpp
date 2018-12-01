@@ -62,30 +62,13 @@ void Board::unset(int x, int y){
     cellAt(x, y)->unsetCell();
 }
 
-Block* Board::getBlock() {
+Block* Board::getCurrBlock() {
     return currBlock;
 }
 
-Block* Board::changeBlock(char type) {
-    /* t block
-    Block * block = new tBlock(0,0,0, this);
-    currBlock = block;
-    this->set(0, 1);
-    this->set(1, 1);
-    this->set(2, 1);
-    this->set(1 , 2);
-    block->addCell(&grid[0][1]);
-    block->addCell(&grid[1][1]);
-    block->addCell(&grid[2][1]);
-    block->addCell(&grid[1][2]);
-
-    currBlock = block;
-    return currBlock;*/
-
-    nextBlock = currBlock;
-
+Block* Board::initBlock(char type) {
     //iBlock
-    if (type == 'i'){
+    if (type == 'I'){
         Block * block = new iBlock(0,0,0, this);
         //cout << "addr block" << block << endl;
         currBlock = block;
@@ -101,7 +84,7 @@ Block* Board::changeBlock(char type) {
         currBlock = block;
         return currBlock;
     }
-    else if (type == 'j'){
+    else if (type == 'J'){
         Block * block = new jBlock(0,0,0, this);
         //cout << "addr block" << block << endl;
         currBlock = block;
@@ -117,7 +100,7 @@ Block* Board::changeBlock(char type) {
         currBlock = block;
         return currBlock;
     }
-    else if (type == 'l'){
+    else if (type == 'L'){
         Block * block = new lBlock(0,0,0, this);
         //cout << "addr block" << block << endl;
         currBlock = block;
@@ -133,7 +116,7 @@ Block* Board::changeBlock(char type) {
         currBlock = block;
         return currBlock;
     }
-    else if (type == 'o'){
+    else if (type == 'O'){
         Block * block = new oBlock(0,0,0, this);
         currBlock = block;
         this->set(0, 3);
@@ -148,7 +131,7 @@ Block* Board::changeBlock(char type) {
         currBlock = block;
         return currBlock;
     }
-    else if (type == 's'){
+    else if (type == 'S'){
         Block * block = new sBlock(0,0,0, this);
         currBlock = block;
         this->set(0, 4);
@@ -163,7 +146,7 @@ Block* Board::changeBlock(char type) {
         currBlock = block;
         return currBlock;
     }
-    else if (type == 'z'){
+    else if (type == 'Z'){
         Block * block = new zBlock(0,0,0, this);
         currBlock = block;
         this->set(0, 3);
@@ -178,7 +161,7 @@ Block* Board::changeBlock(char type) {
         currBlock = block;
         return currBlock;
     }
-    else if (type == 't'){
+    else if (type == 'T'){
         Block * block = new tBlock(0,0,0, this);
         currBlock = block;
         this->set(0, 3);
@@ -560,6 +543,8 @@ bool Board::swapBlock(char blockType){
         for (int i = 0; i < 4; i++){
             b->cells[i]->setCell(b->getBlockType());
         }
+        b->dropSpeed = currBlock->dropSpeed;
+        b->dropSpeed = currBlock->level;
         delete currBlock;
         currBlock = b;
         return true;
