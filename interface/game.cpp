@@ -309,8 +309,15 @@ void Game::tick() {
         loseGamePrompt();
     } else {
         if (curPlayer->getScore() > highscore) {
-            highscore = curPlayer->getScore();
-            // display->updateHighscore(highscore);
+            
+
+            if (curPlayer == player1) {
+                display->updatePlayer1Highscore(curPlayer->getHighscore());
+                display->updatePlayer1Score(curPlayer->getScore());
+            } else {
+                display->updatePlayer2Highscore(curPlayer->getHighscore());
+                display->updatePlayer1Score(curPlayer->getScore());
+            } // if
         } // if
 
         /*** print updated board ***/
