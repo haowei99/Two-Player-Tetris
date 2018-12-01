@@ -8,7 +8,7 @@
 #include "numbergenerator.h"
 #include "gamedisplay.h"
 #include "game.h"
-
+#include "window.h"
 
 void Game::loseGamePrompt() {
     char response;
@@ -248,7 +248,8 @@ Game::Game(int startLevel, std::string sequenceFileName1, std::string sequenceFi
       player2{new Player(0, 0, startLevel, sequenceFileName2, ng)}, 
       curPlayer{nullptr},
       display{new GameDisplay(startLevel)},
-      ci{new CommandInterpreter()} {
+      ci{new CommandInterpreter()},
+      window{textOnly ? nullptr : new Xwindow()} {
     ci->addCommand("left");
     ci->addCommand("right");
     ci->addCommand("down");

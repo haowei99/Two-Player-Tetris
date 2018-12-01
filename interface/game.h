@@ -7,6 +7,7 @@
 #include "gamedisplay.h"
 #include "numbergenerator.h"
 #include "commandinterpreter.h"
+#include "window.h"
 
 class Game {
     int startLevel;
@@ -21,10 +22,11 @@ class Game {
     Player* curPlayer;
     GameDisplay* display;
     CommandInterpreter* ci;
+    Xwindow* window;
     bool readingFromFile = false;
     std::vector<std::string> fileInputs;
     std::vector<std::string> commandList;
-    // XWindow* window;
+    
 
     void promptSpecialActions();
     void addFileInputs(std::string fileName);
