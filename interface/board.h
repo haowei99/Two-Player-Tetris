@@ -16,6 +16,7 @@ class Board {
     public:
     std::vector<Block *> loBlock;
     Board(int x, int y);
+    ~Board();
     void init();
     void reset();
     void clearRow(int row);

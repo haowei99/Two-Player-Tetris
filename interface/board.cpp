@@ -15,6 +15,10 @@ using namespace::std;
 Board::Board(int x, int y): x{x}, y{y}{
 }
 
+Board::~Board() {
+    reset();
+} 
+
 void Board::init() {
     vector<vector<Cell>> new_grid(22, vector<Cell>(11)); // with three reserved rows
     for (int i = 0; i < 22; i++){
