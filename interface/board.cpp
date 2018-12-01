@@ -328,46 +328,46 @@ bool Board::canFitNew(char blockType){
     char type = blockType;
 
     if (type == 'I'){
-        return grid[3][0].cellFilled() 
-        && grid[3][1].cellFilled()
-        && grid[3][2].cellFilled() 
-        && grid[3][3].cellFilled();
+        return !(grid[3][0].cellFilled() 
+        || grid[3][1].cellFilled()
+        || grid[3][2].cellFilled() 
+        || grid[3][3].cellFilled());
     }
     else if (type == 'J'){
-        return grid[3][0].cellFilled() 
-        && grid[4][0].cellFilled()
-        && grid[4][1].cellFilled() 
-        && grid[4][2].cellFilled();
+        return !(grid[3][0].cellFilled() 
+        || grid[4][0].cellFilled()
+        || grid[4][1].cellFilled() 
+        || grid[4][2].cellFilled());
     }
     else if (type == 'L'){
-        return grid[4][0].cellFilled() 
-        && grid[4][1].cellFilled()
-        && grid[4][2].cellFilled() 
-        && grid[3][2].cellFilled();
+        return !(grid[4][0].cellFilled() 
+        || grid[4][1].cellFilled()
+        || grid[4][2].cellFilled() 
+        || grid[3][2].cellFilled());
     }
     else if (type == 'T'){
-        return grid[4][1].cellFilled() 
-        && grid[3][1].cellFilled()
-        && grid[3][2].cellFilled() 
-        && grid[3][0].cellFilled();
+        return !(grid[4][1].cellFilled() 
+        || grid[3][1].cellFilled()
+        || grid[3][2].cellFilled() 
+        || grid[3][0].cellFilled());
     }
     else if (type == 'O'){
-        return grid[3][0].cellFilled()
-        && grid[3][1].cellFilled() 
-        && grid[4][0].cellFilled()
-        && grid[4][1].cellFilled();
+        return !(grid[3][0].cellFilled()
+        || grid[3][1].cellFilled() 
+        || grid[4][0].cellFilled()
+        || grid[4][1].cellFilled());
     }
     else if (type == 'S'){
-        return grid[4][0].cellFilled()
-        && grid[4][1].cellFilled()
-        && grid[3][1].cellFilled()
-        && grid[3][2].cellFilled();
+        return !(grid[4][0].cellFilled()
+        || grid[4][1].cellFilled()
+        || grid[3][1].cellFilled()
+        || grid[3][2].cellFilled());
     }
     else if (type == 'Z'){
-        return grid[3][0].cellFilled()
-        && grid[3][1].cellFilled()
-        && grid[4][1].cellFilled()
-        && grid[4][2].cellFilled();
+        return !(grid[3][0].cellFilled()
+        || grid[3][1].cellFilled()
+        || grid[4][1].cellFilled()
+        || grid[4][2].cellFilled());
     }
     return  false;
 
