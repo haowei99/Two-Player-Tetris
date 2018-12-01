@@ -127,7 +127,10 @@ void Player::drop() {
 int Player::clearRows() {
     // clear filled rows, use returned val to calculated a score and add that to own score
     int rowsCleared = board->checkRows();
-    score += ((level + rowsCleared) * (level + rowsCleared)); 
+
+    if (rowsCleared > 0) {
+        score += ((level + rowsCleared) * (level + rowsCleared));
+    } // if 
 
     if (score > highscore) {
         highscore = score;
