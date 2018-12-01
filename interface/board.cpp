@@ -288,6 +288,7 @@ void Board::set_next_block() {
         grid[21][1].setCell(type);
         grid[21][2].setCell(type);
     }
+    //currBlock = nextBlock;
 }
 
 void Board::dropStar(int level) {
@@ -387,7 +388,6 @@ bool Board::canFit(char blockType){
                 maxY = tmpY;
             }
         }
-        currBlock->cells[i]->unsetCell();
     } 
 
     if (type == 'I'){
@@ -415,6 +415,7 @@ bool Board::canFit(char blockType){
     }
     else if (type == 'T'){
         if (minX + 1 >= 11) return false;
+        if (minX - 1 >= 11) return false;
         if (maxY - 1 < 0) return false;
         return !(grid[maxY][minX].cellFilled() 
         || grid[maxY - 1][minX].cellFilled()
@@ -439,6 +440,7 @@ bool Board::canFit(char blockType){
     }
     else if (type == 'Z'){
         if (minX + 1 >= 11) return false;
+        if (minX - 1 < 0) return false;
         if (maxY - 1 < 0) return false;
         return !(grid[maxY][minX].cellFilled()
         || grid[maxY - 1][minX].cellFilled()
