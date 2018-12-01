@@ -372,7 +372,6 @@ bool Board::canFitNew(char blockType){
     return  false;
 
 }
-
 bool Board::canFit(char blockType){
     // check for if new block or replaced block can fit
     char type = blockType;
@@ -392,46 +391,46 @@ bool Board::canFit(char blockType){
     } 
 
     if (type == 'I'){
-        return grid[maxY][minX].cellFilled() 
-        && grid[maxY][minX + 1].cellFilled()
-        && grid[maxY][minX + 2].cellFilled() 
-        && grid[maxY][minX + 3].cellFilled();
+        return !(grid[maxY][minX].cellFilled() 
+        || grid[maxY][minX + 1].cellFilled()
+        || grid[maxY][minX + 2].cellFilled() 
+        || grid[maxY][minX + 3].cellFilled());
     }
     else if (type == 'J'){
-        return grid[maxY - 1][minX].cellFilled() 
-        && grid[maxY][minX].cellFilled()
-        && grid[maxY][minX + 1].cellFilled() 
-        && grid[maxY][minX + 2].cellFilled();
+        return !(grid[maxY - 1][minX].cellFilled() 
+        || grid[maxY][minX].cellFilled()
+        || grid[maxY][minX + 1].cellFilled() 
+        || grid[maxY][minX + 2].cellFilled());
     }
     else if (type == 'L'){
-        return grid[maxY][minX].cellFilled() 
-        && grid[maxY][minX + 1].cellFilled()
-        && grid[maxY][minX + 2].cellFilled() 
-        && grid[maxY - 1][minX + 2].cellFilled();
+        return !(grid[maxY][minX].cellFilled() 
+        || grid[maxY][minX + 1].cellFilled()
+        || grid[maxY][minX + 2].cellFilled() 
+        || grid[maxY - 1][minX + 2].cellFilled());
     }
     else if (type == 'T'){
-        return grid[maxY][minX].cellFilled() 
-        && grid[maxY - 1][minX].cellFilled()
-        && grid[maxY - 1][minX - 1].cellFilled() 
-        && grid[maxY - 1][minX + 1].cellFilled();
+        return !(grid[maxY][minX].cellFilled() 
+        || grid[maxY - 1][minX].cellFilled()
+        || grid[maxY - 1][minX - 1].cellFilled() 
+        || grid[maxY - 1][minX + 1].cellFilled());
     }
     else if (type == 'O'){
-        return grid[maxY][minX].cellFilled()
-        && grid[maxY][minX + 1].cellFilled() 
-        && grid[maxY - 1][minX].cellFilled()
-        && grid[maxY - 1][minX + 1].cellFilled();
+        return !(grid[maxY][minX].cellFilled()
+        || grid[maxY][minX + 1].cellFilled() 
+        || grid[maxY - 1][minX].cellFilled()
+        || grid[maxY - 1][minX + 1].cellFilled());
     }
     else if (type == 'S'){
-        return grid[maxY][minX].cellFilled()
-        && grid[maxY][minX + 1].cellFilled()
-        && grid[maxY - 1][minX + 1].cellFilled()
-        && grid[maxY - 1][minX + 2].cellFilled();
+        return !(grid[maxY][minX].cellFilled()
+        || grid[maxY][minX + 1].cellFilled()
+        || grid[maxY - 1][minX + 1].cellFilled()
+        || grid[maxY - 1][minX + 2].cellFilled());
     }
     else if (type == 'Z'){
-        return grid[maxY][minX].cellFilled()
-        && grid[maxY - 1][minX].cellFilled()
-        && grid[maxY - 1][minX - 1].cellFilled()
-        && grid[maxY][minX + 1].cellFilled();
+        return !(grid[maxY][minX].cellFilled()
+        || grid[maxY - 1][minX].cellFilled()
+        || grid[maxY - 1][minX - 1].cellFilled()
+        || grid[maxY][minX + 1].cellFilled());
     }
 
     return  false;
