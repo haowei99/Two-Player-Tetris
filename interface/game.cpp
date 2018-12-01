@@ -158,8 +158,6 @@ void Game::readCommands() {
             } // for
 
         } else if (command == "restart") {
-
-            std::cout << "restart" << std::endl;
             throw Game::GameException{false, true};
 
         } else if (command == "drop") { 
