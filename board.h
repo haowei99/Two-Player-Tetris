@@ -24,7 +24,7 @@ class Board {
     void set(int x, int y);
     void unset(int x, int y);
     Block * getCurrBlock();
-    Block * initBlock(char type);
+    Block * initBlock();
     void addBlock(Block *b);
     void removeCells();
     void set_next_block();
