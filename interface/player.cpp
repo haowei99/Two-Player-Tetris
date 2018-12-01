@@ -112,6 +112,7 @@ void Player::setBlock(std::string blockType) { // needs err checking for block?
 void Player::drop() {
     // add the dropped block to board's placedBlocks <-- this should be handled in board/block
     curBlock->drop();
+    board->addBlock(curBlock);
 
     if (hasBlind) {
         hasBlind = false;
