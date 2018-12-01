@@ -22,6 +22,8 @@ Player::~Player() {
 
 
 void Player::init(Player* opponent) {
+    board->init();
+    
     this->opponent = opponent;
     level = startLevel;
     score = 0;
@@ -37,7 +39,6 @@ void Player::reset() {
     
     generator->reset();
     board->reset();
-    init(opponent);
 } // reset
 
 

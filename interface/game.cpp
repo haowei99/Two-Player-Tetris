@@ -270,9 +270,10 @@ Game::~Game() {
 void Game::init() {
     player1->init(player2);
     player2->init(player1);
-    curPlayer = player1;
-
     display->init();
+
+    curPlayer = player1;
+    
     std::cout << (*display);
 } // init
 
@@ -280,7 +281,7 @@ void Game::init() {
 void Game::reset() { 
     player1->reset();
     player2->reset();
-    curPlayer = player1;
+    display->reset();
 } // reset
 
 
