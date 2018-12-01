@@ -32,6 +32,11 @@ int main(int argc, char* argv[]) {
                 sequenceFileName2 = temp;
             } else if (arg == "-startlevel") {
                 istringstream(temp) >> startLevel;
+                
+                if (startLevel < 0 || startLevel > 4) {
+                    cerr << "Invalid start level" << endl;
+                    return 1;
+                } // if
             } else if (arg == "-seed") {
                 istringstream(temp) >> seed;
                 willSetSeed = true;
