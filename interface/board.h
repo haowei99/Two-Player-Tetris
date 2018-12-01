@@ -40,6 +40,7 @@ class Board {
     void dropStar(int level);
 
 
+
    // void setCurrBlock(Block *currBlock);
     friend std::ostream& operator<<(std::ostream& os, Board& board);
 
