@@ -28,13 +28,16 @@ Board* Player::getBoard() {
 
 
 void Player::init(Player* opponent) {
-    board->init();
-    
     this->opponent = opponent;
     level = startLevel;
     score = 0;
     curBlock = generator->generateBlock(level);
     nextBlock = generator->generateBlock(level);
+
+    /*** ATTENTION!!!!! ***/
+    board->set_blocks(curBlock, nextBlock);
+    board->initBlock();
+    board->init();
 } // init
 
 
@@ -105,7 +108,9 @@ void Player::setBlock(std::string blockType) { // needs err checking for block?
     // check if I can replace current block with the specified blocktype
     // if so, do so and delete previous curBlock
 
-    board->swapBlock(blockType[0]);
+    if (board->swapBlock(blockType[0])) {
+        curBlock = board->getCurrBlock();
+    } // if
 } // setBlock
 
 
@@ -164,10 +169,15 @@ bool Player::endTurn() {
     if (board->canFitNew(nextBlock->getBlockType())) {
         curBlock = nextBlock;
         nextBlock = generator->generateBlock(level);
+        board->set_blocks(curBlock, nextBlock);
+        board->initBlock();
+        /*** ATTENTION!!!!! ***/
+        // need to set cur and next for board here
+
         return false;
     } // if
 
-    return false;
+    return true;
 } // endTurn
 
 // return false if player loses
@@ -183,6 +193,8 @@ bool Player::applyEffects() {
     if (hasForce) {
         if (!(board->swapBlock(forceType))) {
             return false;
+        } else {
+            curBlock = board->getCurrBlock();
         } // if
     } // if
 
