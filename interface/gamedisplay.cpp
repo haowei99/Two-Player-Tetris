@@ -112,14 +112,22 @@ std::ostream& operator<<(std::ostream& out, GameDisplay& d) {
     out << "Score: ";
     out << std::setfill(' ') << std::setw(4) << d.player2Score;
     out << std::endl;
-    
-    for (int i = 0;i < d.height;i++) {
-        for (int j = 0;j < d.width;j++) {
-            out << d.grid.at(i).at(j);
+
+
+    for (int i = 0; i < 22; i++){
+        for ( int j = 0; j < 11; j++){
+            out << d.player1->getline(i)[j];
+        }
+
+        for (int i = 0;i < 6;i++) {
+            out << " ";
         } // for
 
+        for ( int j = 0; j < 11; j++){
+            out << d.player2->getline(i)[j];
+        }
         out << std::endl;
-    } // for
+    }
 
     return out;
 } // operator<<
