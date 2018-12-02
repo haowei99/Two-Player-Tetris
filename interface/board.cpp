@@ -230,7 +230,7 @@ int Board::count_score() {
 
 void Board::clearRow(int row) {
     // Unset first
-    for(int i = 0; i < 11; i++){
+    for (int i = 0; i < 11; i++) {
         grid[row][i].unsetCell();
     }
     //remove blocks helper
@@ -240,13 +240,26 @@ void Board::clearRow(int row) {
     grid.erase(grid.begin() + row);
     grid.insert(grid.begin(), vector<Cell>(18));
     //re init x,y position
-    for (int i = 0; i < 18; i++){
-        for (int j = 0; j < 11; j++){
+    int width = 25;
+    int height = 25;
+    for (int i = 0; i < 18; i++) {
+        for (int j = 0; j < 11; j++) {
             grid[i][j].set_X(j);
             grid[i][j].set_Y(i);
+            int x_coord = x + 25 * j;
+            int y_coord = y + 25 * i;
+            grid[i][j].setCoords(x_coord, y_coord, width, height, win);
         }
     }
-
+    for (int i = 0; i < 18; i++) {
+        for (int j = 0; j < 11; j++) {
+            if (grid[i][j].cellFilled()) {
+                grid[i][j].draw();
+            } else {
+                grid[i][j].undraw();
+            }
+        }
+    }
 }
 
 void Board::set_next_block() {
