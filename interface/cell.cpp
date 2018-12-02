@@ -43,6 +43,9 @@ void Cell::setFill() {
     } else {
         colour = Xwindow::White;
     }
+    else if ( fillType == '?'){
+        colour = Xwindow::Black;
+    }
 } // setFill
 
 
@@ -102,10 +105,17 @@ void Cell::set_Y(int yCoor){
 }
 void Cell::blind(){
     isBlind = true;
+    draw();
 }
 
 void Cell::unblind(){
     isBlind = false;
+    if ( this->isFilled ){
+        draw();
+    }
+    else {
+        undraw();
+    }
 }
 
 
