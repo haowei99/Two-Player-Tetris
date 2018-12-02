@@ -7,18 +7,19 @@ class Cell {
     bool isFilled, isBlind;
     char fillType;
     int x, y, width, height;
-    // Colour colour;
+    int xcoord, ycoord;
+    Xwindow * win;
+    Xwindow colour;
     // XWindow* window;
 
 public:
     Cell();
     ~Cell();
-    //void setFill(char fill /*, Colour c */);
-    // setCoords(int x, int y, int width, int height, XWindow* window);
-    // void draw();
+    void setFill();
+    void setCoords(int x, int y, int w, int h, Xwindow* window);
+    void undraw();
+    void draw();
     bool cellFilled();
-//    void addBlock(Block* block); should be deleted
-
     void setCell(char blockType);
     void unsetCell();
     int get_X();

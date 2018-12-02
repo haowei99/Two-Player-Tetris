@@ -23,10 +23,10 @@ bool tBlock::canRotate(int state){
     else if (state == 2){
         x = cells[0]->get_X();
         y = cells[0]->get_Y(); //pos of block
-        bool cell1 = board->cellAt(x - 1, y)->cellFilled();
+        bool cell1 = board->cellAt(x + 1, y + 2)->cellFilled();
         x = cells[2]->get_X();
         y = cells[2]->get_Y(); //pos of block
-        bool cell3 = board->cellAt(x + 1, y + 2)->cellFilled();
+        bool cell3 = board->cellAt(x - 1, y )->cellFilled();
         if ( cell1 || cell3) return false;
     }
     else if (state == 3){
