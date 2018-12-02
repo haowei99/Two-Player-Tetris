@@ -243,8 +243,6 @@ void tBlock::rotateClockwise() {
 
 void tBlock::rotateCounterClockwise() {
     int cycle = 3;
-    int x0 = cells[0]->get_X();
-    int x3 = cells[3]->get_X();
     if(canRotateCounter(rotateState)){
         while(cycle){
             //if ( (rotateState == 2) && x3 == 0) return;
