@@ -245,8 +245,8 @@ Game::Game(int startLevel, std::string sequenceFileName1, std::string sequenceFi
       willSetSeed{willSetSeed},
       seed{seed},
       ng{new NumberGenerator(willSetSeed, seed)},
-      player1{new Player(0, 100, startLevel, sequenceFileName1, ng)}, 
-      player2{new Player(425, 100, startLevel, sequenceFileName2, ng)}, 
+      player1{new Player(0, 100, startLevel, sequenceFileName1, ng, window)}, 
+      player2{new Player(425, 100, startLevel, sequenceFileName2, ng, window)}, 
       curPlayer{nullptr},
       display{new GameDisplay(startLevel, window)},
       ci{new CommandInterpreter()} {

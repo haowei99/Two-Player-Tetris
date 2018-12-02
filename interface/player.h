@@ -6,6 +6,7 @@
 #include "blockgenerator.h"
 #include "block.h"
 #include "board.h"
+#include "window.h"
 
 const int maxLevel = 4;
 const int minLevel = 0;
@@ -25,7 +26,7 @@ class Player {
     int score = 0;
     int highscore = 0;
 public:
-    Player(int x, int y, int startLevel, std::string sequenceFileName, NumberGenerator* ng);
+    Player(int x, int y, int startLevel, std::string sequenceFileName, NumberGenerator* ng, Xwindow* window);
     ~Player();
     void init(Player* opponent);
     void reset();

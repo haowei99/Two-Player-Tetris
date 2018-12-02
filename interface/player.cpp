@@ -5,10 +5,10 @@
 #include "numbergenerator.h"
 #include "board.h"
 #include "block.h"
+#include "window.h"
 
-
-Player::Player(int x, int y, int startLevel, std::string sequenceFileName, NumberGenerator* ng) 
-    : board{new Board(x, y)}, 
+Player::Player(int x, int y, int startLevel, std::string sequenceFileName, NumberGenerator* ng, Xwindow* window) 
+    : board{new Board(x, y, window)}, 
       startLevel{startLevel}, 
       sequenceFileName{sequenceFileName}, 
       generator{new BlockGenerator(board, ng, sequenceFileName)} {} // constructor 
