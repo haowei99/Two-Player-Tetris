@@ -206,7 +206,7 @@ void tBlock::rotate(int state) {
         y = cells[3]->get_Y(); //pos of block
 
         if(board->cellAt(x, y)->cellFilled()) board->unset(x, y);
-        cells[3]->set_Y(y + 1);
+        //cells[3]->set_Y(y + 1);
         board->set(x, y + 1);
         cells[3] = board->cellAt(x, y + 1);
 
@@ -247,8 +247,8 @@ void tBlock::rotateCounterClockwise() {
     int x3 = cells[3]->get_X();
     if(canRotateCounter(rotateState)){
         while(cycle){
-            if ( (rotateState == 2) && x3 == 0) return;
-            if ( (rotateState == 4) && x0 == 0) return;
+            //if ( (rotateState == 2) && x3 == 0) return;
+            //if ( (rotateState == 4) && x0 == 0) return;
             rotate(rotateState);
             if (rotateState == 4) rotateState = 1;
             else rotateState++;

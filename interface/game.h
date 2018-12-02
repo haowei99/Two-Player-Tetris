@@ -26,7 +26,6 @@ class Game {
     bool readingFromFile = false;
     std::vector<std::string> fileInputs;
     std::vector<std::string> commandList;
-    
 
     void promptSpecialActions();
     void addFileInputs(std::string fileName);
