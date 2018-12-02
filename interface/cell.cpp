@@ -50,6 +50,7 @@ void Cell::setCoords(int x, int y, int w, int h, Xwindow *window) {
 }
 
 void Cell::draw() {
+    setFill();
     win->fillRectangle(xcoord,ycoord,width,height, colour); //need a color
 };
 
