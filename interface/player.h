@@ -22,8 +22,8 @@ class Player {
     int blocksDropped = 0;
     char forceType;
     int level;
-    int score;
-    int highscore;
+    int score = 0;
+    int highscore = 0;
 public:
     Player(int x, int y, int startLevel, std::string sequenceFileName, NumberGenerator* ng);
     ~Player();

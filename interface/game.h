@@ -10,6 +10,7 @@
 #include "window.h"
 
 class Game {
+    Xwindow* window;
     int startLevel;
     std::string sequenceFileName1;
     std::string sequenceFileName2;
@@ -22,7 +23,6 @@ class Game {
     Player* curPlayer;
     GameDisplay* display;
     CommandInterpreter* ci;
-    Xwindow* window;
     bool readingFromFile = false;
     std::vector<std::string> fileInputs;
     std::vector<std::string> commandList;

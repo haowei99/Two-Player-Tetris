@@ -40,7 +40,7 @@ void Board::init() {
     new_grid[19][4].setCell(':');
 
     grid = new_grid;
-    }
+}
 
 void Board::reset(){
     for(auto it = grid.begin(); it != grid.end(); ++it){
@@ -545,7 +545,7 @@ bool Board::swapBlock(char blockType){
             b->cells[i]->setCell(b->getBlockType());
         }
         b->dropSpeed = currBlock->dropSpeed;
-        b->dropSpeed = currBlock->level;
+        b->level = currBlock->level;
         delete currBlock;
         currBlock = b;
         return true;

@@ -2,12 +2,41 @@
 #include <string>
 #include <vector>
 #include <iomanip>
+#include <sstream>
 #include "board.h"
 #include "gamedisplay.h"
+#include "window.h"
+
+std::string GameDisplay::intToStr(int n) {
+    std::stringstream ss("");
+    ss << n;
+    return ss.str();
+} // intToStr
 
 
-GameDisplay::GameDisplay(int startLevel) 
-    : startLevel{startLevel} {} // constructor
+void GameDisplay::setupInfo() {
+    if (window != nullptr) {
+        window->fillRectangle(0, 0, 700, 100, Xwindow::White);
+        
+        window->drawBigString(0, 25, "High:");
+        window->drawBigString(0, 50, "Level:");
+        window->drawBigString(0, 75, "Score:");
+        window->drawBigString(50, 25, intToStr(player1Highscore));
+        window->drawBigString(50, 50, intToStr(player1Level));
+        window->drawBigString(50, 75, intToStr(player1Score));
+
+        window->drawBigString(425, 25, "High:");
+        window->drawBigString(425, 50, "Level:");
+        window->drawBigString(425, 75, "Score:");
+        window->drawBigString(475, 25, intToStr(player2Highscore));
+        window->drawBigString(475, 50, intToStr(player2Level));
+        window->drawBigString(475, 75, intToStr(player2Score));
+    } // if
+} // setupInfo
+
+
+GameDisplay::GameDisplay(int startLevel, Xwindow* window) 
+    : startLevel{startLevel}, window{window} {} // constructor
 
 
 GameDisplay::~GameDisplay() {
@@ -19,6 +48,8 @@ void GameDisplay::init(Board* board1, Board* board2) {
     this->board2 = board2;
     player1Level = startLevel;
     player2Level = startLevel;
+    
+    setupInfo();
 } // init
 
 
@@ -31,32 +62,44 @@ void GameDisplay::reset() {
 void GameDisplay::updatePlayer1Score(int score) {
     // draw score to the correct coordinate
     player1Score = score;
+
+    setupInfo();
 } // updatePlayer1Score
 
 
 void GameDisplay::updatePlayer2Score(int score) {
     // draw score to the correct coordinate
     player2Score = score;
+
+    setupInfo();
 } // updatePlayer2Score
 
 
 void GameDisplay::updatePlayer1Highscore(int score) {
     player1Highscore = score;
+
+    setupInfo();
 } // updatePlayer1Highscore
     
     
 void GameDisplay::updatePlayer2Highscore(int score) {
     player2Highscore = score;
+
+    setupInfo();
 } // updatePlayer2Highscore
 
 
 void GameDisplay::updatePlayer1Level(int level) {
     player1Level = level;
+
+    setupInfo();
 } // updatePlayer1Level
 
 
 void GameDisplay::updatePlayer2Level(int level) {
     player2Level = level;
+
+    setupInfo();
 } // updatePlayer2Level
 
 

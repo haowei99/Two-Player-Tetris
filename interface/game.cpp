@@ -237,19 +237,19 @@ void Game::promptSpecialActions() {
 
 Game::Game(int startLevel, std::string sequenceFileName1, std::string sequenceFileName2, 
            bool textOnly, bool willSetSeed, int seed)
-    : startLevel{startLevel}, 
+    : window{textOnly ? nullptr : new Xwindow(700, 650)},
+      startLevel{startLevel}, 
       sequenceFileName1{sequenceFileName1}, 
       sequenceFileName2{sequenceFileName2},
       textOnly{textOnly},
       willSetSeed{willSetSeed},
       seed{seed},
       ng{new NumberGenerator(willSetSeed, seed)},
-      player1{new Player(0, 0, startLevel, sequenceFileName1, ng)}, 
-      player2{new Player(0, 0, startLevel, sequenceFileName2, ng)}, 
+      player1{new Player(0, 100, startLevel, sequenceFileName1, ng)}, 
+      player2{new Player(425, 100, startLevel, sequenceFileName2, ng)}, 
       curPlayer{nullptr},
-      display{new GameDisplay(startLevel)},
-      ci{new CommandInterpreter()},
-      window{textOnly ? nullptr : new Xwindow()} {
+      display{new GameDisplay(startLevel, window)},
+      ci{new CommandInterpreter()} {
     ci->addCommand("left");
     ci->addCommand("right");
     ci->addCommand("down");

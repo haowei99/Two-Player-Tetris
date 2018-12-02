@@ -26,6 +26,7 @@ void Player::init(Player* opponent) {
     this->opponent = opponent;
     level = startLevel;
     score = 0;
+    highscore = 0;
     curBlock = generator->generateBlock(level);
     nextBlock = generator->generateBlock(level);
 
