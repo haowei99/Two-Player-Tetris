@@ -247,10 +247,6 @@ void lBlock::rotate(int state) {
 }
 
 void lBlock::rotateClockwise() {
-    int x0 = cells[0]->get_X();
-    int x3 = cells[3]->get_X();
-    if ( (rotateState == 2) && (x0 > 8)) return;
-    if ( (rotateState == 4) && (x3 > 8)) return;
     if (canRotate(rotateState)){
         rotate(rotateState);
         if (rotateState == 4) rotateState = 1;
