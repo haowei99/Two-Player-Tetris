@@ -1,7 +1,7 @@
 #ifndef __CELL_H__
 #define __CELL_H__
 #include <iostream>
-
+#include "window.h"
 
 class Cell {
     bool isFilled, isBlind;
@@ -9,7 +9,7 @@ class Cell {
     int x, y, width, height;
     int xcoord, ycoord;
     Xwindow * win;
-    Xwindow colour;
+    int colour;
     // XWindow* window;
 
 public:

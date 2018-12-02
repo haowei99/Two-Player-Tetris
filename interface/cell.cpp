@@ -14,29 +14,32 @@ Cell::~Cell() {} // destructor
 
 
 void Cell::setFill() {
-    if ( fillType = 'I'){
+    if ( fillType == 'I'){
         colour = Xwindow::Cyan;
     }
-    else if ( fillType = 'Z'){
+    else if ( fillType == 'Z'){
         colour = Xwindow::Red;
     }
-    else if ( fillType = 'S'){
+    else if ( fillType == 'S'){
         colour = Xwindow::Green;
     }
-    else if ( fillType = 'T'){
+    else if ( fillType == 'T'){
         colour = Xwindow::Magenta;
     }
-    else if ( fillType = 'O'){
+    else if ( fillType == 'O'){
         colour = Xwindow::DarkGreen;
     }
-    else if ( fillType = 'J'){
+    else if ( fillType == 'J'){
         colour = Xwindow::Orange;
     }
-    else if ( fillType = 'L'){
+    else if ( fillType == 'L'){
         colour = Xwindow::Brown;
     }
-    else if ( fillType = '*'){
-        colour = Xwindow::Yellow
+    else if ( fillType == '*'){
+        colour = Xwindow::Yellow;
+    }
+    else if ( fillType == '-'){
+        colour = Xwindow::Black;
     }
 } // setFill
 
@@ -51,11 +54,16 @@ void Cell::setCoords(int x, int y, int w, int h, Xwindow *window) {
 
 void Cell::draw() {
     setFill();
-    win->fillRectangle(xcoord,ycoord,width,height, colour); //need a color
+    
+    if (win != nullptr) {
+        win->fillRectangle(xcoord,ycoord,width,height, colour); //need a color
+    } // if
 };
 
 void Cell::undraw() {
-    win->fillRectangle(xcoord,ycoord,width,height, 0); //need a default color
+    if (win != nullptr) {
+        win->fillRectangle(xcoord,ycoord,width,height, 0); //need a default color
+    } // if
 }
 
 

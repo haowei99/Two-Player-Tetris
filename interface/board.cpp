@@ -39,9 +39,9 @@ void Board::init() {
 
     // Next:
     new_grid[19][0].setCell('N');
-    new_grid[19][1].setCell('E');
-    new_grid[19][2].setCell('X');
-    new_grid[19][3].setCell('T');
+    new_grid[19][1].setCell('e');
+    new_grid[19][2].setCell('x');
+    new_grid[19][3].setCell('t');
     new_grid[19][4].setCell(':');
 
     grid = new_grid;
