@@ -3,6 +3,7 @@
 #include <vector>
 #include "cell.h"
 #include "block.h"
+#include "window.h"
 
 class Board {
     std::vector<std::vector<Cell>> grid; //NEED TO FIX, ARRAY OF CELL POINTERS NOW
@@ -10,12 +11,13 @@ class Board {
     int y;
     Block* currBlock;
     Block *nextBlock;
+    Xwindow * win;
 
     //Xwindow window;
 
     public:
     std::vector<Block *> loBlock;
-    Board(int x, int y);
+    Board(int x, int y, Xwindow * win);
     ~Board();
     void init();
     void reset();

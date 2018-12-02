@@ -12,7 +12,7 @@
 
 using namespace::std;
 
-Board::Board(int x, int y): x{x}, y{y}{
+Board::Board(int x, int y, Xwindow * window): x{x}, y{y}, win{window}{
 }
 
 Board::~Board() {
@@ -21,8 +21,13 @@ Board::~Board() {
 
 void Board::init() {
     vector<vector<Cell>> new_grid(22, vector<Cell>(11)); // with three reserved rows
+    int width = 25;
+    int height = 25;
     for (int i = 0; i < 22; i++){
         for (int j = 0; j < 11; j++){
+            int x_coord = x + 25 * j;
+            int y_coord = y + 25 * i;
+            new_grid[i][j].setCoords(x_coord,y_coord,width,height, win);
             new_grid[i][j].set_X(j);
             new_grid[i][j].set_Y(i);
         }

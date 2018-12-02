@@ -1,6 +1,7 @@
 #include <iostream>
 #include "cell.h"
 #include "block.h"
+#include "window.h"
 
 
 
@@ -11,15 +12,50 @@ Cell::Cell()
 Cell::~Cell() {} // destructor
 
 
-/*
-void Cell::setFill(char fill , Colour c ) {
-    fillType = fill;
+
+void Cell::setFill() {
+    if ( fillType = 'I'){
+        colour = Xwindow::Cyan;
+    }
+    else if ( fillType = 'Z'){
+        colour = Xwindow::Red;
+    }
+    else if ( fillType = 'S'){
+        colour = Xwindow::Green;
+    }
+    else if ( fillType = 'T'){
+        colour = Xwindow::Magenta;
+    }
+    else if ( fillType = 'O'){
+        colour = Xwindow::DarkGreen;
+    }
+    else if ( fillType = 'J'){
+        colour = Xwindow::Orange;
+    }
+    else if ( fillType = 'L'){
+        colour = Xwindow::Brown;
+    }
+    else if ( fillType = '*'){
+        colour = Xwindow::Yellow
+    }
 } // setFill
-*/
 
 
-// setCoords(int x, int y, int width, int height, XWindow* window);
-// void draw();
+void Cell::setCoords(int x, int y, int w, int h, Xwindow *window) {
+    xcoord = x;
+    ycoord = y;
+    width= w;
+    height = h;
+    win = window;
+}
+
+void Cell::draw() {
+    win->fillRectangle(xcoord,ycoord,width,height, colour); //need a color
+};
+
+void Cell::undraw() {
+    win->fillRectangle(xcoord,ycoord,width,height, 0); //need a default color
+}
 
 
 bool Cell::cellFilled() {
@@ -29,10 +65,12 @@ bool Cell::cellFilled() {
 void Cell::setCell(char blockType){
     isFilled = true;
     fillType = blockType;
+    draw();
 }
 
 void Cell::unsetCell(){
     isFilled = false;
+    undraw();
     // fillType = '_';
 }
 
@@ -58,6 +96,9 @@ void Cell::blind(){
 void Cell::unblind(){
     isBlind = false;
 }
+
+
+
 
 std::ostream& operator<<(std::ostream& out, Cell& cell) {
     if (cell.isBlind) out << "?";
