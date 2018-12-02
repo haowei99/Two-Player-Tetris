@@ -141,6 +141,13 @@ int Player::clearRows() {
     if (rowsCleared == 0) {
         if (blocksDropped % 5 == 0 && level >= 4) {
             board->dropStar(level);
+            
+            int clearedByStar = board->checkRows();
+
+            if (clearedByStar > 0) {
+                score += ((level + clearedByStar) * (level + clearedByStar));
+                blocksDropped = 0;
+            } // if 
         } // if
     } else {
         blocksDropped = 0;
