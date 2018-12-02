@@ -46,6 +46,15 @@ void Board::init() {
     new_grid[19][4].setCell(':');
 
     grid = new_grid;
+    for (int i = 0; i < 18; i++) {
+        for (int j = 0; j < 11; j++) {
+            if (grid[i][j].cellFilled()) {
+                grid[i][j].draw();
+            } else {
+                grid[i][j].undraw();
+            }
+        }
+    }
 }
 
 void Board::reset(){
