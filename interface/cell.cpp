@@ -40,10 +40,12 @@ void Cell::setFill() {
     }
     else if ( fillType == '-'){
         colour = Xwindow::Black;
-    } else {
+    } 
+    else {
         colour = Xwindow::White;
     }
-    else if ( fillType == '?'){
+
+    if (isBlind) {
         colour = Xwindow::Black;
     }
 } // setFill
@@ -117,8 +119,6 @@ void Cell::unblind(){
         undraw();
     }
 }
-
-
 
 
 std::ostream& operator<<(std::ostream& out, Cell& cell) {
