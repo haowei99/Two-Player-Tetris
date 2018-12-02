@@ -40,6 +40,8 @@ void Cell::setFill() {
     }
     else if ( fillType == '-'){
         colour = Xwindow::Black;
+    } else {
+        colour = Xwindow::White;
     }
 } // setFill
 

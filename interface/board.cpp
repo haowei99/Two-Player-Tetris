@@ -21,6 +21,7 @@ Board::~Board() {
 
 void Board::init() {
     vector<vector<Cell>> new_grid(22, vector<Cell>(11)); // with three reserved rows
+
     int width = 25;
     int height = 25;
     for (int i = 0; i < 22; i++){
@@ -36,7 +37,7 @@ void Board::init() {
     for (int j = 0; j < 11; j++){
             new_grid[18][j].setCell('-');
     } //setting up  ------
-
+    
     // Next:
     new_grid[19][0].setCell('N');
     new_grid[19][1].setCell('e');
