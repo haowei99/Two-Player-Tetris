@@ -11,6 +11,7 @@ class Cell {
     Xwindow * win;
     int colour;
     // XWindow* window;
+    bool drop = false;
 
 public:
     Cell();

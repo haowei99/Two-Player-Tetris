@@ -9,6 +9,7 @@
 #include "zBlock.h"
 #include "tBlock.h"
 #include "starBlock.h"
+#include "window.h"
 
 using namespace::std;
 
@@ -46,6 +47,9 @@ void Board::init() {
     new_grid[19][4].setCell(':');
 
     grid = new_grid;
+
+
+
     for (int i = 0; i < 18; i++) {
         for (int j = 0; j < 11; j++) {
             if (grid[i][j].cellFilled()) {
@@ -55,6 +59,22 @@ void Board::init() {
             }
         }
     }
+    //draw lines
+    if (win != nullptr) {
+        int x_coord = x;
+        for (int i = 0; i < 19; i++) {
+            int y_coord = y + i * 25;
+            win->drawLine(x_coord, y_coord, x_coord + 11 * 25, y_coord ); //y_coord +2 is width of line
+        }
+        int y_coord = y;
+        for (int j = 0; j < 12; j++) {
+            int x_coord = x + j * 25;
+            win->drawLine(x_coord, y_coord, x_coord, y_coord + 18 * 25);
+        }
+    }
+    //draw NEXT:
+
+    win->drawBigString(x + 2 , 19 * 25 + y + 15, "N E X T:", Xwindow::Brown); // x+ 2 is buffer
 }
 
 void Board::reset(){

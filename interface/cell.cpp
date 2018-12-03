@@ -61,15 +61,16 @@ void Cell::setCoords(int x, int y, int w, int h, Xwindow *window) {
 
 void Cell::draw() {
     setFill();
-    
+    // must shrink the size a little bit smaller
+
     if (win != nullptr) {
-        win->fillRectangle(xcoord,ycoord,width,height, colour); //need a color
+        win->fillRectangle(xcoord + 1,ycoord + 1 ,width - 1,height - 1, colour); //need a color
     } // if
 };
 
 void Cell::undraw() {
     if (win != nullptr) {
-        win->fillRectangle(xcoord,ycoord,width,height, 0); //need a default color
+        win->fillRectangle(xcoord + 1,ycoord + 1 ,width - 1,height - 1, 0); //need a default color
     } // if
 }
 
