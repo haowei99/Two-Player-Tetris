@@ -361,7 +361,7 @@ void Board::dropStar(int level) {
             break;
         }
     }
-    Block * star = new starBlock(x, y, level, this);
+    Block * star = new starBlock(level, this);
     //this->set(x, y);
     cellAt(x, y)->setCell('*');
     
@@ -542,49 +542,49 @@ bool Board::swapBlock(char blockType){
         //char type = blockType;
 
         if (blockType == 'I'){
-            b = new iBlock{0, 0, currLvl, this};
+            b = new iBlock{currLvl, this};
             b->addCell(&grid[maxY][minX]);
             b->addCell(&grid[maxY][minX + 1]);
             b->addCell(&grid[maxY][minX + 2]);
             b->addCell(&grid[maxY][minX + 3]);
         }
         else if (blockType == 'J'){
-            b = new jBlock{0, 0, currLvl, this};
+            b = new jBlock{currLvl, this};
             b->addCell(&grid[maxY - 1][minX]);
             b->addCell(&grid[maxY][minX]);
             b->addCell(&grid[maxY][minX + 1]);
             b->addCell(&grid[maxY][minX + 2]);
         }
         else if (blockType == 'L'){
-            b = new lBlock{0, 0, currLvl, this};
+            b = new lBlock{currLvl, this};
             b->addCell(&grid[maxY][minX]);
             b->addCell(&grid[maxY][minX + 1]);
             b->addCell(&grid[maxY][minX + 2]);
             b->addCell(&grid[maxY - 1][minX + 2]);
         }
         else if (blockType == 'T'){
-            b = new tBlock{0, 0, currLvl, this};
+            b = new tBlock{currLvl, this};
             b->addCell(&grid[maxY - 1][minX]);
             b->addCell(&grid[maxY - 1][minX + 1]);
             b->addCell(&grid[maxY - 1][minX + 2]);
             b->addCell(&grid[maxY][minX + 1]);
         }
         else if (blockType == 'O'){
-            b = new oBlock{0, 0, currLvl, this};
+            b = new oBlock{currLvl, this};
             b->addCell(&grid[maxY][minX]);
             b->addCell(&grid[maxY][minX + 1]);
             b->addCell(&grid[maxY - 1][minX]);
             b->addCell(&grid[maxY - 1][minX + 1]);
         }
         else if (blockType == 'S'){
-            b = new sBlock{0, 0, currLvl, this};
+            b = new sBlock{currLvl, this};
             b->addCell(&grid[maxY][minX]);
             b->addCell(&grid[maxY][minX + 1]);
             b->addCell(&grid[maxY - 1][minX + 1]);
             b->addCell(&grid[maxY - 1][minX + 2]);
         }
         else { //(blockType == 'Z')
-            b = new zBlock{0, 0, currLvl, this};
+            b = new zBlock{currLvl, this};
             b->addCell(&grid[maxY - 1][minX]);
             b->addCell(&grid[maxY - 1][minX + 1]);
             b->addCell(&grid[maxY][minX + 1]);

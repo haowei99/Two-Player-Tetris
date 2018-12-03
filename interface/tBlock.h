@@ -7,7 +7,7 @@ class tBlock: public Block{
     bool canRotate(int state);
     bool canRotateCounter(int state);
 public:
-    tBlock(int x, int y, int level, Board *board);
+    tBlock(int level, Board *board);
     void rotateClockwise() override;
     void rotateCounterClockwise() override;
     ~tBlock() = default;

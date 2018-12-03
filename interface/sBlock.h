@@ -5,7 +5,7 @@
 class sBlock: public Block{
     bool rotate(int state);
 public:
-    sBlock(int x, int y, int level, Board *board);
+    sBlock(int level, Board *board);
     void rotateClockwise() override;
     void rotateCounterClockwise() override;
     ~sBlock() = default;
