@@ -18,19 +18,19 @@ void GameDisplay::setupInfo() {
     if (window != nullptr) {
         window->fillRectangle(0, 0, 700, 100, Xwindow::White);
         
-        window->drawBigString(0, 25, "High:");
-        window->drawBigString(0, 50, "Level:");
-        window->drawBigString(0, 75, "Score:");
-        window->drawBigString(50, 25, intToStr(player1Highscore));
-        window->drawBigString(50, 50, intToStr(player1Level));
-        window->drawBigString(50, 75, intToStr(player1Score));
+        window->drawBigString(10, 25, "High:");
+        window->drawBigString(10, 50, "Level:");
+        window->drawBigString(10, 75, "Score:");
+        window->drawBigString(60, 25, intToStr(player1Highscore));
+        window->drawBigString(60, 50, intToStr(player1Level));
+        window->drawBigString(60, 75, intToStr(player1Score));
 
-        window->drawBigString(425, 25, "High:");
-        window->drawBigString(425, 50, "Level:");
-        window->drawBigString(425, 75, "Score:");
-        window->drawBigString(475, 25, intToStr(player2Highscore));
-        window->drawBigString(475, 50, intToStr(player2Level));
-        window->drawBigString(475, 75, intToStr(player2Score));
+        window->drawBigString(435, 25, "High:");
+        window->drawBigString(435, 50, "Level:");
+        window->drawBigString(435, 75, "Score:");
+        window->drawBigString(485, 25, intToStr(player2Highscore));
+        window->drawBigString(485, 50, intToStr(player2Level));
+        window->drawBigString(485, 75, intToStr(player2Score));
     } // if
 } // setupInfo
 
