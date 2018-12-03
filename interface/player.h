@@ -21,7 +21,7 @@ class Player {
     Block* curBlock;
     Block* nextBlock;
     int blocksDropped = 0;
-    char forceType;
+    char forceType = 'I';
     int level;
     int score = 0;
     int highscore = 0;
