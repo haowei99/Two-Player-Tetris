@@ -14,7 +14,8 @@ protected:
     int xCoor, yCoor; // coords of top left corner of block NO LONGER NEEDED NO KEEPING TRACK OF top left
     int level;
     Board* board;
-    int dropSpeed;
+    int curLevel;
+    bool hasHeavy;
     Cell* cells[max];
     int len = 0;
     char blockType;
@@ -47,6 +48,7 @@ public:
     int getCellSize();
     void applyHeavy();
     void shiftDown(); // shifts the block down by 1
+    void setCurLevel(int newCurLevel);
 };
 
 #endif // __BLOCK_H__

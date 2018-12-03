@@ -75,6 +75,7 @@ void Player::counterclockwise() {
 void Player::levelUp() {
     if (level < maxLevel) {
         level += 1;
+        curBlock->setCurLevel(level);
     } // if
 } // levelUp
 
@@ -82,6 +83,7 @@ void Player::levelUp() {
 void Player::levelDown() {
     if (level > minLevel) {
         level -= 1;
+        curBlock->setCurLevel(level);
     } // if
 } // levelDown
 
@@ -188,6 +190,8 @@ bool Player::endTurn() {
 
 // return false if player loses
 bool Player::applyEffects() {
+    curBlock->setCurLevel(level);
+    
     if (hasHeavy) {
         curBlock->applyHeavy(); 
     } // if

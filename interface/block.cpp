@@ -4,30 +4,53 @@
 #include <iostream>
 
 Block::Block(int x, int y, int level, Board *board)
-    : xCoor{x}, yCoor{y}, level{level}, board{board}, dropSpeed{0}, len{0} {
+    : xCoor{x}, yCoor{y}, level{level}, board{board}, curLevel{level}, hasHeavy{false}, len{0} {
+    /*
     if (level >= 3) {
         dropSpeed = 1;
     } else {
         dropSpeed = 0;  
     } // if
+    */
 } // constructor
 
 
 Block::~Block() {} // destructor
 
 
+void Block::applyHeavy(){
+    hasHeavy = true;
+}
 
 void Block::applyDropSpeed(){
-    int speed = dropSpeed;
+    int speed = 0;
+
+    switch(curLevel) {
+        case 0:
+        case 1:
+        case 2:
+            speed = 0;
+            break;
+        case 3:
+        case 4:
+            speed = 1;
+            break;
+    } // switch
+
+    if (hasHeavy) {
+        speed += 3;
+    } // if
+
     while (speed > 0){
         shiftDown();
         speed--;
-    }
-}
+    } // while
+} // applyDropSpeed
 
-void Block::applyHeavy(){
-    dropSpeed += 3;
-}
+
+void Block::setCurLevel(int newCurLevel) {
+    curLevel = newCurLevel;
+} // setCurLevel
 
 
 int Block::getPoints() {

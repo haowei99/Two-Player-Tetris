@@ -196,7 +196,6 @@ void Game::readCommands() {
         std::cout << (*display);
     } // while
 
-    //std::cout << (*display);
 } // readCommands
 
 
@@ -327,7 +326,7 @@ void Game::tick() {
             display->updatePlayer2Score(curPlayer->getScore());
         } // if
 
-        //std::cout << (*display);
+        std::cout << (*display);
 
         if (rowsCleared > 2) {
             promptSpecialActions();

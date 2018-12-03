@@ -59,6 +59,7 @@ void Board::init() {
             }
         }
     }
+    
     //draw lines
     if (win != nullptr) {
         int x_coord = x;
@@ -71,10 +72,10 @@ void Board::init() {
             int x_coord = x + j * 25;
             win->drawLine(x_coord, y_coord, x_coord, y_coord + 18 * 25);
         }
-    }
-    //draw NEXT:
 
-    win->drawBigString(x + 2 , 19 * 25 + y + 15, "N E X T:", Xwindow::Brown); // x+ 2 is buffer
+        //draw NEXT:
+        win->drawBigString(x + 2 , 19 * 25 + y + 15, "N E X T:", Xwindow::Brown); // x+ 2 is buffer
+    } 
 }
 
 void Board::reset(){
@@ -592,7 +593,8 @@ bool Board::swapBlock(char blockType){
         for (int i = 0; i < 4; i++){
             b->cells[i]->setCell(b->getBlockType());
         }
-        b->dropSpeed = currBlock->dropSpeed;
+
+        b->curLevel = currBlock->curLevel;
         b->level = currBlock->level;
         delete currBlock;
         currBlock = b;
