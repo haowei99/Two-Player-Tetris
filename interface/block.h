@@ -2,7 +2,7 @@
 #define __BLOCK_H__
 #include <string>
 #include "cell.h"
-//#include "board.h"
+
 
 class Board;
 
@@ -11,7 +11,6 @@ const int max = 4;
 class Block {
     friend Board;
 protected:
-    int xCoor, yCoor; // coords of top left corner of block NO LONGER NEEDED NO KEEPING TRACK OF top left
     int level;
     Board* board;
     int curLevel;
@@ -19,14 +18,13 @@ protected:
     Cell* cells[max];
     int len = 0;
     char blockType;
-    //initial roatate state =1
+    //initial rotate state is 1
     int rotateState = 1;
-    // XWindow* window;
     int numCells = 4;
     bool counted; //for score counting
     
 public:
-    Block(int x, int y, int level, Board* board);
+    Block(int level, Board* board);
     virtual ~Block();
     virtual void rotateClockwise() = 0;
     virtual void rotateCounterClockwise() = 0;
@@ -38,7 +36,6 @@ public:
     bool canMoveDown(); 
     bool canMoveRight();
     bool canMoveLeft();
-   // virtual void rotate(int state) =0; //for state changes
     char getBlockType();
     int getDropSpeed();
     void setDropSpeed(int speed);
