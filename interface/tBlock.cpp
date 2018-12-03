@@ -3,7 +3,7 @@
 
 using namespace::std;
 
-tBlock::tBlock(int x, int y, int level, Board *board): Block{x, y, level, board} {
+tBlock::tBlock(int level, Board *board): Block{level, board} {
     numCells = 4;
     blockType = 'T';
 }

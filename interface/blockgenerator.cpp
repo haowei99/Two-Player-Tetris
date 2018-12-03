@@ -155,19 +155,19 @@ int BlockGenerator::randNum(int lower, int upper) {
 
 Block* BlockGenerator::makeBlock(std::string type, int level) {
     if (type == "S") {
-        return new sBlock(0, 0, level, board);
+        return new sBlock(level, board);
     } else if (type == "Z") {
-        return new zBlock(0, 0, level, board);
+        return new zBlock(level, board);
     } else if (type == "I") {
-        return new iBlock(0, 0, level, board);
+        return new iBlock(level, board);
     } else if (type == "J") {
-        return new jBlock(0, 0, level, board);
+        return new jBlock(level, board);
     } else if (type == "L") {
-        return new lBlock(0, 0, level, board);
+        return new lBlock(level, board);
     } else if (type == "O") {
-        return new oBlock(0, 0, level, board);
+        return new oBlock(level, board);
     } else if (type == "T") {
-        return new tBlock(0, 0, level, board);
+        return new tBlock(level, board);
     } else {
         return nullptr;
     } // if

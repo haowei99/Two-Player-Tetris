@@ -1,7 +1,7 @@
 #include "iBlock.h"
 #include "board.h"
 
-iBlock::iBlock(int x, int y, int level, Board *board): Block{x, y, level, board} {
+iBlock::iBlock(int level, Board *board): Block{level, board} {
     blockType ='I';
     numCells = 4;
 }

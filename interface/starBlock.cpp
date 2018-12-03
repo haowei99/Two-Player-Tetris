@@ -1,6 +1,6 @@
 #include "starBlock.h"
 
-starBlock::starBlock(int x, int y, int level, Board *board): Block{x, y, level, board} {
+starBlock::starBlock(int level, Board *board): Block{level, board} {
     blockType ='*';
     numCells = 1;
 }

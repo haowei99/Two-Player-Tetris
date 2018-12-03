@@ -1,7 +1,7 @@
 #include "jBlock.h"
 #include "board.h"
 
-jBlock::jBlock(int x, int y, int level, Board *board): Block{x, y, level, board} {
+jBlock::jBlock(int level, Board *board): Block{level, board} {
     blockType = 'J';
     numCells = 4; 
 }

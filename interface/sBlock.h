@@ -3,18 +3,11 @@
 #include "block.h"
 
 class sBlock: public Block{
-    int numCells;
     bool rotate(int state);
 public:
-    sBlock(int x, int y, int level, Board *board);
+    sBlock(int level, Board *board);
     void rotateClockwise() override;
     void rotateCounterClockwise() override;
-    /*
-    void right() override;
-    void left() override;
-    void down() override;
-    void drop() override;
-    bool canMoveDown() override;*/
     ~sBlock() = default;
 };
 
