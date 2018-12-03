@@ -3,7 +3,7 @@
 
 using namespace::std;
 
-zBlock::zBlock(int x, int y, int level, Board *board): Block{x, y, level, board} {
+zBlock::zBlock(int level, Board *board): Block{level, board} {
     numCells = 4;
     blockType = 'Z';
 }
