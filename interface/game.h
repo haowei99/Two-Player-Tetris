@@ -9,6 +9,7 @@
 #include "commandinterpreter.h"
 #include "window.h"
 
+
 class Game {
     Xwindow* window;
     int startLevel;
@@ -32,7 +33,6 @@ class Game {
     void loseGamePrompt();
     std::string getNextInput();
     void readCommands();
-
 public:
 
     class GameException {
@@ -58,5 +58,6 @@ public:
     void tick();
     void run();
 };
+
 
 #endif /** __GAME_H__ **/

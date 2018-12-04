@@ -7,13 +7,15 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
     int startLevel = 0;
-    int seed = 0; // should there be a default value for seed?
+    int seed = 0; 
     string sequenceFileName1 = "sequence1.txt";
     string sequenceFileName2 = "sequence2.txt";
     bool textOnly = false;
     bool willSetSeed = false;
 
     int i = 1;
+
+    // evaluate command line arguments
     while(i < argc) {
         string arg = argv[i];
 
@@ -54,8 +56,10 @@ int main(int argc, char* argv[]) {
         i++;
     } // while
 
+    // create game object
     Game game = Game(startLevel, sequenceFileName1, sequenceFileName2, textOnly, willSetSeed, seed);
 
+    // initialize the game, then run it
     game.init();
     game.run();
 } // main

@@ -11,17 +11,15 @@
 #include "starBlock.h"
 #include "window.h"
 
-using namespace::std;
 
-Board::Board(int x, int y, Xwindow * window): x{x}, y{y}, win{window}{
-}
+Board::Board(int x, int y, Xwindow * window): x{x}, y{y}, win{window} {} // constructor
 
 Board::~Board() {
     reset();
 } 
 
 void Board::init() {
-    vector<vector<Cell>> new_grid(22, vector<Cell>(11)); // with three reserved rows
+    std::vector<std::vector<Cell>> new_grid(22, std::vector<Cell>(11)); // with three reserved rows
 
     int width = 25;
     int height = 25;
@@ -37,7 +35,7 @@ void Board::init() {
 
     for (int j = 0; j < 11; j++){
             new_grid[18][j].setCell('-');
-    } //setting up  ------
+    } // setting up  ------
     
     // Next:
     new_grid[19][0].setCell('N');
@@ -47,7 +45,6 @@ void Board::init() {
     new_grid[19][4].setCell(':');
 
     grid = new_grid;
-
 
 
     for (int i = 0; i < 18; i++) {
@@ -60,7 +57,7 @@ void Board::init() {
         }
     }
     
-    //draw lines
+    // draw lines
     if (win != nullptr) {
         int x_coord = x;
         for (int i = 0; i < 19; i++) {
@@ -73,10 +70,11 @@ void Board::init() {
             win->drawLine(x_coord, y_coord, x_coord, y_coord + 18 * 25);
         }
 
-        //draw NEXT:
+        // draw NEXT:
         win->drawBigString(x + 2 , 19 * 25 + y + 15, "N E X T:", Xwindow::Brown); // x+ 2 is buffer
     } 
 }
+
 
 void Board::reset(){
     for(auto it = grid.begin(); it != grid.end(); ++it){
@@ -90,25 +88,29 @@ void Board::reset(){
     grid.erase(grid.begin(), grid.end());
 }
 
+
 Cell *Board::cellAt(int x, int y){
     return &grid[y][x];
 }
+
 
 void Board::set(int x, int y){
     cellAt(x, y)->setCell(currBlock->getBlockType());
 }
 
+
 void Board::unset(int x, int y){
     cellAt(x, y)->unsetCell();
 }
+
 
 Block* Board::getCurrBlock() {
     return currBlock;
 }
 
+
 Block* Board::initBlock(char type) {
-    //char type = currBlock->getBlockType();
-    //iBlock
+    // iBlock
     if (type == 'I'){
         this->set(0, 3);
         this->set(1, 3);
@@ -188,16 +190,20 @@ Block* Board::initBlock(char type) {
     }
 }
 
+
 void Board::addBlock(Block *b){
     loBlock.emplace_back(b);
 }
+
 
 void Board::removeCells(){
     int size = loBlock.size();
     for (int i = 0; i < size; i++){
         Block *b = loBlock.at(i);
         for (int j = 0; j < 4; j++) {
-            if (b->cells[j]) { // if cell exist
+
+            // if cell exists
+            if (b->cells[j]) { 
                 if (!b->cells[j]->cellFilled()) {
                     b->cells[j] = nullptr;
                     --(b->numCells);
@@ -208,23 +214,13 @@ void Board::removeCells(){
 
 }
 
-std::ostream& operator<<(std::ostream& out, Board& board){
-    for (int i = 0; i < 22; i++){
-        for (int j = 0; j < 11; j++){
-            out << board.grid[i][j];
-        }
-        out <<endl;
-    }
-    //out << endl << "Next: " <<endl;
-    //out << board.nextBlock << endl;
-    return out;
-}
 
-vector<Cell> Board::getline(int i) {
+std::vector<Cell> Board::getline(int i) {
     return grid[i];
 }
 
-int Board::checkRows() { // note give score
+
+int Board::checkRows() { 
     int row_cleared = 0;
     for (int i = 0; i < 18; i++) {
         bool clear = true;
@@ -241,8 +237,8 @@ int Board::checkRows() { // note give score
     }
 
     return row_cleared;
-    
 }
+
 
 int Board::count_score() {
     int s = 0;
@@ -251,7 +247,7 @@ int Board::count_score() {
         if(!loBlock.at(i)->counted){
             if (loBlock.at(i)->numCells == 0) {
                 loBlock.at(i)->counted = true;
-                int point = (loBlock.at(i)->level + 1) * (loBlock.at(i)->level + 1); //level + 1 squared
+                int point = (loBlock.at(i)->level + 1) * (loBlock.at(i)->level + 1); // level + 1 squared
                 s += point;
             } // if
         }
@@ -259,18 +255,20 @@ int Board::count_score() {
     return s;
 }
 
+
 void Board::clearRow(int row) {
     // Unset first
     for (int i = 0; i < 11; i++) {
         grid[row][i].unsetCell();
     }
-    //remove blocks helper
+
+    // remove blocks helper
     removeCells();
 
-
     grid.erase(grid.begin() + row);
-    grid.insert(grid.begin(), vector<Cell>(18));
-    //re init x,y position
+    grid.insert(grid.begin(), std::vector<Cell>(18));
+    
+    // re-init x,y position
     int width = 25;
     int height = 25;
     for (int i = 0; i < 18; i++) {
@@ -282,6 +280,7 @@ void Board::clearRow(int row) {
             grid[i][j].setCoords(x_coord, y_coord, width, height, win);
         }
     }
+
     for (int i = 0; i < 18; i++) {
         for (int j = 0; j < 11; j++) {
             if (grid[i][j].cellFilled()) {
@@ -293,12 +292,13 @@ void Board::clearRow(int row) {
     }
 }
 
+
 void Board::set_next_block() {
     for (int i = 20; i < 22; i++){
         for (int j = 0; j < 11; j++){
             grid[i][j].unsetCell();
         }
-    } //clear cells first
+    } // clear cells first
     char type = nextBlock->getBlockType();
 
     if (type == 'I'){
@@ -343,11 +343,11 @@ void Board::set_next_block() {
         grid[21][1].setCell(type);
         grid[21][2].setCell(type);
     }
-    //currBlock = nextBlock;
 }
 
+
 void Board::dropStar(int level) {
-    //check if can be dropped
+    // check if can be dropped
     if (cellAt(5, 3)->cellFilled()) return;
 
     int x = 5;
@@ -362,23 +362,25 @@ void Board::dropStar(int level) {
         }
     }
     Block * star = new starBlock(level, this);
-    //this->set(x, y);
     cellAt(x, y)->setCell('*');
     
     star->addCell(&grid[y][x]);
     star->addCell(nullptr);
     star->addCell(nullptr);
-    star->addCell(nullptr); //to stay consistent for four cells
+    star->addCell(nullptr); // to stay consistent for four cells
     
     addBlock(star);
 }
 
+
 void Board::set_blocks(Block *curr, Block *next) {
     currBlock = curr;
     nextBlock = next;
+
     // set next block
     set_next_block();
 }
+
 
 void Board::blind() {
     for (int i = 5; i < 15; i++){
@@ -388,6 +390,7 @@ void Board::blind() {
     }
 }
 
+
 void Board::unblind() {
     for (int i = 5; i < 15; i++){
         for (int j = 2; j < 9; j++){
@@ -395,6 +398,7 @@ void Board::unblind() {
         }
     }
 }
+
 
 bool Board::canFitNew(char blockType){
     // check for if new block or replaced block can fit
@@ -445,6 +449,8 @@ bool Board::canFitNew(char blockType){
     return  false;
 
 }
+
+
 bool Board::canFit(char blockType){
     // check for if new block or replaced block can fit
     char type = blockType;
@@ -456,7 +462,6 @@ bool Board::canFit(char blockType){
         int tmpX = currBlock->cells[i]->get_X();
         if (tmpX < minX) minX = tmpX;
         if (tmpY > maxY) maxY = tmpY;
-        //currBlock->cells[i]->unsetCell();
     } 
 
     if (type == 'I'){
@@ -484,7 +489,6 @@ bool Board::canFit(char blockType){
     }
     else if (type == 'T'){
         if (minX + 1 >= 11) return false;
-        //f (minX < 0) return false;
         if (maxY - 1 < 0) return false;
         return !(grid[maxY][minX].cellFilled() 
         || grid[maxY - 1][minX].cellFilled()
@@ -508,8 +512,7 @@ bool Board::canFit(char blockType){
         || grid[maxY - 1][minX + 2].cellFilled());
     }
     else if (type == 'Z'){
-        if (minX + 1 >= 11) return false;
-       // if (minX - 1 < 0) return false;
+        if (minX + 1 >= 11) return false;;
         if (maxY - 1 < 0) return false;
         return !(grid[maxY][minX + 1].cellFilled()
         || grid[maxY - 1][minX + 1].cellFilled()
@@ -517,10 +520,9 @@ bool Board::canFit(char blockType){
         || grid[maxY][minX + 2].cellFilled());
     }
 
-    return  false;
-
-
+    return false;
 }
+
 
 bool Board::swapBlock(char blockType){
 
@@ -533,13 +535,11 @@ bool Board::swapBlock(char blockType){
         if (tmpY > maxY) maxY = tmpY;
         currBlock->cells[i]->unsetCell();
     }
-    //unset before asking unset
 
+    // unset before asking unset
     if (canFit(blockType)){
         Block *b;
         int currLvl =currBlock->level;
-
-        //char type = blockType;
 
         if (blockType == 'I'){
             b = new iBlock{currLvl, this};
@@ -583,13 +583,14 @@ bool Board::swapBlock(char blockType){
             b->addCell(&grid[maxY - 1][minX + 1]);
             b->addCell(&grid[maxY - 1][minX + 2]);
         }
-        else { //(blockType == 'Z')
+        else { 
             b = new zBlock{currLvl, this};
             b->addCell(&grid[maxY - 1][minX]);
             b->addCell(&grid[maxY - 1][minX + 1]);
             b->addCell(&grid[maxY][minX + 1]);
             b->addCell(&grid[maxY][minX + 2]);
         }
+
         for (int i = 0; i < 4; i++){
             b->cells[i]->setCell(b->getBlockType());
         }
@@ -614,5 +615,5 @@ bool Board::swapBlock(char blockType){
             currBlock->cells[i]->setCell(type);
         }
     }
-    return  false;
+    return false;
 }

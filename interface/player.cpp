@@ -188,7 +188,10 @@ bool Player::endTurn() {
     return true;
 } // endTurn
 
-// return false if player loses
+
+// applies special effects it their corresponding flags are set to true
+// if player loses due to the force special action, retrur nfalse
+// otherwise return true
 bool Player::applyEffects() {
     curBlock->setCurLevel(level);
     

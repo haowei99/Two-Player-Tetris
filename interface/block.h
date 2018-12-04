@@ -18,10 +18,9 @@ protected:
     Cell* cells[max];
     int len = 0;
     char blockType;
-    //initial rotate state is 1
     int rotateState = 1;
     int numCells = 4;
-    bool counted; //for score counting
+    bool counted; // for score counting
     
 public:
     Block(int level, Board* board);

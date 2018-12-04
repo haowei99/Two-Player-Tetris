@@ -5,6 +5,7 @@
 #include "board.h"
 #include "window.h"
 
+
 class GameDisplay {
     int startLevel;
     Xwindow* window;
@@ -29,10 +30,12 @@ public:
     void updatePlayer2Highscore(int score);
     void updatePlayer1Level(int level);
     void updatePlayer2Level(int level);
+    void drawGameOverMessage(int playerNum);
 
     friend std::ostream& operator<<(std::ostream& out, GameDisplay& d);
 };
 
 std::ostream& operator<<(std::ostream& out, GameDisplay& d);
+
 
 #endif /** __GAMEDISPLAY_H__ **/

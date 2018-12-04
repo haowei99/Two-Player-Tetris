@@ -15,8 +15,10 @@ void Game::loseGamePrompt() {
 
     if (curPlayer == player1) {
         std::cout << "Sorry player 1, you have lost" << std::endl;
+        display->drawGameOverMessage(1);
     } else {
         std::cout << "Sorry player 2, you have lost" << std::endl;
+        display->drawGameOverMessage(2);
     } // if
 
     std::cout << "Would you like to restart? (Y/N)" << std::endl;
@@ -73,12 +75,6 @@ std::string Game::getNextInput() {
 
 
 void Game::readCommands() {
-    /** TODOS:
-     * add logic for printing display when command called
-     * add shortcuts
-     * write a higher order function to make command multiplication easier? 
-     **/
-    
     while (true) {
         std::string input = getNextInput();
         std::istringstream iss(input);
@@ -108,37 +104,26 @@ void Game::readCommands() {
         command = ci->interpret(command); // interpret the command and apply shortcuts
 
         if (command == "left") {
-
             for (int i = 0;i < multiplier;i++) {
                 curPlayer->left();
             } // for
-
         } else if (command == "right") {
-
             for (int i = 0;i < multiplier;i++) {
                 curPlayer->right();
             } // for
-
         } else if (command == "down") {
-
             for (int i = 0;i < multiplier;i++) {
                 curPlayer->down();
             } // for
-
         } else if (command == "clockwise") {
-
             for (int i = 0;i < multiplier;i++) {
                 curPlayer->clockwise();
             } // for
-
         } else if (command == "counterclockwise") {
-
             for (int i = 0;i < multiplier;i++) {
                 curPlayer->counterclockwise();
             } // for
-
         } else if (command == "levelup") {
-            
             for (int i = 0;i < multiplier;i++) {
                 curPlayer->levelUp();
             } // for
@@ -148,9 +133,7 @@ void Game::readCommands() {
             } else {
                 display->updatePlayer2Level(curPlayer->getLevel());
             } // if
-
         } else if (command == "leveldown") {
-
             for (int i = 0;i < multiplier;i++) {
                 curPlayer->levelDown();
             } // for
@@ -160,45 +143,34 @@ void Game::readCommands() {
             } else {
                 display->updatePlayer2Level(curPlayer->getLevel());
             } // if
-
         } else if (command == "norandom") {
-
             std::string noRandomFileName = getNextInput();
             curPlayer->noRandom(noRandomFileName);
-
         } else if (command == "random") { 
-
             curPlayer->random();
-
         } else if (command == "sequence") { 
-
             std::string fileName = getNextInput();
 
             for (int i = 0;i < multiplier;i++) {
                 addFileInputs(fileName);
             } // for
-
         } else if (command == "restart") {
             throw Game::GameException{false, true};
-
         } else if (command == "drop") { 
-
             curPlayer->drop();
             break;
-
         } else {
-
             std::cout << "Please enter a valid command" << std::endl;
             continue;
-
         } // if
 
-        std::cout << (*display);
+        std::cout << (*display); // update the system after a command is executed
     } // while
 
 } // readCommands
 
 
+// prompt users to select special actions
 void Game::promptSpecialActions() {
     while (true) {
         int n;
@@ -249,6 +221,7 @@ Game::Game(int startLevel, std::string sequenceFileName1, std::string sequenceFi
       curPlayer{nullptr},
       display{new GameDisplay(startLevel, window)},
       ci{new CommandInterpreter()} {
+    // add all commands into CommandInterpreter
     ci->addCommand("left");
     ci->addCommand("right");
     ci->addCommand("down");

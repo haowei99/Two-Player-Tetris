@@ -1,5 +1,0 @@
-- implement graphics
-- check if star block CAN be cleared
-
-MAIN ISSUES
-- clearing starblock

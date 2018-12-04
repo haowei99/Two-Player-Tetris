@@ -6,14 +6,13 @@
 #include "window.h"
 
 class Board {
-    std::vector<std::vector<Cell>> grid; //NEED TO FIX, ARRAY OF CELL POINTERS NOW
+    std::vector<std::vector<Cell>> grid;
     int x;
     int y;
     Block* currBlock;
     Block *nextBlock;
     std::vector<Block *> loBlock;
     Xwindow * win;
-    //Xwindow window;
 
     public:
     Board(int x, int y, Xwindow * win);
@@ -39,17 +38,6 @@ class Board {
     bool canFitNew(char blockType);
     bool swapBlock(char blockType);
     void dropStar(int level);
-
-
-
-   // void setCurrBlock(Block *currBlock);
-    friend std::ostream& operator<<(std::ostream& os, Board& board);
-
-
-
 };
-
-std::ostream& operator<<(std::ostream& os, Board& board);
-
 
 #endif

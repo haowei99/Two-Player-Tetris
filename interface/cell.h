@@ -10,7 +10,6 @@ class Cell {
     int xcoord, ycoord;
     Xwindow * win;
     int colour;
-    // XWindow* window;
     bool drop = false;
 
 public:

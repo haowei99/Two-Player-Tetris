@@ -21,9 +21,10 @@ BlockGenerator::BlockGenerator(Board* board, NumberGenerator* ng, std::string se
 
 BlockGenerator::~BlockGenerator() {
     reset();
-} // destructor <-- ASK: default dtor ok?
+} // destructor 
 
 
+// resets generator to its original state
 void BlockGenerator::reset() {
     isRandom = true;
     noRandomFileName = "";
@@ -38,6 +39,7 @@ void BlockGenerator::reset() {
 } // reset
 
 
+// generates a block for level 0 (from sequence file)
 std::string BlockGenerator::generateLevel0() {
     std::string type;
 
@@ -57,6 +59,7 @@ std::string BlockGenerator::generateLevel0() {
 } // generateLevel0
 
 
+// generate a block with level 1 probabilities
 std::string BlockGenerator::generateLevel1(int random) {
     switch(random) {
         case 0:
@@ -84,6 +87,7 @@ std::string BlockGenerator::generateLevel1(int random) {
 } // generateLevel1
 
 
+// generate a block with level 2 probabilities
 std::string BlockGenerator::generateLevel2(int random) {
     switch(random) {
         case 0: 
@@ -106,6 +110,7 @@ std::string BlockGenerator::generateLevel2(int random) {
 } // generateLevel2
 
 
+// generate a block with level 3/4 probabilities
 std::string BlockGenerator::generateLevel34(int random) {
     if (isRandom) {
         switch(random) {
@@ -148,11 +153,14 @@ std::string BlockGenerator::generateLevel34(int random) {
 } // generateLevel34 
 
 
+// generate a random number in [lower, upper]
 int BlockGenerator::randNum(int lower, int upper) {
     return ng->randNum(lower, upper); 
 } // randNum
 
 
+// given a string representing the type of block, generate a new instance
+// of the corresponding block
 Block* BlockGenerator::makeBlock(std::string type, int level) {
     if (type == "S") {
         return new sBlock(level, board);
@@ -173,7 +181,8 @@ Block* BlockGenerator::makeBlock(std::string type, int level) {
     } // if
 } // makeBlock
 
-// change to return block later
+
+// generates a block according to the given level (Player calls this)
 Block* BlockGenerator::generateBlock(int level) {
     if (level == 0) {
         return makeBlock(generateLevel0(), level);
@@ -186,8 +195,8 @@ Block* BlockGenerator::generateBlock(int level) {
     } // if
 } // generateBlock
 
-// ASK: should calling this while noRandomFileReader is already open
-// reset it to the beginning of file?
+
+// set the ifstream for reading the file specified by a norandom command
 void BlockGenerator::setStream(std::string fileName) {
     if (isRandom) {
         isRandom = false;
@@ -197,6 +206,8 @@ void BlockGenerator::setStream(std::string fileName) {
 } // setStream
 
 
+// unsets the ifstream for reading the file specified by norandom
+// this is used when the random command is entered
 void BlockGenerator::unsetStream() {
     if (!isRandom) {
         isRandom = true;

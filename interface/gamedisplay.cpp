@@ -7,6 +7,7 @@
 #include "gamedisplay.h"
 #include "window.h"
 
+
 std::string GameDisplay::intToStr(int n) {
     std::stringstream ss("");
     ss << n;
@@ -103,13 +104,22 @@ void GameDisplay::updatePlayer2Level(int level) {
 } // updatePlayer2Level
 
 
+void GameDisplay::drawGameOverMessage(int playerNum) {
+    if (window != nullptr) {
+        std::string msg;
+
+        if (playerNum == 1) {
+            msg = "Player 1 lost";
+            window->drawBigString(180, 25, msg);
+        } else {
+            msg = "Player 2 lost";
+            window->drawBigString(605, 25, msg);
+        } // if
+    } // if
+} // drawGameOverMessage
+
+
 std::ostream& operator<<(std::ostream& out, GameDisplay& d) {
-    /***
-     * for graphical display, maybe store each indiviual msg
-     * in a string using a stringstream, then draw those strings
-     * to the Xwindow using drawstring at the correct coordinates
-     * As for the text display, just out << msg from stringstream
-     * ***/
     out << "High: ";
     out << std::setfill(' ') << std::setw(5) << d.player1Highscore;
 

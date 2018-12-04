@@ -37,4 +37,5 @@ public:
     std::string interpret(std::string command);
 };
 
+
 #endif /** __COMMANDINTERPRETER_H__ **/

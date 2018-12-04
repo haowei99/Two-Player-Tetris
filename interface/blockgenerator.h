@@ -7,9 +7,6 @@
 #include "board.h"
 #include "numbergenerator.h"
 
-/** TODOS
- * figure out how setseed works for random number generator
- * ***/
 
 class BlockGenerator {
     Board* board;
@@ -34,5 +31,6 @@ public:
     void unsetStream();
     void reset();
 };
+
 
 #endif /** __BLOCKGENERATOR_H__ **/
