@@ -6,6 +6,7 @@ class lBlock: public Block{
     void rotate(int state);
     bool canRotate(int state);
     bool canRotateCounter(int state);
+
 public:
     lBlock(int level, Board *board);
     void rotateClockwise() override;
@@ -14,4 +15,4 @@ public:
 };
 
 
-#endif //__LBLOCK_H__
+#endif // __LBLOCK_H__

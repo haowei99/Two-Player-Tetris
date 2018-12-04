@@ -1,6 +1,7 @@
 #include "iBlock.h"
 #include "board.h"
 
+
 iBlock::iBlock(int level, Board *board): Block{level, board} {
     blockType ='I';
     numCells = 4;
@@ -9,21 +10,21 @@ iBlock::iBlock(int level, Board *board): Block{level, board} {
 
 bool iBlock::rotate(int state) {
     int x, y;
-    if (state == 2) { //initial state is flat
+    if (state == 2) {  // initial state is flat
         // check if 4th block is out of bounds when rotate
         x = cells[3]->get_X() + 3;
-        y = cells[3]->get_Y() + 3; //pos of block
+        y = cells[3]->get_Y() + 3; // pos of block
         if (!in_grid(x, y)) return false;
         x = cells[0]->get_X();
-        y = cells[0]->get_Y(); //pos of block
+        y = cells[0]->get_Y(); // pos of block
         if((board->cellAt(x + 1, y)->cellFilled()) ||
         (board->cellAt(x + 2, y)->cellFilled()) || (board->cellAt(x + 3, y)->cellFilled())){
             return false;
-        } //collision detection
+        } // collision detection
 
-        //block 2
+        // block 2
         x = cells[1]->get_X();
-        y = cells[1]->get_Y(); //pos of block
+        y = cells[1]->get_Y(); // pos of block
 
         if(board->cellAt(x, y)->cellFilled()) board->unset(x, y);
         board->set(x + 1, y + 1);
@@ -38,48 +39,49 @@ bool iBlock::rotate(int state) {
         board->set(x + 2, y + 2);
         cells[2] = board->cellAt(x + 2, y + 2);
 
-        //block 4
+        // block 4
         x = cells[3]->get_X();
-        y = cells[3]->get_Y(); //pos of block
+        y = cells[3]->get_Y(); // pos of block
 
         if(board->cellAt(x, y)->cellFilled()) board->unset(x, y);
         board->set(x + 3, y + 3);
         cells[3] = board->cellAt(x + 3, y + 3);
 
-        //block 1 pivot point, does not change
+        // block 1 pivot point, does not change
     }
     else{
         x = cells[0]->get_X();
-        y = cells[0]->get_Y(); //pos of block
+        y = cells[0]->get_Y(); // pos of block
+        // collision detection
         if((board->cellAt(x, y - 1)->cellFilled()) ||
            (board->cellAt(x, y - 2)->cellFilled()) || (board->cellAt(x, y - 3)->cellFilled())){
             return false;
-        } //collision detection
-        //block 2
+        } 
+        // block 2
         x = cells[1]->get_X();
-        y = cells[1]->get_Y(); //pos of block
+        y = cells[1]->get_Y(); // pos of block
 
         if(board->cellAt(x, y)->cellFilled()) board->unset(x, y);
         board->set(x - 1, y - 1);
         cells[1] = board->cellAt(x - 1, y - 1);
 
-        //block 3
+        // block 3
         x = cells[2]->get_X();
-        y = cells[2]->get_Y(); //pos of block
+        y = cells[2]->get_Y(); // pos of block
 
         if(board->cellAt(x, y)->cellFilled()) board->unset(x, y);
         board->set(x - 2, y - 2);
         cells[2] = board->cellAt(x - 2, y - 2);
 
-        //block 4
+        // block 4
         x = cells[3]->get_X();
-        y = cells[3]->get_Y(); //pos of block
+        y = cells[3]->get_Y(); // pos of block
 
         if(board->cellAt(x, y)->cellFilled()) board->unset(x, y);
         board->set(x - 3, y - 3);
         cells[3] = board->cellAt(x - 3, y - 3);
 
-        //block 1 pivot point, does not change
+        // block 1 pivot point, does not change
     }
     return true;
 }
@@ -93,6 +95,7 @@ void iBlock::rotateClockwise() {
     applyDropSpeed();
 }
 
+
 void iBlock::rotateCounterClockwise() {
     if (rotate(rotateState)) {
         if (rotateState == 1) rotateState = 2;
@@ -100,3 +103,4 @@ void iBlock::rotateCounterClockwise() {
     }
     applyDropSpeed();
 }
+

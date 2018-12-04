@@ -6,6 +6,7 @@ class jBlock: public Block{
     void rotate(int state);
     bool canRotate(int state);
     bool canRotateCounter(int state);
+
 public:
     jBlock(int level, Board *board);
     void rotateClockwise() override;
@@ -14,4 +15,4 @@ public:
 };
 
 
-#endif //__jBLOCK_H__
+#endif // __jBLOCK_H__

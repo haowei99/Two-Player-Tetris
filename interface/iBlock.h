@@ -4,6 +4,7 @@
 
 class iBlock: public Block{
     bool rotate(int state);
+
 public:
     iBlock(int level, Board *board);
     void rotateClockwise() override;
@@ -12,4 +13,4 @@ public:
 };
 
 
-#endif //__iBLOCK_H__
+#endif // __iBLOCK_H__

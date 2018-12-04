@@ -4,6 +4,7 @@
 
 class zBlock: public Block{
     bool rotate(int state);
+    
 public:
     zBlock(int level, Board *board);
     void rotateClockwise() override;
