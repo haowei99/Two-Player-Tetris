@@ -73,6 +73,9 @@ bool zBlock::rotate(int state) {
 
 
 void zBlock::rotateClockwise() {
+    int x3 = cells[3]->get_X();
+    if ( (rotateState == 2) && (x3 > 9)) return;
+
     if (rotate(rotateState)) {
         if (rotateState == 2) rotateState = 1;
         else rotateState = 2;
@@ -82,6 +85,9 @@ void zBlock::rotateClockwise() {
 
 
 void zBlock::rotateCounterClockwise() {
+    int x3 = cells[3]->get_X();
+    if ( (rotateState == 2) && (x3 > 9)) return;
+
     if (rotate(rotateState)) {
         if (rotateState == 2) rotateState = 1;
         else rotateState = 2;
