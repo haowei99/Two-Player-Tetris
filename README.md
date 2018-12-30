@@ -33,24 +33,24 @@ terminal, Xming is a great tool for setting the windows up). Simple run ./biquad
 
 ## Level Breakdown
 
-Level 0: 
+### Level 0: 
 Takes its blocks in sequence from the files sequence1.txt (for player 1) and sequence2.txt (for player 2) 
 or from other files, whose names are supplied on the command line.
 
-Level 1: 
+### Level 1: 
 The block selector will randomly choose a block with probabilities skewed such that
 S and Z blocks are selected with probability 1/12 each, and the other blocks are selected with
 probability 1/6 each.
 
-Level 2: All blocks are selected with equal probability.
+### Level 2: All blocks are selected with equal probability.
 
-Level 3: The block selector will randomly choose a block with probabilities skewed such that
+### Level 3: The block selector will randomly choose a block with probabilities skewed such that
 S and Z blocks are selected with probability 2/9 each, and the other blocks are selected with
 probability 1/9 each. Moreover, blocks generated in level 3 are "heavy": every command to
 move or rotate the block will be followed immediately and automatically by a downward move
 of one row (if possible).
 
-Level 4: In addition to the rules of Level 3, in Level 4 there is an external constructive force:
+### Level 4: In addition to the rules of Level 3, in Level 4 there is an external constructive force:
 every time you place 5 (and also 10, 15, etc.) blocks without clearing at least one row, a
 1x1 block (indicated by * in text, and by the colour brown in graphics) is dropped onto your
 game board in the centre column. Once dropped, it acts like any other block: if it completes
